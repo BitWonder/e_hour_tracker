@@ -2,7 +2,11 @@
 import { Application, Router } from "https://deno.land/x/oak/mod.ts";
 
 // database setup
-//const database = await Deno.openKv();
+const database = await Deno.openKv("https://api.deno.com/databases/8edee72b-f309-4f18-939d-15a9b6affa13/connect");
+
+if (database.get(["admin"]) === 'undefined') {
+    console.log("No Admin")
+}
 
 const app = new Application();
 const router = new Router();
