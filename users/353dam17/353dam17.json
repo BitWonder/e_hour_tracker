@@ -1,0 +1,27 @@
+{
+  "user": "353dam17",
+  "full_name": "Drake Alexander Morgan",
+  "password": "password",
+  "academy": "e-Communication",
+  "person": "student",
+  "hours": [
+    {
+      "title": "first",
+      "hours": 28,
+      "date": "2005-06-07",
+      "description": "I made a spinning triangle. It was hot pink.",
+      "images": [],
+      "submited": "2005-06-07"
+    }
+  ],
+  "requested": [
+    {
+      "title": "first",
+      "hours": 28,
+      "date": "2005-06-07",
+      "description": "I made a spinning triangle. It was hot pink.",
+      "images": [],
+      "submited": "2005-06-07"
+    }
+  ]
+}

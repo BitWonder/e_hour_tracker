@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Submit E-hours</title>
+    <link rel="stylesheet" href="./css/form.css">
+    <link rel="stylesheet" href="./css/vars.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/x-icon" href="./images/favicon/favicon.ico">
+</head>
+<body>
+    <header id="banner">
+        <a href="./hours.html"><h1>Submit Hours</h1></a>
+    </header>
+    <main>
+        <form>
+            <input type="text" placeholder="Title" id="title">
+            <input type="date" id="datePicker">
+            <input type="number" placeholder="Hours Worked" min=".5" max="100" step=".25" id="hours" >
+            <label for="description" id="description"></label>
+            <textarea id="description_text" placeholder="Please write a reflection on what you experienced, and how this activity is connected to your Academy classes or a potential future career. &#10Use your English/Language Arts skills when writing the reflection." style="resize: none;"></textarea>
+            <div id="place_images_here">
+
+            </div>
+            <input type="file" accept="image/png, image/jpeg, image/webp" id="image_getter" onchange="previewFile()">
+            <input type="submit" value="Submit Hours">
+        </form>
+    </main>
+
+    <script>
+        document.getElementById('datePicker').valueAsDate = new Date();
+
+        let x_number = 0
+
+        let firstRun = true
+
+        let num_o_imag = 0
+
+        function hours() {
+            console.log("hours")
+            let x = document.getElementById("hours").value
+            if (x <= 8) {
+                if (document.getElementById("description").innerText == "5 or more sentences!") {
+                    return
+                }
+                document.getElementById("description").innerText = "5 or more sentences!";
+            } else if ( x <= 16 ) {
+                if (document.getElementById("description").innerText == "8 or more sentences!") {
+                    return
+                }
+                document.getElementById("description").innerText = "8 or more sentences!";
+            } else if ( x <= 32 ){
+                if (document.getElementById("description").innerText == "10 or more sentences!") {
+                    return
+                }
+                document.getElementById("description").innerText = "10 or more sentences!";
+            } else {
+                if (document.getElementById("description").innerText == "20 or more sentences!") {
+                    return
+                }
+                document.getElementById("description").innerText = "20 or more sentences!";
+            }
+            if (firstRun == false) {
+            document.getElementById("description").classList.add("emphasize");
+            setTimeout(() => {
+                document.getElementById("description").classList.remove("emphasize")
+            }, 1500)
+            }
+            else {
+                firstRun = false
+            }
+        }
+
+        document.getElementById("hours").onchange = () => {hours()}
+
+        let form = document.getElementsByTagName("form")[0];
+
+        form.onsubmit = function(event) {
+            event.preventDefault();
+            let username = localStorage.getItem("username");
+            var json_user = false;
+            let url = `./users/${username}/${username}.json`;
+            var client = new XMLHttpRequest();
+            client.open('GET', url);
+            client.onloadend = function() {
+                console.log(client.responseText)
+                let stuff = JSON.parse(client.responseText)
+                stuff.requested.push({
+                    title: document.getElementById("title").value,
+                    hours: document.getElementById("hours").value,
+                    date: document.getElementById("datePicker").value,
+                    description: document.getElementById("description_text").value,
+                    images: [],
+                    submited: (new Date()).toString()
+                })
+                console.log(stuff)
+                client = new XMLHttpRequest();
+                client.open("POST", url);
+                client.send(JSON.stringify(stuff));
+            }
+            client.send();
+        }
+
+        function previewFile() {
+            const file = document.getElementById("image_getter").files[0];
+            const reader = new FileReader();
+          
+            reader.addEventListener(
+              "load",
+              () => {
+                // convert image file to base64 string
+                let e = document.createElement("img");
+                e.src = reader.result;
+                e.classList.add("epic")
+                e.setAttribute("id",`img_${num_o_imag}`)
+                e.setAttribute("onclick",`document.getElementById(img_${num_o_imag}).remove()`)
+                document.getElementById("place_images_here").append(e);
+                num_o_imag += 1
+              },
+              false
+            );
+          
+            if (file) {
+              reader.readAsDataURL(file);
+            }
+        }
+
+        hours()
+
+        checkFirstVisit();
+        function checkFirstVisit(){
+            console.log(`was_visited = ${localStorage.getItem('was_visited')}`);
+            if(localStorage.getItem('was_visited') == 1){
+                return;
+            }
+            first_visit = true;
+            localStorage.setItem('was_visited', 1);
+            console.log("Showing")
+            document.getElementById("description").innerText = "The number of sentences you need is determined by the amount of hours that you're submitting.\n Check here to see how many sentences you need";
+            document.getElementById("description").classList.add("emphasize");
+            setTimeout(() => {
+                document.getElementById("description").classList.remove("emphasize")
+            }, 1500)
+        }
+    </script>
+</body>
+</html>

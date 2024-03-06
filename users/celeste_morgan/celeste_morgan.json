@@ -1,0 +1,14 @@
+{
+    "user": "260cjr19",
+    "full_name": "Celeste Abigal Morgan",
+    "password": "password",
+    "academy": "DS",
+    "hours": [
+        {
+            "title": "first",
+            "hours": 1000000,
+            "description": "Bad things have happened",
+            "images": []
+        }
+    ]
+}

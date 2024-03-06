@@ -1,0 +1,127 @@
+body {
+    background: var(--main-color);
+    margin: 0;
+    font-family: "Barlow", sans-serif;
+}
+
+#banner {
+    background: var(--secondary-color);
+    width: 100%;
+    height: 10vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--main-text-color);
+}
+
+#banner h1 {
+    margin: 0;
+}
+
+#description {
+    transition: all .5s;
+    color: var(--main-text-color);
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 1vh;
+    text-align: center;
+    margin: 3%;
+    padding: 2%;
+    padding-bottom: 1%;
+    border-radius: 25px;
+    background-color: var(--secondary-color);
+    min-height: 60vh;
+    -webkit-box-shadow: 0px 0px 20px 0px rgba(0,0,0,0.8);
+    -moz-box-shadow: 0px 0px 20px 0px rgba(0,0,0,0.8);
+    box-shadow: 0px 0px 20px 0px rgba(0,0,0,0.8);
+}
+
+form input {
+    background-color: var(--main-color);
+    color: white;
+    width: fit-content;
+    text-align: center;
+    border: none;
+}
+
+#title {
+    font-size: 20px;
+}
+
+form input::placeholder {
+    color: white;
+    opacity: .7;
+}
+
+form textarea {
+    height: 40vh;
+    width: 100%;
+}
+
+form * {
+    place-self: center;
+    margin-left: auto;
+    margin-right: auto;
+    transition: all .2s;
+    padding: 0.1%;
+}
+
+.emphasize {
+    font-size: 1.5em;
+    font-weight: bold;
+    transition: all .5s;
+    color: red !important;
+}
+
+.epic {
+    height: 5vh;
+}
+
+form input:focus {
+    /*outline-color: var(--accent-color);*/
+    outline: var(--accent-color) solid 1px;
+}
+
+form input:hover {
+    transform: scale(1.1);
+    outline: var(--accent-color) solid 1px;
+}
+
+form textarea {
+    max-width: 80%;
+    border-radius: 15px;
+    padding: 1%;
+}
+
+form textarea:focus {
+    outline: var(--accent-color) solid 1px;
+}
+
+a {
+    color: var(--main-text-color);
+    text-decoration: none;
+}
+
+form input[type="submit"] {
+    margin-top: 1vh;
+    font-size: 18px;
+    border-radius: 50px;
+    padding: 1vh 1vw;
+}
+
+form input[type="submit"]:hover {
+    transform: scale(1.1);
+    outline: var(--accent-color) solid 1px;
+}
+
+#image_getter {
+    transition: all .5s;
+}
+
+#image_getter:hover {
+    transform: scale(1.1);
+    outline: var(--accent-color) solid 1px;
+}

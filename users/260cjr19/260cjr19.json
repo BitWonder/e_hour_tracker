@@ -1,0 +1,17 @@
+{
+  "user": "260cjr19",
+  "full_name": "Collin John Rawson",
+  "password": "password",
+  "academy": "e-Communication",
+  "person": "student",
+  "hours": [
+    {
+      "title": "first",
+      "hours": 1000000,
+      "description": "Bad things have happened",
+      "images": []
+    }
+  ],
+  "requested": [
+  ]
+}

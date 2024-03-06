@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-Hour Tracker</title>
+    <link rel="icon" type="image/x-icon" href="./images/favicon/favicon.ico">
+    <link rel="stylesheet" href="./css/main.css">
+    <link rel="stylesheet" href="./css/vars.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/x-icon" href="./images/favicon/favicon.ico">
+</head>
+<body>
+    <header>
+        <h1 id="welcome"></h1>
+        <a href="./index.html">
+            <input type="button" value="Log Out" onclick="localStorage.setItem('username', null)">
+        </a>
+    </header>
+
+    <main>
+        <img src="#" id="academy">
+        <section id="hours">
+            <div class="hour_teller" id="less_hours"></div>
+            <div class="hour_teller" id="mid_hours"></div>
+            <div class="hour_teller" id="total_hours"></div>
+        </section>
+
+        <div id="button-container">
+            <a href="./form.html"><input type="button" value="Submit Hours"></a>
+        </div>
+
+        <section id="accepted">
+            <header style="margin-top: 3vh;">
+                <h1>Pending Hours</h1>
+            </header>
+            <table id="pending_hours"></table>
+            <br>
+            <header>
+                <h1>Accepted Hours</h1>
+            </header>
+            <table id="accepted_hours"></table>
+        </section>
+    </main>
+
+    <script>
+        let username = localStorage.getItem("username");
+        var json_user = false;
+        let url = `./users/${username}/${username}.json`;
+        var client = new XMLHttpRequest();
+        client.open('GET', url);
+        client.onloadend = function() {
+            json_user = client.responseText;
+            continue_function()
+        }
+        client.send();
+
+        // now for the formatting stuff
+        function continue_function() {
+            let user = JSON.parse(json_user);
+            document.getElementById("welcome").innerText = `Welcome, ${user.full_name}!`
+            document.getElementById("academy").src = `./images/academy/${user.academy}.png`
+            let total_hours = 0;
+            user.hours.forEach(element => {
+                total_hours += element.hours
+                let place = document.getElementById("accepted_hours");
+                let p = document.createElement("div");
+                p.innerHTML = `<h3>${element.title}</h3> <p>${element.hours}</p> </p>${element.description}</p>`;
+                p.classList.add("hours");
+                place.append(p);
+            });
+            let pending = 0;
+            user.requested.forEach(element => {
+                pending += element.hours
+                // if error or no hours then don't show
+                if (element.title === null || element.description === null || element.hours === null) {
+                    return
+                }
+                let place = document.getElementById("pending_hours");
+                let p = document.createElement("div");
+                p.innerHTML = `<h3>${element.title}</h3> <p>${element.hours}</p> </p>${element.description}</p>`;
+                p.classList.add("hours");
+                place.append(p);
+            });
+            let min_precent = total_hours / 200;
+            let min_pending = pending     / 200;
+            let mid_precent = total_hours / 300;
+            let mid_pending = pending     / 300;
+            let max_precent = total_hours / 400;
+            let max_pending = pending     / 400;
+            let done_color = "green"
+            let pending_color = "yellow"
+            let not_done_color = "white"
+            document.getElementById("less_hours").style = `background: linear-gradient(90deg, ${done_color} 0%, ${done_color} ${min_precent * 100}%, ${pending_color} ${min_precent * 100}%, ${pending_color} ${(min_pending + min_precent) * 100}%, ${not_done_color} ${(min_pending + min_precent) * 100}%, ${not_done_color} 100%); border: solid 1px black;`;
+            document.getElementById("less_hours").innerText = `${total_hours} / 200`;
+            document.getElementById("mid_hours").style = `background: linear-gradient(90deg, ${done_color} 0%, ${done_color} ${mid_precent * 100}%, ${pending_color} ${mid_precent * 100}%, ${pending_color} ${(mid_pending + mid_precent) * 100}%, ${not_done_color} ${(mid_pending + mid_precent) * 100}%, ${not_done_color} 100%); border: solid 1px black;`;
+            document.getElementById("mid_hours").innerText = `${total_hours} / 300`;
+            document.getElementById("total_hours").style = `background: linear-gradient(90deg, ${done_color} 0%, ${done_color} ${max_precent * 100}%, ${pending_color} ${max_precent * 100}%, ${pending_color} ${(max_pending + max_precent) * 100}%, ${not_done_color} ${(max_precent + max_pending) * 100}%, ${not_done_color} 100%); border: solid 1px black;`;
+            document.getElementById("total_hours").innerText = `${total_hours} / 400`;
+        }
+    </script>
+    © Copyright www.olatheschools.com
+</body>
+</html>

@@ -1,0 +1,96 @@
+body {
+    margin: 0;
+    background-color: var(--main-color);
+    color: var(--main-text-color);
+    height: 100vh;
+    font-family: "Roboto";
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* because this annoyed me, I turned it off */
+h1 {
+    margin: 0;
+}
+
+header {
+    background-color: var(--secondary-color);
+    text-align: center;
+    padding: 3%;
+}
+
+main {
+    display: grid;
+    justify-items: center;
+    padding: 3%;
+    height: 80%;
+}
+
+main form {
+    background-color: var(--secondary-color);
+    display: flex;
+    width: 50%;
+    flex-direction: column;
+    padding: 5%;
+    padding-top: 1%;
+    padding-bottom: 1%;
+    text-align: center;
+    display: grid;
+    grid-template-rows: 10fr 1fr 1fr 1fr 1fr 1fr;
+    gap: 1%;
+    -webkit-box-shadow: 0px 0px 20px 0px rgba(0,0,0,0.8);
+    -moz-box-shadow: 0px 0px 20px 0px rgba(0,0,0,0.8);
+    box-shadow: 0px 0px 20px 0px rgba(0,0,0,0.8);
+    border-radius: 15px;
+}
+
+main form img {
+    width: 80%;
+    margin-bottom: 5%;
+    place-self: center;
+}
+
+main form label {
+    font-size: 25px;
+    margin: auto 0 auto 0;
+}
+
+main form input[type="text"], main form input[type="password"] {
+    background-color: rgba(0,0,0,0);
+    border: none;
+    color: var(--main-text-color);
+    border-bottom: 1px solid var(--accent-color);
+    font-size: large;
+    transition: all .25s;
+    text-align: center;
+}
+
+main form input[type="text"]:focus, main form input[type="password"]:focus {
+    border: none;
+    outline: none;
+    border-bottom: 3px solid var(--accent-color);
+    font-size: larger;
+}
+
+main form input[type="submit"] {
+    border-radius: 50px;
+    transition: all .5s;
+    width: 20vw;
+    height: 4vh;
+    place-self: center;
+    margin: 1vh auto 0 auto;
+    font-size: 20px;
+    border: none;
+}
+
+main form input[type="submit"]:hover {
+    background-color: var(--accent-color);
+    color: var(--main-text-color);
+}
+
+@media screen and (max-width: 150vh) {
+    main form input[type="submit"] {
+        width: 80%;
+    }
+}

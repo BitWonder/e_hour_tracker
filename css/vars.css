@@ -1,0 +1,11 @@
+:root {
+    --main-color: rgb(43, 42, 51);
+    --secondary-color: rgb(66, 65, 77);
+    --main-text-color: rgb(251, 251, 254);
+    --accent-color: #ff3a43;
+    /*--main-color: #606E7F;
+    --secondary-color: #39587F;
+    --main-text-color: rgb(254,254,254);
+    --accent-color: rgb(192,176,234);*/
+}
+@import url('https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap')
