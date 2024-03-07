@@ -2,28 +2,34 @@
 import { Application, Router } from "https://deno.land/x/oak/mod.ts";
 
 // database setup
-const database = await Deno.openKv();
+const database = Deno.openKv();
 console.log("database setup");
 
 // key value where key can contain two things... the academy and the username
-if (await database.get(["users", "admin"]).value === undefined) {
-    // the all academy is for later... don't want to go back and convolutedly find the group their apart of by secondary key
-    console.log("making first admin");
-    await new_admin("admin", "V!o1€n7C0nserv@7iv€DueToC0ntr@ctAgr3€", "all", "admin");
-}
+database.then(async db => {
+    if (await db.get(["users", "admin"]) === undefined) {
+        // the all academy is for later... don't want to go back and convolutedly find the group their apart of by secondary key
+        console.log("making first admin");
+        await new_admin("admin", "V!o1€n7C0nserv@7iv€DueToC0ntr@ctAgr3€", "all", "admin");
+    }
 
-// to make user admin is set and accessible... once committed their is no going back
-var x = (await database.get(["users","admin"]).value);
-console.log("Admin: " + x)
+    // to make sure admin is set and accessible... once committed there is no going back
+    var x = (await db.get(["users", "admin"]));
+    console.log("Admin: " + x);
+}).catch(error => {
+    console.error("Error opening the database:", error);
+});
 
-// using one-to-many found : https://docs.deno.com/deploy/kv/manual/secondary_indexes
+// using one-to-many found: https://docs.deno.com/deploy/kv/manual/secondary_indexes
 // data needs to be a JSON stringed
 // academy user is in for group
 async function new_user(username, group, data) {
-    const primaryKey   = ["users", username];
+    const primaryKey = ["users", username];
     const secondaryKey = ["academy", group, username];
-    await database.set(primaryKey, data);
-    await database.set(secondaryKey, data);
+    await database.then(db => {
+        db.set(primaryKey, data);
+        db.set(secondaryKey, data);
+    });
 }
 
 async function new_admin(full_name, password, academy, username) {
@@ -58,10 +64,10 @@ const port = 1027;
 app.use(router.routes());
 app.use(router.allowedMethods());
 app.use(async (context) => {
-  await context.send({
-    root: `${Deno.cwd()}/`,
-    index: "./index.html",
-  });
+    await context.send({
+        root: `${Deno.cwd()}/`,
+        index: "./index.html",
+    });
 });
 
 console.log("Server is running");
