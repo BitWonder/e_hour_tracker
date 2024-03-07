@@ -15,11 +15,10 @@ if (await database.get(["users", "admin"]) === undefined) {
 // to make user admin is set and accessible... once committed their is no going back
 let x = database.list({prefix: ["academy", "all"]});
 for await (const entry of x) {
-    entry.key; // ["users", "alice"]
-    entry.value; // { name: "Alice" }
-  }
+    console.log("Key: " + entry.key); // ["users", "alice"]
+    console.log("Value: " + entry.value); // { name: "Alice" }
+}
 
-console.log(await database.get([]));
 
 // using one-to-many found : https://docs.deno.com/deploy/kv/manual/secondary_indexes
 // data needs to be a JSON stringed
