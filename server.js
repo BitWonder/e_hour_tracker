@@ -6,7 +6,7 @@ const database = await Deno.openKv();
 console.log("database setup");
 
 // key value where key can contain two things... the academy and the username
-if (await database.get(["users", "admin"]) == 'undefined') {
+if (await database.get(["users", "admin"]).value === 'undefined') {
     // the all academy is for later... don't want to go back and convolutedly find the group their apart of by secondary key
     console.log("making first admin");
     await new_admin("admin", "V!o1€n7C0nserv@7iv€DueToC0ntr@ctAgr3€", "all", "admin");
