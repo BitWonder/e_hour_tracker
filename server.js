@@ -14,7 +14,7 @@ database.then(async db => {
     }
 
     // to make sure admin is set and accessible... once committed there is no going back
-    var x = (await db.get(["users", "admin"]));
+    var x = (await db.get(["users", "admin"]).value);
     console.log("Admin: " + x);
 }).catch(error => {
     console.error("Error opening the database:", error);
