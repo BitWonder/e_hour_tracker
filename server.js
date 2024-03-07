@@ -6,34 +6,27 @@ const database = await Deno.openKv();
 console.log("database setup");
 
 // key value where key can contain two things... the academy and the username
-database.then(async db => {
-    if (await db.get(["users", "admin"]) === undefined) {
-        // the all academy is for later... don't want to go back and convolutedly find the group their apart of by secondary key
-        console.log("making first admin");
-        //               name     password                                user   username
-        await new_admin("admin", "V!o1€n7C0nserv@7iv€DueToC0ntr@ctAgr3€", "all", "admin");
-    }
+if (await database.get(["users", "admin"]) === undefined) {
+    // the all academy is for later... don't want to go back and convolutedly find the group their apart of by secondary key
+    console.log("making first admin");
+    //               name     password                                user   username
+    await new_admin("admin", "V!o1€n7C0nserv@7iv€DueToC0ntr@ctAgr3€", "all", "admin");
+}
 
-    // to make sure admin is set and accessible... once committed there is no going back
-    var x = (await db.get(["users", "admin"]));
-    console.log("Admin: " + x.value);
-}).catch(error => {
-    console.error("Error opening the database:", error);
-});
-
+// to make sure admin is set and accessible... once committed there is no going back
+var x = (await database.get(["users", "admin"]));
+console.log("Admin: " + x.value);
 // using one-to-many found: https://docs.deno.com/deploy/kv/manual/secondary_indexes
 // data needs to be a JSON stringed
 // academy user is in for group
 async function new_user(username, group, data) {
     const primaryKey = ["users", username];
     const secondaryKey = ["academy", group, username];
-    await database.then(db => {
-        db.atomic()
-            .check(primaryKey)
-            .set(primaryKey, data)
-            .set(secondaryKey, data)
-            .commit()
-    });
+    await database.atomic()
+        .check(primaryKey)
+        .set(primaryKey, data)
+        .set(secondaryKey, data)
+        .commit()
 }
 
 async function new_admin(full_name, password, academy, username) {
