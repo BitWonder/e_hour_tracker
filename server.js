@@ -10,7 +10,7 @@ if (database.get(["users", "admin"]) === undefined) {
     new_admin("admin", "V!o1€n7C0nserv@7iv€DueToC0ntr@ctAgr3€", "all", "admin");
 }
 // to make user admin is set and accessible... once committed their is no going back
-console.log("admin" + await database.get(["users", "admin"]).value)
+console.log("admin: " + database.get(["users", "admin"]).value)
 
 // using one-to-many found : https://docs.deno.com/deploy/kv/manual/secondary_indexes
 // data needs to be a JSON stringed
