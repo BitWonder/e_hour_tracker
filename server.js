@@ -63,7 +63,7 @@ const decoder = new TextDecoder();
 const port = 1027;
 
 // router gets go here
-router.get("/login", async (context) => {
+router.post("/login", async (context) => {
     let body = context.body;
     let data = JSON.parse(decoder.decode(body));
     if (await database.get(["users", data.username]).value.password == data.password) {
