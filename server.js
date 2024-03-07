@@ -10,6 +10,7 @@ database.then(async db => {
     if (await db.get(["users", "admin"]) === undefined) {
         // the all academy is for later... don't want to go back and convolutedly find the group their apart of by secondary key
         console.log("making first admin");
+        //               name     password                                user   username
         await new_admin("admin", "V!o1€n7C0nserv@7iv€DueToC0ntr@ctAgr3€", "all", "admin");
     }
 
@@ -63,12 +64,8 @@ const port = 1027;
 
 // router gets go here
 router.post("/login", async (context) => {
-    console.log("context: " + context);
-    console.log("context.request: " + context.request);
-    console.log("context.request.body: " + context.request.body);
-    console.log("context.request.body.text(): " + await context.request.body.text());
     const body = JSON.parse(await context.request.body.text());
-    console.log("Data: " + data)
+    console.log("Data: " + body)
     const user = await database.get(["users", body.username]);
     if (user && user.value.password === body.password) {
         context.response.status = 200;
