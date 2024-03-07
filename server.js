@@ -63,7 +63,7 @@ const port = 1027;
 
 // router gets go here
 router.post("/login", async (context) => {
-    const body = await context.request.body().value;
+    const body = await context.request.body({ type: "json" }).value;
     const data = JSON.parse(body);
     const user = await database.get(["users", data.username]);
     if (user && user.value.password === data.password) {
