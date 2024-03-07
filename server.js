@@ -65,7 +65,8 @@ const port = 1027;
 router.post("/login", async (context) => {
     console.log("context: " + context);
     console.log("context.request: " + context.request);
-    const body = await context.request.body({ type: "json" }).value;
+    const body = await context.request().body({ type: "json" }).value;
+    console.log("Data: " + data)
     const user = await database.get(["users", body.username]);
     if (user && user.value.password === body.password) {
         context.response.status = 200;
