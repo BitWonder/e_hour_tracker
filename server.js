@@ -59,21 +59,20 @@ async function new_student(full_name, password, academy, username) {
 
 const app = new Application();
 const router = new Router();
-const decoder = new TextDecoder();
 const port = 1027;
 
 // router gets go here
 router.post("/login", async (context) => {
-    let body = context.body;
-    let data = JSON.parse(decoder.decode(body));
-    if (await database.get(["users", data.username]).value.password == data.password) {
-        let user = await database.get(["users", data.username]).value.user;
-        ctx.response.status = 200;
-        ctx.response.body = {user: user};
-        ctx.response.type = "json";
-        return
+    const body = await context.request.body().value;
+    const data = JSON.parse(body);
+    const user = await database.get(["users", data.username]);
+    if (user && user.value.password === data.password) {
+        context.response.status = 200;
+        context.response.body = { user: user.value.user };
+        context.response.type = "json";
+        return;
     }
-    ctx.response.status = 401;
+    context.response.status = 401;
 });
 
 // setup initialize app
