@@ -13,7 +13,8 @@ if (await database.get(["users", "admin"]).value === undefined) {
 }
 
 // to make user admin is set and accessible... once committed their is no going back
-console.log("Admin: " + (await database.get(["users","admin"]).value))
+var x = (await database.get(["users","admin"]).value);
+console.log("Admin: " + x)
 
 // using one-to-many found : https://docs.deno.com/deploy/kv/manual/secondary_indexes
 // data needs to be a JSON stringed
