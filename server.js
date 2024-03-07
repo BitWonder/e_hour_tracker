@@ -2,7 +2,7 @@
 import { Application, Router } from "https://deno.land/x/oak/mod.ts";
 
 // database setup
-const database = Deno.openKv();
+const database = await Deno.openKv();
 console.log("database setup");
 
 // key value where key can contain two things... the academy and the username
