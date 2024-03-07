@@ -7,6 +7,7 @@ console.log("database setup")
 // key value where key can contain two things... the academy and the username
 if (database.get(["users", "admin"]) === undefined) {
     // the all academy is for later... don't want to go back and convolutedly find the group their apart of by secondary key
+    console.log("making first admin")
     new_admin("admin", "V!o1€n7C0nserv@7iv€DueToC0ntr@ctAgr3€", "all", "admin");
 }
 // to make user admin is set and accessible... once committed their is no going back
@@ -14,7 +15,7 @@ async function get(key) {
     let x = await database.get(key).value;
     return x;
 }
-let x = get(["users", "admin"]);
+let x = await get(["users", "admin"]);
 console.log("admin: " + x);
 
 // using one-to-many found : https://docs.deno.com/deploy/kv/manual/secondary_indexes
