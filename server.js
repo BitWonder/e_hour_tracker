@@ -67,7 +67,7 @@ router.post("/login", async (context) => {
     console.log("context.request: " + context.request);
     console.log("context.request.body: " + context.request.body);
     console.log("context.request.body.text(): " + await context.request.body.text());
-    const body = await context.request().body({ type: "json" }).value;
+    const body = JSON.parse(await context.request.body.text());
     console.log("Data: " + data)
     const user = await database.get(["users", body.username]);
     if (user && user.value.password === body.password) {
