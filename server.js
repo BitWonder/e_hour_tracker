@@ -66,7 +66,7 @@ router.post("/login", async (context) => {
     console.log("context: " + context);
     console.log("context.request: " + context.request);
     console.log("context.request.body: " + context.request.body);
-    console.log("context.request.body.value: " + context.request.body.value);
+    console.log("context.request.body.json: " + context.request.body.json());
     const body = await context.request().body({ type: "json" }).value;
     console.log("Data: " + data)
     const user = await database.get(["users", body.username]);
