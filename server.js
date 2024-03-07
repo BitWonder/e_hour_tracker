@@ -27,8 +27,11 @@ async function new_user(username, group, data) {
     const primaryKey = ["users", username];
     const secondaryKey = ["academy", group, username];
     await database.then(db => {
-        db.set(primaryKey, data);
-        db.set(secondaryKey, data);
+        db.atomic()
+            .check(primaryKey)
+            .set(primaryKey, data)
+            .set(secondaryKey, data)
+            .commit()
     });
 }
 
@@ -56,9 +59,22 @@ async function new_student(full_name, password, academy, username) {
 
 const app = new Application();
 const router = new Router();
+const decoder = new TextDecoder();
 const port = 1027;
 
 // router gets go here
+router.get("/login", async (context) => {
+    let body = context.body;
+    let data = JSON.parse(decoder.decode(body));
+    if (await database.get(["users", data.username]).value.password == data.password) {
+        let user = await database.get(["users", data.username]).value.user;
+        ctx.response.status = 200;
+        ctx.response.body = {user: user};
+        ctx.response.type = "json";
+        return
+    }
+    ctx.response.status = 401;
+});
 
 // setup initialize app
 app.use(router.routes());

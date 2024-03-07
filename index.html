@@ -26,39 +26,40 @@
     <script>
         let attempts = 3
 
-        document.getElementById("login").onsubmit = function(event) {
+        document.getElementById("login").onsubmit = async function(event) {
             event.preventDefault()
 
             if ( attempts <= 0 ) {
                 return
             }
 
-            let inputed = document.getElementById("password").value;
+            let password = document.getElementById("password").value;
             let username = document.getElementById("username").value;
-            let url = `./users/${username}/${username}.json`;
-            var client = new XMLHttpRequest();
-            client.open('GET', url);
-            client.onloadend = function() {
-                if (client.status === 200) { // got response good
-                    let password = JSON.parse(client.responseText).password;
-                    if (password === inputed) {
-                        console.log("Signed In");
-                        localStorage.setItem("username", username);
-                        if (JSON.parse(client.responseText).person != "student") {
-                            window.location = "./admin.html";
-                            return;
-                        }
-                        window.location = "./hours.html";
-                    }
-                    else {
-                        alert(`Wrong Password\n You have ${attempts} attempt(s) left!`)
-                        attempts -= 1
-                    }
-                } else { // did not get responce good
-                    alert(`Wrong Username\n You have ${attempts} attempt(s) left!`)
+            const response = await fetch(url, {
+                method: "POST", // *GET, POST, PUT, DELETE, etc.
+                mode: "cors", // no-cors, *cors, same-origin
+                cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
+                credentials: "same-origin", // include, *same-origin, omit
+                headers: {
+                  "Content-Type": "application/json",
+                  // 'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                redirect: "follow", // manual, *follow, error
+                referrerPolicy: "no-referrer", // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
+                body: JSON.stringify({
+                    username: username,
+                    password: password
+                }), // body data type must match "Content-Type" header
+            });
+
+            if (response.status == 200) {
+                let user = JSON.stringify(response.body);
+                localStorage.setItem("username", username);
+                if (user == "admin") {
+                    window.location.href = "./admin.html"
                 }
+                window.location.href = "./hours.html"
             }
-            client.send();
         }
     </script>
     <script src="./js/connect.js" type="module"></script>

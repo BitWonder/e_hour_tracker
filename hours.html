@@ -9,14 +9,15 @@
     <link rel="stylesheet" href="./css/vars.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
     <link rel="icon" type="image/x-icon" href="./images/favicon/favicon.ico">
 </head>
 <body>
     <header>
         <h1 id="welcome"></h1>
         <a href="./index.html">
-            <input type="button" value="Log Out" onclick="localStorage.setItem('username', null)">
+            <!--onmouseover="document.getElementById('logout').src = './images/icon/logout.png'" onmouseleave="document.getElementById('logout').src = './images/icon/logout_invert.png'"-->
+            <button value="Log Out" onclick="localStorage.setItem('username', null)"><img src="./images/icon/logout_invert.png"  id="logout"/></button>
         </a>
     </header>
 
@@ -29,7 +30,7 @@
         </section>
 
         <div id="button-container">
-            <a href="./form.html"><input type="button" value="Submit Hours"></a>
+            <a href="./form.html"><button value="Submit Hours"><h3>Submit Hours</h3></button></a>
         </div>
 
         <section id="accepted">
@@ -94,13 +95,13 @@
             let pending_color = "yellow"
             let not_done_color = "white"
             document.getElementById("less_hours").style = `background: linear-gradient(90deg, ${done_color} 0%, ${done_color} ${min_precent * 100}%, ${pending_color} ${min_precent * 100}%, ${pending_color} ${(min_pending + min_precent) * 100}%, ${not_done_color} ${(min_pending + min_precent) * 100}%, ${not_done_color} 100%); border: solid 1px black;`;
-            document.getElementById("less_hours").innerText = `${total_hours} / 200`;
+            document.getElementById("less_hours").innerHTML = `<h3>${total_hours} / 200</h3>`;
             document.getElementById("mid_hours").style = `background: linear-gradient(90deg, ${done_color} 0%, ${done_color} ${mid_precent * 100}%, ${pending_color} ${mid_precent * 100}%, ${pending_color} ${(mid_pending + mid_precent) * 100}%, ${not_done_color} ${(mid_pending + mid_precent) * 100}%, ${not_done_color} 100%); border: solid 1px black;`;
-            document.getElementById("mid_hours").innerText = `${total_hours} / 300`;
+            document.getElementById("mid_hours").innerHTML = `<h3>${total_hours} / 300</h3>`;
             document.getElementById("total_hours").style = `background: linear-gradient(90deg, ${done_color} 0%, ${done_color} ${max_precent * 100}%, ${pending_color} ${max_precent * 100}%, ${pending_color} ${(max_pending + max_precent) * 100}%, ${not_done_color} ${(max_precent + max_pending) * 100}%, ${not_done_color} 100%); border: solid 1px black;`;
-            document.getElementById("total_hours").innerText = `${total_hours} / 400`;
+            document.getElementById("total_hours").innerHTML = `<h3>${total_hours} / 400</h3>`;
         }
     </script>
-    © Copyright www.olatheschools.com
+    <p id="copyright">&copy; Copyright Drake Morgan and Collin Rawson 2024</p>
 </body>
 </html>
