@@ -13,8 +13,11 @@ if (await database.get(["users", "admin"]) === undefined) {
 }
 
 // to make user admin is set and accessible... once committed their is no going back
-
-console.log("admin: " + database.list({prefix: ["academy", "all"]}));
+let x = database.list({prefix: ["academy", "all"]});
+for await (const entry of x) {
+    entry.key; // ["users", "alice"]
+    entry.value; // { name: "Alice" }
+  }
 
 console.log(await database.get([]));
 
