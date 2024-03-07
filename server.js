@@ -13,12 +13,7 @@ if (await database.get(["users", "admin"]) === undefined) {
 }
 
 // to make user admin is set and accessible... once committed their is no going back
-let x = database.list({prefix: ["academy", "all"]});
-for await (const entry of x) {
-    console.log("Key: " + entry.key); // ["users", "alice"]
-    console.log("Value: " + entry.value); // { name: "Alice" }
-}
-
+console.log(database.get(["admin", "admin"]).value)
 
 // using one-to-many found : https://docs.deno.com/deploy/kv/manual/secondary_indexes
 // data needs to be a JSON stringed
@@ -26,11 +21,8 @@ for await (const entry of x) {
 async function new_user(username, group, data) {
     const primaryKey   = ["users", username];
     const secondaryKey = ["academy", group, username];
-    await database.atomic()
-        .check({key: primaryKey})
-        .set(primaryKey, data)
-        .set(secondaryKey, data)
-        .commit();
+    await database.set(primaryKey, data);
+    await database.set(secondaryKey, data);
 }
 
 async function new_admin(full_name, password, academy, username) {
