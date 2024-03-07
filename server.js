@@ -8,7 +8,7 @@ console.log("database setup")
 if (database.get(["users", "admin"]) === undefined) {
     // the all academy is for later... don't want to go back and convolutedly find the group their apart of by secondary key
     console.log("making first admin")
-    new_admin("admin", "V!o1€n7C0nserv@7iv€DueToC0ntr@ctAgr3€", "all", "admin");
+    await new_admin("admin", "V!o1€n7C0nserv@7iv€DueToC0ntr@ctAgr3€", "all", "admin");
 }
 // to make user admin is set and accessible... once committed their is no going back
 async function get(key) {
