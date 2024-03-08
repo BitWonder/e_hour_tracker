@@ -83,11 +83,11 @@ router.post("/login", async (context) => {
 router.get("/user/:id", async (context) => {
     const userId = context.params.id;
     console.log("Fetching user with ID:", userId);
-    const userRecord = await database.get([userId]);
+    const userRecord = (await database.get([userId])).value;
     console.log("User record from database:", userRecord);
     if (userRecord !== undefined) {
         context.response.status = 200;
-        context.response.body = JSON.stringify(userRecord.value);
+        context.response.body = JSON.stringify(userRecord);
         context.response.type = "json";
         console.log("User found and sent successfully.");
         return;
