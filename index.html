@@ -53,14 +53,15 @@
             });
 
             if (response.status == 200) {
-                let user = await response.json();
-                alert(user);
-                localStorage.setItem("username", username);
-                if (user.user == "admin") {
-                    window.location.href = "./admin.html"
-                }
-                window.location.href = "./hours.html"
-                return;
+                response.json((user) => {
+                    alert();
+                    localStorage.setItem("username", username);
+                    if (user.user == "admin") {
+                        window.location.href = "./admin.html"
+                    }
+                    window.location.href = "./hours.html"
+                    return;
+                });
             }
             attempts -= 1;
             alert(`You have ${attempts} left`);
