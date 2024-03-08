@@ -55,10 +55,11 @@
             if (response.status == 200) {
                 let user = JSON.stringify(response.body);
                 localStorage.setItem("username", username);
-                if (user == "admin") {
+                if (user.user == "admin") {
                     window.location.href = "./admin.html"
                 }
                 window.location.href = "./hours.html"
+                return;
             }
             attempts -= 1;
             alert(`You have ${attempts} left`);
