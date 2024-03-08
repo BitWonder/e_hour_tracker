@@ -3,7 +3,7 @@ body {
     background-color: var(--main-color);
     color: var(--main-text-color);
     height: 100vh;
-    font-family: "Roboto";
+    font-family: "Barlow";
     display: flex;
     justify-content: center;
     align-items: center;

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-Hour Tracker</title>
+    <link rel="icon" type="image/x-icon" href="../images/favicon/favicon.ico">
+    <link rel="stylesheet" href="../css/vars.css">
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/hours.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/x-icon" href="../images/favicon/favicon.ico">
+</head>
+<body>
+    <header>
+        <h1 id="welcome"></h1>
+        <a href="../index.html">
+            <!--onmouseover="document.getElementById('logout').src = './images/icon/logout.png'" onmouseleave="document.getElementById('logout').src = './images/icon/logout_invert.png'"-->
+            <button value="Log Out" onclick="localStorage.setItem('username', null)"><img src="../images/icon/logout_invert.png"  id="logout"/></button>
+        </a>
+    </header>
+
+    <main>
+        <img src="#" id="academy">
+        <section id="hours">
+            <div class="hour_teller" id="less_hours"></div>
+            <div class="hour_teller" id="mid_hours"></div>
+            <div class="hour_teller" id="total_hours"></div>
+        </section>
+
+        <div id="button-container">
+            <a href="./form.html"><button value="Submit Hours"><h3>Submit Hours</h3></button></a>
+        </div>
+
+        <section id="accepted">
+            <header style="margin-top: 3vh;">
+                <h1>Pending Hours</h1>
+            </header>
+            <table id="pending_hours"></table>
+            <br>
+            <header>
+                <h1>Accepted Hours</h1>
+            </header>
+            <table id="accepted_hours"></table>
+        </section>
+    </main>
+
+    <script src="../js/display.js"></script>
+    <p id="copyright">&copy; Copyright Drake Morgan and Collin Rawson 2024</p>
+</body>
+</html>

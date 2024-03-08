@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-Hour Tracker Admin</title>
+    <link rel="icon" type="image/x-icon" href="./images/favicon/favicon.ico">
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/vars.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/x-icon" href="../images/favicon/favicon.ico">
+</head>
+<body>
+    <header>
+        <h1 id="welcome"></h1>
+        <a href="../index.html">
+            <!--onmouseover="document.getElementById('logout').src = './images/icon/logout.png'" onmouseleave="document.getElementById('logout').src = './images/icon/logout_invert.png'"-->
+            <button value="Log Out" onclick="localStorage.setItem('username', null)"><img src="../images/icon/logout_invert.png"  id="logout"/></button>
+        </a>
+    </header>
+
+
+    <!--
+
+        properly ordered
+        4. look at requested hours
+        5. look at students porfolios
+        1. add new student
+        2. add new admin
+        3. remove person
+
+
+    -->
+    <main>
+        <img src="#" id="academy">
+        
+        <div id="button-container">
+            <a href="../form.html"><button value="Submit Hours"><h3>New Student</h3></button></a>
+        </div>
+
+        <div id="button-container">
+            <a href="../form.html"><button value="Submit Hours"><h3>New Admin</h3></button></a>
+        </div>
+
+        <div id="button-container">
+            <a href="../form.html"><button value="Submit Hours"><h3>Delete Person</h3></button></a>
+        </div>
+    </main>
+
+    <script>
+        let username = localStorage.getItem("username");
+        var json_user = false;
+        let url = `../users/${username}/${username}.json`;
+        var client = new XMLHttpRequest();
+        client.open('GET', url);
+        client.onloadend = function() {
+            json_user = client.responseText;
+            continue_function()
+        }
+        client.send();
+
+        // now for the formatting stuff
+        function continue_function() {
+            let user = JSON.parse(json_user);
+            document.getElementById("welcome").innerText = `Welcome, ${user.full_name}!`
+            document.getElementById("academy").src = `../images/academy/${user.academy}.png`
+        }
+    </script>
+</body>
+</html>

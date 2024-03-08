@@ -1,6 +1,7 @@
 html {
     font-family: "Barlow";
 }
+
 body {
     background-color: var(--main-color);
     color: var(--main-text-color);
@@ -21,13 +22,26 @@ header {
 
     text-align: center;
     height: 10vh;
+    min-height: fit-content;
     width: 100%;
 }
 
 header h1 {
     grid-column: 2;
-
+    margin: 0;
     place-self: center;
+}
+
+@media screen and (max-height: 30em) {
+    header h1 {
+        font-size: large;
+    }
+}
+
+@media screen and (max-height: 15em) {
+    header h1 {
+        font-size: medium;
+    }
 }
 
 header a:first-child {
@@ -51,7 +65,7 @@ header a button {
     background: none;
     border: none;
     transition: all .2s ease-in-out;
-    border-radius: 15px;
+    border-radius: 10px;
 }
 
 header a button:hover {
@@ -64,16 +78,16 @@ header a button:hover img {
 
 main {
     padding: 5%;
+    padding-top: 2%;
 
     display: flex;
     flex-direction: column;
 }
 
 main img {
-    height: 50vh;
-    width: calc((1604 / 960) * 50vh);
-    
-    margin-top: 10vh;
+    height: 25vh;
+    width: calc((1604 / 960) * 25vh);
+
     margin-left: auto;
     margin-right: auto;
     margin-bottom: 10vh;
@@ -92,6 +106,10 @@ main img {
         font-size: larger;
     }
 
+    main {
+        padding-top: 5%;
+    }
+
     main img {
         width: 70vw;
         height: calc(70vw / (1604 / 960));
@@ -104,7 +122,7 @@ main .hour_teller {
 
     display: grid;
 
-    border-radius: 5px;
+    /*border-radius: 5px;*/
 }
 
 main .hour_teller h3 {
@@ -117,6 +135,17 @@ main .hour_teller h3 {
     text-shadow: 0 0 8px rgb(0,0,0);
 }
 
+/* border of teller by position */
+main .hour_teller:first-child {
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+main .hour_teller:last-child {
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+
 main #button-container {
     margin-top: 10vh;
     margin-bottom: 10vh;
@@ -126,16 +155,19 @@ main #button-container {
 
 main #button-container button {
     height: 8vh;
-    width: 20vh;
+    width: 20vw;
+    min-width: 15em;
     border: none;
-    border-radius: 25px;
+    border-radius: 15px;
+    color: var(--main-text-color);
     background-color: var(--accent-color);
+    text-shadow: 0 0 7px rgb(0,0,0);
     transition: all .2s ease-in-out;
 }
 
 main #button-container button:hover {
     transform: scale(1.1);
-    background-color: red;
+    background-color: lightblue;
 }
 
 main section header {
@@ -152,6 +184,8 @@ main section table {
 main section table div {
     border: 1px solid var(--secondary-color);
     width: 100%;
+    margin-bottom: 5px;
+    border-top: 5px solid var(--secondary-color);
 }
 
 main section table div:last-child {
