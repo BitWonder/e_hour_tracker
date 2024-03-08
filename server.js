@@ -15,7 +15,7 @@ if (await database.get(["users", "admin"]) === undefined) {
 
 // to make sure admin is set and accessible... once committed there is no going back
 var x = (await database.get(["users", "admin"]));
-console.log("Admin: " + x.value);
+console.log("Admin => " + x.value);
 // using one-to-many found: https://docs.deno.com/deploy/kv/manual/secondary_indexes
 // data needs to be a JSON stringed
 // academy user is in for group
@@ -60,8 +60,8 @@ router.post("/login", async (context) => {
     const input = await context.request.body.text();
     let body = JSON.parse(input);
     console.log("Data: {" + body.username + ", " + body.password + "}");
-    const user = await database.get(["users", body.username]);
-    console.log("User: {" + user.value.username + ", " + user.value.password + "}")
+    const user = await database.get(["users", body.username]).value;
+    console.log("User: {" + user.username + ", " + user.password + "}")
     if (user.value.password === body.password) {
         console.log("good... sending 200")
         context.response.status = 200;
