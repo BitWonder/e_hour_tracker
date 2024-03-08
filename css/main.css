@@ -86,7 +86,7 @@ main {
 
 main img {
     height: 25vh;
-    width: calc((1604 / 960) * 25vh);
+    width: auto;
 
     margin-left: auto;
     margin-right: auto;
@@ -112,7 +112,7 @@ main img {
 
     main img {
         width: 70vw;
-        height: calc(70vw / (1604 / 960));
+        height: auto;
     }
 }
 

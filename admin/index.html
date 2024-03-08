@@ -49,24 +49,6 @@
         </div>
     </main>
 
-    <script>
-        let username = localStorage.getItem("username");
-        var json_user = false;
-        let url = `../users/${username}/${username}.json`;
-        var client = new XMLHttpRequest();
-        client.open('GET', url);
-        client.onloadend = function() {
-            json_user = client.responseText;
-            continue_function()
-        }
-        client.send();
-
-        // now for the formatting stuff
-        function continue_function() {
-            let user = JSON.parse(json_user);
-            document.getElementById("welcome").innerText = `Welcome, ${user.full_name}!`
-            document.getElementById("academy").src = `../images/academy/${user.academy}.png`
-        }
-    </script>
+    <script src="../js/get_user.js"></script>
 </body>
 </html>

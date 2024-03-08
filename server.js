@@ -67,8 +67,11 @@ router.post("/login", async (context) => {
     console.log("User: {" + user.username + ", " + user.password + "}")
     if (user.password === body.password) {
         console.log("good... sending 200")
+        let id = crypto.randomUUID();
+        console.log("New TTL ID: " + id);
+        database.set([id], user, { expireIn: 3600000 });
         context.response.status = 200;
-        context.response.body = { user: user.user };
+        context.response.body = { user: user.user, id: id };
         context.response.type = "json";
         console.log("Sending user: " + user.user);
         return;
@@ -76,6 +79,18 @@ router.post("/login", async (context) => {
     console.log("Not good... sending 401")
     context.response.status = 401;
 });
+
+router.get("/user", async(context) => {
+    if (await database.get([ (JSON.parse(await context.request.body.text())).id ]) !== undefined) {
+        context.response.status = 200;
+        context.response.body = (await database.get([ (JSON.parse(await context.request.body.text())).id ])).value;
+        context.response.type = "json";
+        console.log("sending get... ");
+        return;
+    }
+    console.log("TTL id is gone")
+    context.response.status = 401;
+})
 
 // setup initialize app
 app.use(router.routes());
