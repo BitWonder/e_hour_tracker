@@ -80,10 +80,11 @@ router.post("/login", async (context) => {
     context.response.status = 401;
 });
 
-router.get("/user", async(context) => {
-    if (await database.get([ (JSON.parse(await context.request.body.text())).id ]) !== undefined) {
+router.get("/user:id", async(context) => {
+    const userId = ctx.request.url.searchParams.get('id');
+    if (await database.get([ userId ]) !== undefined) {
         context.response.status = 200;
-        context.response.body = (await database.get([ (JSON.parse(await context.request.body.text())).id ])).value;
+        context.response.body = (await database.get([ userId ])).value;
         context.response.type = "json";
         console.log("sending get... ");
         return;
