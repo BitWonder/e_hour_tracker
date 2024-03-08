@@ -41,6 +41,7 @@ async function new_admin(full_name, password, academy, username) {
 
 async function new_student(full_name, password, academy, username) {
     await new_user(username, academy, JSON.stringify({
+        username: username,
         full_name: full_name,
         password: password,
         academy: academy,
@@ -60,9 +61,10 @@ router.post("/login", async (context) => {
     const input = await context.request.body.text();
     let body = JSON.parse(input);
     console.log("Data: {" + body.username + ", " + body.password + "}");
-    const user = await database.get(["users", body.username]).value;
+    const data = await database.get(["users", body.username]).value;
+    let user = JSON.parse(data);
     console.log("User: {" + user.username + ", " + user.password + "}")
-    if (user.value.password === body.password) {
+    if (user.password === body.password) {
         console.log("good... sending 200")
         context.response.status = 200;
         context.response.body = { user: user.value.user };
