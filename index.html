@@ -53,15 +53,8 @@
             });
 
             if (response.status == 200) {
-                response.json((user) => {
-                    alert(user);
-                    localStorage.setItem("username", username);
-                    if (user.user == "admin") {
-                        window.location.href = "./admin.html"
-                    }
-                    window.location.href = "./hours.html"
-                    return;
-                });
+                let user = await response.json()
+                alert(user)
             }
             attempts -= 1;
             console.log(response.status);
