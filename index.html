@@ -54,7 +54,7 @@
 
             if (response.status == 200) {
                 response.json((user) => {
-                    alert();
+                    alert(user);
                     localStorage.setItem("username", username);
                     if (user.user == "admin") {
                         window.location.href = "./admin.html"
@@ -64,7 +64,7 @@
                 });
             }
             attempts -= 1;
-            alert(`You have ${attempts} left`);
+            alert(`You have ${attempts} attempts(s) left`);
             return;
         }
     </script>
