@@ -53,7 +53,7 @@
             });
 
             if (response.status == 200) {
-                let user = response.body;
+                let user = await response.json();
                 alert(user);
                 localStorage.setItem("username", username);
                 if (user.user == "admin") {
