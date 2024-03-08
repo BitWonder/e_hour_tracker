@@ -53,7 +53,8 @@
             });
 
             if (response.status == 200) {
-                let user = JSON.parse(response.body);
+                let user = response.body;
+                console.log(user)
                 localStorage.setItem("username", username);
                 if (user.user == "admin") {
                     window.location.href = "./admin.html"
