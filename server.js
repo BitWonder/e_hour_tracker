@@ -61,7 +61,7 @@ router.post("/login", async (context) => {
     const input = await context.request.body.text();
     let body = JSON.parse(input);
     console.log("Data: {" + body.username + ", " + body.password + "}");
-    const data = (await database.get(["users", "admin"])).value;
+    const data = (await database.get(["users", body.username])).value;
     console.log("Unparsed data: " + data)
     let user = JSON.parse(data);
     console.log("User: {" + user.username + ", " + user.password + "}")
@@ -70,6 +70,7 @@ router.post("/login", async (context) => {
         context.response.status = 200;
         context.response.body = { user: user.user };
         context.response.type = "json";
+        console.log("Sending user: " + user.user);
         return;
     }
     console.log("Not good... sending 401")
