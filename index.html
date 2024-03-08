@@ -55,7 +55,7 @@
             if (response.status == 200) {
                 let user = await response.json()
                 alert(user);
-                alert(user.body);
+                alert(user.user);
             }
             attempts -= 1;
             console.log(response.status);
