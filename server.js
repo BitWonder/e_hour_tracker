@@ -86,7 +86,7 @@ router.get("/user/:id", async (context) => {
         context.response.status = 200;
         context.response.body = JSON.stringify((await database.get([userId])).value);
         context.response.type = "json";
-        confirm.log(JSON.stringify((await database.get([userId])).value));
+        console.log(JSON.stringify((await database.get([userId])).value));
         console.log("sending get... ");
         return;
     }
