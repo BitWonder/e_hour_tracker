@@ -8,4 +8,4 @@ const response = await fetch(`https://${window.location.host}/user/${user_id}`, 
     referrerPolicy: "no-referrer", // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
 });
 
-console.log((await response.json()));
+next((await response.json()));
