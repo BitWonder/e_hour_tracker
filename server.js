@@ -68,7 +68,7 @@ router.post("/login", async (context) => {
     if (user.password === body.password) {
         console.log("good... sending 200")
         context.response.status = 200;
-        context.response.body = { user: user.value.user };
+        context.response.body = { user: user.user };
         context.response.type = "json";
         return;
     }
