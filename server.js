@@ -82,15 +82,17 @@ router.post("/login", async (context) => {
 
 router.get("/user/:id", async (context) => {
     const userId = context.params.id;
-    if (await database.get([userId]) !== undefined) {
+    console.log("Fetching user with ID:", userId);
+    const userRecord = await database.get([userId]);
+    console.log("User record from database:", userRecord);
+    if (userRecord !== undefined) {
         context.response.status = 200;
-        context.response.body = JSON.stringify((await database.get([userId])).value);
+        context.response.body = JSON.stringify(userRecord.value);
         context.response.type = "json";
-        console.log(JSON.stringify((await database.get([userId])).value));
-        console.log("sending get... ");
+        console.log("User found and sent successfully.");
         return;
     }
-    console.log("TTL id is gone")
+    console.log("User not found or error retrieving user data.");
     context.response.status = 401;
 })
 
