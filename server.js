@@ -22,12 +22,12 @@ console.log("Admin => " + x.value);
 async function new_user(username, group, data) {
     const primaryKey = ["users", username];
     const secondaryKey = ["academy", group, username];
-    let result = await database.atomic()
-        .check(primaryKey)
-        .set(primaryKey, data)
-        .set(secondaryKey, data)
-        .commit()
-    return result;
+    if ((await database.get(primaryKey)).value === undefined) {
+        return { ok: false };
+    }
+    await database.set(primaryKey, data);
+    await database.set(secondaryKey, data);
+    return { ok: true };
 }
 
 async function new_admin(full_name, password, academy, username) {
