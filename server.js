@@ -104,7 +104,7 @@ router.post("/login", async (context) => {
 router.post("/newStudent", async (context) => {
     const input = await context.request.body.text();
     let body = JSON.parse(input);
-    console.log("Data: {" + body.username + ", " + body.password + "}");
+    console.log("Data: " + body);
     let response = await new_student(body.full_name, body.password, body.academy, body.username);
     if ( response.ok == false) {
         context.response.status = 401;
