@@ -21,13 +21,17 @@
     <main>
         <form id="new">
             <label for="name">Full Name:</label>
-            <input type="text" id="name">
+            <input type="text" id="name" required>
             <label for="name">Username:</label>
-            <input type="text" id="user">
+            <input type="text" id="user" required>
             <label for="name">Password:</label>
-            <input type="text" id="password">
+            <input type="text" id="password" required>
             <label for="name">Academy:</label>
-            <input type="text" id="academy">
+            <select id="academy" form="new" required>
+                <option disabled selected value> -- select an academy -- </option>
+                <option value="e-Communication">e-Communication</option>
+                <option value="engineering">engineering</option>
+            </select>
             <input type="submit">
         </form>
     </main>

@@ -20,6 +20,7 @@ document.getElementById("new").onsubmit = async function(event) {
             academy: document.getElementById("academy").value
         }), // body data type must match "Content-Type" header)
     });
+
     if (response.status == 200) {
         document.getElementById("name").value = "";
         document.getElementById("user").value = "";
@@ -28,5 +29,6 @@ document.getElementById("new").onsubmit = async function(event) {
         alert("Created Successfully!")
         return;
     }
-    alert("Failed to Create New Student!")
+    alert("Failed to Create New Student!");
+    return;
 }
