@@ -58,26 +58,44 @@ const port = 1027;
 
 // router gets go here
 router.post("/login", async (context) => {
-    const input = await context.request.body.text();
-    let body = JSON.parse(input);
-    console.log("Data: {" + body.username + ", " + body.password + "}");
-    const data = (await database.get(["users", body.username])).value;
-    console.log("Unparsed data: " + data)
-    let user = JSON.parse(data);
-    console.log("User: {" + user.username + ", " + user.password + "}")
-    if (user.password === body.password) {
-        console.log("good... sending 200")
-        let id = crypto.randomUUID();
-        console.log("New TTL ID: " + id);
-        database.set([id], user, { expireIn: 3600000 });
-        context.response.status = 200;
-        context.response.body = { user: user.user, id: id };
-        context.response.type = "json";
-        console.log("Sending user: " + user.user);
+    try {
+        const input = await context.request.body.text();
+        let body = JSON.parse(input);
+        console.log("Data: {" + body.username + ", " + body.password + "}");
+
+        const userData = await database.get(["users", body.username]);
+        if (!userData) {
+            console.log("User not found");
+            context.response.status = 401;
+            return;
+        }
+
+        const user = JSON.parse(userData.value);
+        console.log("User: {" + user.username + ", " + user.password + "}");
+
+        if (user.password === body.password) {
+            console.log("Login successful... sending 200");
+
+            const sessionId = crypto.randomUUID();
+            console.log("New Session ID: " + sessionId);
+
+            await database.set([sessionId], user, { expireIn: 3600000 });
+
+            context.response.status = 200;
+            context.response.body = { user: user.user, id: sessionId };
+            context.response.type = "json";
+            console.log("Sending user: " + user.user);
+            return;
+        } else {
+            console.log("Password incorrect... sending 401");
+            context.response.status = 401;
+            return;
+        }
+    } catch (error) {
+        console.error("Error occurred:", error);
+        context.response.status = 500;
         return;
     }
-    console.log("Not good... sending 401")
-    context.response.status = 401;
 });
 
 router.get("/user/:id", async (context) => {
