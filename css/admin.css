@@ -132,10 +132,12 @@ main img {
     background-color: var(--accent-color);
     text-shadow: 0 0 7px rgb(0,0,0);
     transition: all .2s ease-in-out;
+    margin-bottom: 5vh;
 }
 
 #actions button:hover {
     background-color: lightblue;
+    transform: scale(1.1);
 }
 
 @media screen and (max-width: 100vh) {
