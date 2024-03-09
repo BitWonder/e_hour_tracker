@@ -42,7 +42,13 @@ async function new_admin(full_name, password, academy, username) {
 }
 
 async function new_student(full_name, password, academy, username) {
-    let response = await new_user(username, academy, JSON.stringify({
+    console.log("Creating new student:");
+    console.log("Full Name:", full_name);
+    console.log("Password:", password);
+    console.log("Academy:", academy);
+    console.log("Username:", username);
+
+    let studentObj = {
         username: username,
         full_name: full_name,
         password: password,
@@ -51,7 +57,14 @@ async function new_student(full_name, password, academy, username) {
         hours: [],
         requested: [],
         denied: []
-    }));
+    };
+
+    console.log("Student Object:", studentObj);
+
+    let response = await new_user(username, academy, JSON.stringify(studentObj));
+
+    console.log("Response from new_user:", response);
+
     return response;
 }
 
