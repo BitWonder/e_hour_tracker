@@ -22,25 +22,27 @@ console.log("Admin => " + x.value);
 async function new_user(username, group, data) {
     const primaryKey = ["users", username];
     const secondaryKey = ["academy", group, username];
-    await database.atomic()
+    let result = await database.atomic()
         .check(primaryKey)
         .set(primaryKey, data)
         .set(secondaryKey, data)
         .commit()
+    return result;
 }
 
 async function new_admin(full_name, password, academy, username) {
-    await new_user(username, academy, JSON.stringify({
+    let response = await new_user(username, academy, JSON.stringify({
         username: username,
         full_name: full_name,
         password: password,
         academy: academy,
         user: "admin"
     }));
+    return response;
 }
 
 async function new_student(full_name, password, academy, username) {
-    await new_user(username, academy, JSON.stringify({
+    let response = await new_user(username, academy, JSON.stringify({
         username: username,
         full_name: full_name,
         password: password,
@@ -50,6 +52,7 @@ async function new_student(full_name, password, academy, username) {
         requested: [],
         denied: []
     }));
+    return response;
 }
 
 const app = new Application();
@@ -96,6 +99,19 @@ router.post("/login", async (context) => {
         context.response.status = 500;
         return;
     }
+});
+
+router.post("/newStudent", async (context) => {
+    const input = await context.request.body.text();
+    let body = JSON.parse(input);
+    console.log("Data: {" + body.username + ", " + body.password + "}");
+    let response = await new_student(body.full_name, body.password, body.academy, body.username);
+    if ( response.ok == false) {
+        context.response.status = 401;
+        return;
+    }
+    context.response.status = 200;
+    return;
 });
 
 router.get("/user/:id", async (context) => {
