@@ -48,7 +48,7 @@ async function new_student(full_name, password, academy, username) {
     console.log("Academy:", academy);
     console.log("Username:", username);
 
-    let studentObj = {
+    let studentObj = JSON.stringify({
         username: username,
         full_name: full_name,
         password: password,
@@ -57,11 +57,11 @@ async function new_student(full_name, password, academy, username) {
         hours: [],
         requested: [],
         denied: []
-    };
+    });
 
-    console.log("Student Object:", studentObj);
+    console.log("Student Object: ", studentObj);
 
-    let response = await new_user(username, academy, JSON.stringify(studentObj));
+    let response = await new_user(username, academy, studentObj);
 
     console.log("Response from new_user:", response);
 
