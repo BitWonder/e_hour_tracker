@@ -155,12 +155,30 @@ router.post("/newAdmin", async (context) => {
 router.post("/delete", async (context) => {
     const input = await context.request.body.text();
     let body = JSON.parse(input);
-    console.log("Data: {" + body.username + "}");
+
+    // Log parsed data
+    console.log("Parsed Data: {" + body.username + "}");
+
     let data = (await database.get(["users", body.username])).value;
     let group = data.academy;
-    await database.delete(["users", body.username]);
+
+    // Log data retrieval and group determination
+    console.log("Retrieved data for username: " + body.username);
+    console.log("User belongs to academy group: " + group);
+
+    // Delete user from academy group
     await database.delete(["academy", group, body.username]);
+    console.log("User deleted from academy group: " + group);
+
+    // Delete user from users database
+    await database.delete(["users", body.username]);
+    console.log("User data deleted: " + body.username);
+
+    // Set response status
     context.response.status = 200;
+    console.log("Response status set to 200");
+
+    // End function
     return;
 });
 

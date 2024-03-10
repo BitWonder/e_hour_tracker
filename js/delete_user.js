@@ -20,9 +20,9 @@ document.getElementById("new").onsubmit = async function(event) {
 
     if (response.status == 200) {
         document.getElementById("user").value = "";
-        alert("Created Successfully!")
+        alert("Deleted!")
         return;
     }
-    alert("Failed to Create New Student!");
+    alert("Failed to Delete!");
     return;
 }
