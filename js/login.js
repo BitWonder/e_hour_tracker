@@ -31,11 +31,10 @@ document.getElementById("login").onsubmit = async function(event) {
         let user = await response.json()
         localStorage.setItem("user_id", user.id)
         if (user.user == "admin") {
-            /*if (user.academy !== "all") {
-                window.location.href = "./teacher/";
-                return;
-            }*/
             window.location.href = "./admin/";
+            return;
+        } else if (user.user == "teacher") {
+            window.location.href = "./teacher/";
             return;
         }
         window.location.href = "./student/";

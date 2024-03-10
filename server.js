@@ -133,6 +133,25 @@ router.post("/newStudent", async (context) => {
     return;
 });
 
+router.post("/newAdmin", async (context) => {
+    const input = await context.request.body.text();
+    let body = JSON.parse(input);
+    console.log("Data: {" + body.full_name + ", " + body.password + ", " + body.academy + ", " + body.username + ", " + body.user + "}");
+    let response = await new_user(body.username, body.academy, JSON.stringify({
+        username: body.username,
+        full_name: body.full_name,
+        password: body.password,
+        academy: body.academy,
+        user: body.user
+    }));
+    if ( response.ok == false) {
+        context.response.status = 401;
+        return;
+    }
+    context.response.status = 200;
+    return;
+});
+
 router.get("/user/:id", async (context) => {
     const userId = context.params.id;
     console.log("Fetching user with ID:", userId);
