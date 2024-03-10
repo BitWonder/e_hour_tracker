@@ -195,6 +195,8 @@ function next(user_json) {
     document.getElementById("total_hours").style = `background: linear-gradient(90deg, ${done_color} 0%, ${done_color} ${max_percent * 100}%, ${pending_color} ${max_percent * 100}%, ${pending_color} ${(max_pending + max_percent) * 100}%, ${not_done_color} ${(max_percent + max_pending) * 100}%, ${not_done_color} 100%); border: solid 1px black;`;
     document.getElementById("total_hours").append(max_text);
     
+    console.log("total hours: ", total_hours);
+    console.log("pending hours: ", pending_hours);
     console.log("Minimum Percent:", min_percent);
     console.log("Minimum Pending:", min_pending);
     console.log("Mid Percent:", mid_percent);
