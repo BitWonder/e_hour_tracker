@@ -22,12 +22,17 @@ console.log("Admin => " + x.value);
 async function new_user(username, group, data) {
     const primaryKey = ["users", username];
     const secondaryKey = ["academy", group, username];
-    if (typeof (await database.get(primaryKey)).value === "undefined") {
-        return { ok: false };
+    
+    // Check if user exists
+    const userRecord = await database.get(primaryKey);
+    if (!userRecord || typeof userRecord.value === "undefined") {
+        return { ok: true };
     }
+    
+    // User exists, set data
     await database.set(primaryKey, data);
     await database.set(secondaryKey, data);
-    return { ok: true };
+    return { ok: false };
 }
 
 async function new_admin(full_name, password, academy, username) {
