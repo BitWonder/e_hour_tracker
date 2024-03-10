@@ -115,6 +115,8 @@ function next(user_json) {
     } else {
         needed = user_json.needed_hours;
     }
+    console.log("Pending: " + pending_hours);
+    console.log("Total_hours: " + total_hours);
     let min_percent = total_hours   / (needed - 200);
     console.log(min_percent);
     let min_pending = pending_hours / (needed - 200);
