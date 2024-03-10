@@ -12,7 +12,7 @@ function next(user_json) {
             title = document.createElement("h3");
             title.innerText = hour.title;
             hour_text = document.createElement("p");
-            hour_text.innerText = `${element.hours} hour`;
+            hour_text.innerText = `${element.amount} hour`;
             s1.append(title);
             s1.append(hour_text);
             p.append(s1);
@@ -21,7 +21,7 @@ function next(user_json) {
             title = document.createElement("h3");
             title.innerText = hour.title;
             hour_text = document.createElement("p");
-            hour_text.innerText = `${element.hours} hours`;
+            hour_text.innerText = `${element.amount} hours`;
             s1.append(title);
             s1.append(hour_text);
             p.append(s1);
@@ -48,7 +48,7 @@ function next(user_json) {
             title = document.createElement("h3");
             title.innerText = hour.title;
             hour_text = document.createElement("p");
-            hour_text.innerText = `${element.hours} hour`;
+            hour_text.innerText = `${element.amount} hour`;
             s1.append(title);
             s1.append(hour_text);
             p.append(s1);
@@ -57,7 +57,7 @@ function next(user_json) {
             title = document.createElement("h3");
             title.innerText = hour.title;
             hour_text = document.createElement("p");
-            hour_text.innerText = `${element.hours} hours`;
+            hour_text.innerText = `${element.amount} hours`;
             s1.append(title);
             s1.append(hour_text);
             p.append(s1);
@@ -82,7 +82,7 @@ function next(user_json) {
             title = document.createElement("h3");
             title.innerText = hour.title;
             hour_text = document.createElement("p");
-            hour_text.innerText = `${element.hours} hour`;
+            hour_text.innerText = `${element.amount} hour`;
             s1.append(title);
             s1.append(hour_text);
             p.append(s1);
@@ -91,7 +91,7 @@ function next(user_json) {
             title = document.createElement("h3");
             title.innerText = hour.title;
             hour_text = document.createElement("p");
-            hour_text.innerText = `${element.hours} hours`;
+            hour_text.innerText = `${element.amount} hours`;
             s1.append(title);
             s1.append(hour_text);
             p.append(s1);
