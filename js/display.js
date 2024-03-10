@@ -5,7 +5,6 @@ function next(user_json) {
     let pending_hours = 0;
     let place = document.getElementById("pending_hours");
     user_json.requested.forEach(hour => {
-        console.log(pending_hours);
         pending_hours += parseFloat(hour.amount);
         let p = document.createElement("div");
         if ( hour.hours == 1 ) {
@@ -195,20 +194,5 @@ function next(user_json) {
     document.getElementById("mid_hours").append(mid_text);
     document.getElementById("total_hours").style = `background: linear-gradient(90deg, ${done_color} 0%, ${done_color} ${max_percent * 100}%, ${pending_color} ${max_percent * 100}%, ${pending_color} ${(max_pending + max_percent) * 100}%, ${not_done_color} ${(max_percent + max_pending) * 100}%, ${not_done_color} 100%); border: solid 1px black;`;
     document.getElementById("total_hours").append(max_text);
-    
-    console.log("total hours: ", total_hours);
-    console.log("pending hours: ", pending_hours);
-    console.log("Minimum Percent:", min_percent);
-    console.log("Minimum Pending:", min_pending);
-    console.log("Mid Percent:", mid_percent);
-    console.log("Mid Pending:", mid_pending);
-    console.log("Maximum Percent:", max_percent);
-    console.log("Maximum Pending:", max_pending);
-    console.log("Done Color:", done_color);
-    console.log("Pending Color:", pending_color);
-    console.log("Not Done Color:", not_done_color);
-    console.log("Less Text:", less_text.innerText);
-    console.log("Mid Text:", mid_text.innerText);
-    console.log("Max Text:", max_text.innerText);
 
 }
