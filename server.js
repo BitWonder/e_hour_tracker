@@ -152,6 +152,18 @@ router.post("/newAdmin", async (context) => {
     return;
 });
 
+router.post("/delete", async (context) => {
+    const input = await context.request.body.text();
+    let body = JSON.parse(input);
+    console.log("Data: {" + body.username + "}");
+    let data = (await database.get(["users", body.username])).value;
+    let group = data.academy;
+    await database.delete(["users", body.username]);
+    await database.delete(["academy", group, body.username]);
+    context.response.status = 200;
+    return;
+});
+
 router.get("/user/:id", async (context) => {
     const userId = context.params.id;
     console.log("Fetching user with ID:", userId);
