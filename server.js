@@ -184,25 +184,42 @@ router.post("/delete", async (context) => {
 });
 
 router.post("/submitHours", async (context) => {
+    console.log("Received POST request to submit hours");
+
     const input = await context.request.body.text();
+    console.log("Received input data:", input);
+
     let body = JSON.parse(input);
-    let person = (await database.get([body.id])).value
-    // not checking for group because that should sync in every write function
-    if (person !== (await database.get(["users", person.username])).value) { // because their isn't one identifier if someone logs in twice. data can get out of sync so check to make sure data pre isn't already messed up
+    console.log("Parsed input data:", body);
+
+    let person = (await database.get([body.id])).value;
+    console.log("Retrieved person data from database:", person);
+
+    if (person !== (await database.get(["users", person.username])).value) {
+        console.log("Data inconsistency detected. Aborting submission.");
         context.request.status = 409;
         return;
     }
-    // continue
+
+    console.log("No data inconsistency detected. Continuing with submission.");
+
     person.requested.push({
-        title:  body.title,
-        date:   body.date,
+        title: body.title,
+        date: body.date,
         amount: body.amount,
         description: body.description,
         images: body.images
     });
+    console.log("Added submitted hours to person's requested list:", person.requested);
+
     await database.set(["users", person.username], JSON.stringify(person));
+    console.log("Updated user data in the database:", person);
+
     await database.set(["academy", person.academy, person.username], JSON.stringify(person));
+    console.log("Updated academy data in the database:", person);
+
     context.response.status = 200;
+    console.log("Submission successful. Responding with status 200.");
     return;
 });
 
