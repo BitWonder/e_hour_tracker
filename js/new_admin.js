@@ -18,7 +18,7 @@ document.getElementById("new").onsubmit = async function(event) {
             username: document.getElementById("user").value,
             password: document.getElementById("password").value,
             academy: document.getElementById("academy").value,
-            user: document.getElementById("user").value
+            user: document.getElementById("user_group").value
         }), // body data type must match "Content-Type" header)
     });
 
@@ -27,7 +27,7 @@ document.getElementById("new").onsubmit = async function(event) {
         document.getElementById("user").value = "";
         document.getElementById("password").value = "";
         document.getElementById("academy").value = "";
-        document.getElementById("user").value = "";
+        document.getElementById("user_group").value = "";
         alert("Created Successfully!")
         return;
     }
