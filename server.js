@@ -153,51 +153,31 @@ router.post("/newAdmin", async (context) => {
 });
 
 router.post("/delete", async (context) => {
-    try {
-        const input = await context.request.body.text();
-        let body = JSON.parse(input);
+    const input = await context.request.body.text();
+    let body = JSON.parse(input);
 
-        // Log parsed data
-        console.log("Parsed Data: {" + body.username + "}");
+    // Log parsed data
+    console.log("Parsed Data: {" + body.username + "}");
 
-        let data = (await database.get(["users", body.username])).value;
+    let data = JSON.parse((await database.get(["users", body.username])).value);
+    console.log("User data: " + data);
+    let group = data.academy;
 
-        // Log user data
-        console.log("User data: " + JSON.stringify(data));
+    // Log data retrieval and group determination
+    console.log("Retrieved data for username: " + body.username);
+    console.log("User belongs to academy group: " + group);
 
-        if (!data) {
-            console.log("User not found in the database");
-            context.response.status = 404;
-            return;
-        }
+    // Delete user from academy group
+    await database.delete(["academy", group, body.username]);
+    console.log("User deleted from academy group: " + group);
 
-        let group = data.academy;
+    // Delete user from users database
+    await database.delete(["users", body.username]);
+    console.log("User data deleted: " + body.username);
 
-        // Log data retrieval and group determination
-        console.log("Retrieved data for username: " + body.username);
-        console.log("User belongs to academy group: " + group);
-
-        if (!group) {
-            console.log("User does not belong to any academy group");
-            context.response.status = 400;
-            return;
-        }
-
-        // Delete user from academy group
-        await database.delete(["academy", group, body.username]);
-        console.log("User deleted from academy group: " + group);
-
-        // Delete user from users database
-        await database.delete(["users", body.username]);
-        console.log("User data deleted: " + body.username);
-
-        // Set response status
-        context.response.status = 200;
-        console.log("Response status set to 200");
-    } catch (error) {
-        console.error("Error occurred:", error);
-        context.response.status = 500;
-    }
+    // Set response status
+    context.response.status = 200;
+    console.log("Response status set to 200");
 
     // End function
     return;
