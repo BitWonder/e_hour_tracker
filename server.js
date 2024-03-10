@@ -195,7 +195,7 @@ router.post("/submitHours", async (context) => {
     let person = (await database.get([body.id])).value;
     console.log("Retrieved person data from database:", person);
 
-    if (person !== (await database.get(["users", person.username])).value) {
+    if (person !== JSON.parse((await database.get(["users", person.username])).value)) {
         console.log("Data inconsistency detected. Aborting submission.");
         context.request.status = 409;
         return;
