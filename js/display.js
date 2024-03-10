@@ -5,7 +5,7 @@ function next(user_json) {
     let pending_hours = 0;
     let place = document.getElementById("pending_hours");
     user_json.requested.forEach(hour => {
-        pending_hours += hour.hours;
+        pending_hours += hour.amount;
         let p = document.createElement("div");
         if ( hour.hours == 1 ) {
             s1 = document.createElement("section");
@@ -41,7 +41,7 @@ function next(user_json) {
     let total_hours = 0;
     place = document.getElementById("accepted_hours");
     user_json.hours.forEach(hour => {
-        total_hours += hour.hours;
+        total_hours += hour.amount;
         let p = document.createElement("div");
         if ( hour.hours == 1 ) {
             s1 = document.createElement("section");
