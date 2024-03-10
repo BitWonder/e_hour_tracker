@@ -15,7 +15,16 @@ function next(user_json) {
             hour_text.innerText = `${hour.amount} hour`;
             s1.append(title);
             s1.append(hour_text);
+            s2 = document.createElement("section");
+            title = document.createElement("h3");
+            title.innerText = "Description:";
+            hour_text = document.createElement("p");
+            hour_text.innerText = `${hour.description}`;
+            s2.append(title);
+            s2.append(hour_text);
             p.append(s1);
+            p.append(s2);
+
         } else {
             s1 = document.createElement("section");
             title = document.createElement("h3");
@@ -51,7 +60,15 @@ function next(user_json) {
             hour_text.innerText = `${hour.amount} hour`;
             s1.append(title);
             s1.append(hour_text);
+            s2 = document.createElement("section");
+            title = document.createElement("h3");
+            title.innerText = "Description:";
+            hour_text = document.createElement("p");
+            hour_text.innerText = `${hour.description}`;
+            s2.append(title);
+            s2.append(hour_text);
             p.append(s1);
+            p.append(s2);
         } else {
             s1 = document.createElement("section");
             title = document.createElement("h3");
@@ -60,7 +77,15 @@ function next(user_json) {
             hour_text.innerText = `${hour.amount} hours`;
             s1.append(title);
             s1.append(hour_text);
+            s2 = document.createElement("section");
+            title = document.createElement("h3");
+            title.innerText = "Description:";
+            hour_text = document.createElement("p");
+            hour_text.innerText = `${hour.description}`;
+            s2.append(title);
+            s2.append(hour_text);
             p.append(s1);
+            p.append(s2);
         }
         p.classList.add("hours");
         place.append(p);
@@ -85,7 +110,15 @@ function next(user_json) {
             hour_text.innerText = `${hour.amount} hour`;
             s1.append(title);
             s1.append(hour_text);
+            s2 = document.createElement("section");
+            title = document.createElement("h3");
+            title.innerText = "Description:";
+            hour_text = document.createElement("p");
+            hour_text.innerText = `${hour.description}`;
+            s2.append(title);
+            s2.append(hour_text);
             p.append(s1);
+            p.append(s2);
         } else {
             s1 = document.createElement("section");
             title = document.createElement("h3");
@@ -94,7 +127,15 @@ function next(user_json) {
             hour_text.innerText = `${hour.amount} hours`;
             s1.append(title);
             s1.append(hour_text);
+            s2 = document.createElement("section");
+            title = document.createElement("h3");
+            title.innerText = "Description:";
+            hour_text = document.createElement("p");
+            hour_text.innerText = `${hour.description}`;
+            s2.append(title);
+            s2.append(hour_text);
             p.append(s1);
+            p.append(s2);
         }
         p.classList.add("hours");
         place.append(p);
@@ -115,20 +156,12 @@ function next(user_json) {
     } else {
         needed = user_json.needed_hours;
     }
-    console.log("Pending: " + pending_hours);
-    console.log("Total_hours: " + total_hours);
     let min_percent = total_hours   / (needed - 200);
-    console.log(min_percent);
     let min_pending = pending_hours / (needed - 200);
-    console.log(min_pending);
     let mid_percent = total_hours   / (needed - 100);
-    console.log(mid_percent);
     let mid_pending = pending_hours / (needed - 100);
-    console.log(mid_pending);
     let max_percent = total_hours   / needed;
-    console.log(max_percent);
     let max_pending = pending_hours / needed;
-    console.log(max_pending);
     let done_color = "var(--accent-color)"
     let pending_color = "lightblue"
     let not_done_color = "white"
