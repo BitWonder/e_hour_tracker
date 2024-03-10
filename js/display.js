@@ -1,4 +1,5 @@
 function next(user_json) {
+    console.log(user_json);
     document.getElementById("academy").src = `../images/academy/${user_json.academy}.png`;
     document.getElementById("welcome").innerText = `Welcome ${user_json.full_name}!`;
     let pending_hours = 0;
