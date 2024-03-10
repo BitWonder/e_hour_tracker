@@ -6,7 +6,7 @@
     <title>E-Hour Tracker Admin</title>
     <link rel="icon" type="image/x-icon" href="./images/favicon/favicon.ico">
     <link rel="stylesheet" href="../css/vars.css">
-    <link rel="stylesheet" href="../css/admin.css">
+    <link rel="stylesheet" href="../css/form.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
@@ -21,16 +21,29 @@
     <main>
         <form id="new">
             <label for="name">Full Name:</label>
-            <input type="text" id="name" required>
+            <input type="text" id="name" autocomplete="off" placeholder="Full Name" required>
             <label for="name">Username:</label>
-            <input type="text" id="user" required>
+            <input type="text" id="user" autocomplete="off" placeholder="Username" required>
             <label for="name">Password:</label>
-            <input type="text" id="password" required>
+            <input type="text" id="password" minlength="8" autocomplete="off" placeholder="Password" required>
             <label for="name">Academy:</label>
             <select id="academy" form="new" required>
                 <option disabled selected value> -- select an academy -- </option>
                 <option value="e-Communication">e-Communication</option>
-                <option value="engineering">engineering</option>
+                <option value="Engineering">Engineering</option>
+                <option value="Animal_Health">Animal Health</option>
+                <option value="BioMedical_Engineering">BioMedical Engineering</option>
+                <option value="Business_Finance">Business Finance</option>
+                <option value="Civic_Leadership">Civic Leadership</option>
+                <option value="Computer_Science">Computer Science</option>
+                <option value="Design">Design </option>
+                <option value="Distinguished_Scholars">Distinguished Scholars</option>
+                <option value="Future_Educators">Future Educators</option>
+                <option value="Geoscience">Geoscience</option>
+                <option value="Green_Tech">Green Tech</option>
+                <option value="Medical_Professions">Medical Professions</option>
+                <option value="Public_Safety">Public Safety</option>
+                <option value="Sports_Medicine">Sports Medicine & Exercise Science</option>
             </select>
             <input type="submit">
         </form>

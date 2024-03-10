@@ -53,6 +53,7 @@ async function new_student(full_name, password, academy, username) {
         full_name: full_name,
         password: password,
         academy: academy,
+        needed_hours: 400,
         user: "student",
         hours: [],
         requested: [],

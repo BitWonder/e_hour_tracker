@@ -1,54 +1,127 @@
 function next(user_json) {
     document.getElementById("academy").src = `../images/academy/${user_json.academy}.png`;
     document.getElementById("welcome").innerText = `Welcome ${user_json.full_name}!`;
-}
+    let pending_hours = 0;
+    let place = document.getElementById("pending_hours");
+    user_json.requested.forEach(hour => {
+        pending_hours += hour.hours;
+        let p = document.createElement("div");
+        if ( hour.hours == 1 ) {
+            s1 = document.createElement("section");
+            title = document.createElement("h3");
+            title.innerText = hour.title;
+            hour_text = document.createElement("p");
+            hour_text.innerText = `${element.hours} hour`;
+            s1.append(title);
+            s1.append(hour_text);
+            p.append(s1);
+        } else {
+            s1 = document.createElement("section");
+            title = document.createElement("h3");
+            title.innerText = hour.title;
+            hour_text = document.createElement("p");
+            hour_text.innerText = `${element.hours} hours`;
+            s1.append(title);
+            s1.append(hour_text);
+            p.append(s1);
+        }
+        p.classList.add("hours");
+        place.append(p);
+    })
+    if (!place.hasChildNodes()) {
+        none = document.createElement("div");
+        none.classList.add("none")
+        text = document.createElement("p");
+        text.innerText = "No Pending Hours";
+        none.append(text);
+        place.append(none);
+    }
 
-// now for the formatting stuff
-function continue_function() {
-    let user = JSON.parse(json_user);
     let total_hours = 0;
-    user.hours.forEach(element => {
-        total_hours += element.hours
-        let place = document.getElementById("accepted_hours");
+    place = document.getElementById("accepted_hours");
+    user_json.hours.forEach(hour => {
+        total_hours += hour.hours;
         let p = document.createElement("div");
-        if ( element.hours == 1 ) {
-            p.innerHTML = `<section><h3>${element.title}</h3> <p>${element.hours} hour</p></section> <section><h4>Description:</h4> </p>${element.description}</p></section> <section><h4>Comments:</h4> <p>No Comments</p></section>`;
+        if ( hour.hours == 1 ) {
+            s1 = document.createElement("section");
+            title = document.createElement("h3");
+            title.innerText = hour.title;
+            hour_text = document.createElement("p");
+            hour_text.innerText = `${element.hours} hour`;
+            s1.append(title);
+            s1.append(hour_text);
+            p.append(s1);
         } else {
-            p.innerHTML = `<section><h3>${element.title}</h3> <p>${element.hours} hours</p></section> <section><h4>Description:</h4> </p>${element.description}</p></section> <section><h4>Comments:</h4> <p>No Comments</p></section>`;
+            s1 = document.createElement("section");
+            title = document.createElement("h3");
+            title.innerText = hour.title;
+            hour_text = document.createElement("p");
+            hour_text.innerText = `${element.hours} hours`;
+            s1.append(title);
+            s1.append(hour_text);
+            p.append(s1);
         }
         p.classList.add("hours");
         place.append(p);
-    });
-    let pending = 0;
-    user.requested.forEach(element => {
-        pending += element.hours
-        // if error or no hours then don't show
-        if (element.title === null || element.description === null || element.hours === null) {
-            return
-        }
-        let place = document.getElementById("pending_hours");
+    })
+
+    place = document.getElementById("denied_hours");
+    user_json.denied.forEach(hour => {
         let p = document.createElement("div");
-        if ( element.hours == 1 ) {
-            p.innerHTML = `<section><h3>${element.title}</h3> <p>${element.hours} hour</p></section> <section><h4>Description:</h4> </p>${element.description}</p></section>`;
+        if ( hour.hours == 1 ) {
+            s1 = document.createElement("section");
+            title = document.createElement("h3");
+            title.innerText = hour.title;
+            hour_text = document.createElement("p");
+            hour_text.innerText = `${element.hours} hour`;
+            s1.append(title);
+            s1.append(hour_text);
+            p.append(s1);
         } else {
-            p.innerHTML = `<section><h3>${element.title}</h3> <p>${element.hours} hours</p></section> <section><h4>Description:</h4> </p>${element.description}</p></section>`;
+            s1 = document.createElement("section");
+            title = document.createElement("h3");
+            title.innerText = hour.title;
+            hour_text = document.createElement("p");
+            hour_text.innerText = `${element.hours} hours`;
+            s1.append(title);
+            s1.append(hour_text);
+            p.append(s1);
         }
         p.classList.add("hours");
         place.append(p);
-    });
-    let min_precent = total_hours / 200;
-    let min_pending = pending     / 200;
-    let mid_precent = total_hours / 300;
-    let mid_pending = pending     / 300;
-    let max_precent = total_hours / 400;
-    let max_pending = pending     / 400;
+    })
+
+    // the show amount of hours
+    let needed = 400;
+    if (user_json.needed_hours === undefined) {
+        needed = 400;
+    } else {
+        needed = user_json.needed_hours;
+    }
+    let min_percent = total_hours / needed - 200;
+    let min_pending = pending     / needed - 200;
+    let mid_percent = total_hours / needed - 100;
+    let mid_pending = pending     / needed - 100;
+    let max_percent = total_hours / needed;
+    let max_pending = pending     / needed;
     let done_color = "var(--accent-color)"
     let pending_color = "lightblue"
     let not_done_color = "white"
-    document.getElementById("less_hours").style = `background: linear-gradient(90deg, ${done_color} 0%, ${done_color} ${min_precent * 100}%, ${pending_color} ${min_precent * 100}%, ${pending_color} ${(min_pending + min_precent) * 100}%, ${not_done_color} ${(min_pending + min_precent) * 100}%, ${not_done_color} 100%); border: solid 1px black;`;
-    document.getElementById("less_hours").innerHTML = `<h3>${total_hours} / 200</h3>`;
-    document.getElementById("mid_hours").style = `background: linear-gradient(90deg, ${done_color} 0%, ${done_color} ${mid_precent * 100}%, ${pending_color} ${mid_precent * 100}%, ${pending_color} ${(mid_pending + mid_precent) * 100}%, ${not_done_color} ${(mid_pending + mid_precent) * 100}%, ${not_done_color} 100%); border: solid 1px black;`;
-    document.getElementById("mid_hours").innerHTML = `<h3>${total_hours} / 300</h3>`;
-    document.getElementById("total_hours").style = `background: linear-gradient(90deg, ${done_color} 0%, ${done_color} ${max_precent * 100}%, ${pending_color} ${max_precent * 100}%, ${pending_color} ${(max_pending + max_precent) * 100}%, ${not_done_color} ${(max_precent + max_pending) * 100}%, ${not_done_color} 100%); border: solid 1px black;`;
-    document.getElementById("total_hours").innerHTML = `<h3>${total_hours} / 400</h3>`;
+    less_text = document.createElement("h3");
+    minNeed = int(needed) - 200;
+    less_text.innerText = `${total_hours} / ${minNeed}`;
+
+    mid_text = document.createElement("h3");
+    midNeed = int(needed) - 100;
+    mid_text.innerText = `${total_hours} / ${midNeed}`;
+
+    max_text = document.createElement("h3");
+    maxNeed = int(needed);
+    max_text.innerText = `${total_hours} / ${maxNeed}`;
+    document.getElementById("less_hours").style = `background: linear-gradient(90deg, ${done_color} 0%, ${done_color} ${min_percent * 100}%, ${pending_color} ${min_percent * 100}%, ${pending_color} ${(min_pending + min_percent) * 100}%, ${not_done_color} ${(min_pending + min_percent) * 100}%, ${not_done_color} 100%); border: solid 1px black;`;
+    document.getElementById("less_hours").append(less_text);
+    document.getElementById("mid_hours").style = `background: linear-gradient(90deg, ${done_color} 0%, ${done_color} ${mid_percent * 100}%, ${pending_color} ${mid_percent * 100}%, ${pending_color} ${(mid_pending + mid_percent) * 100}%, ${not_done_color} ${(mid_pending + mid_percent) * 100}%, ${not_done_color} 100%); border: solid 1px black;`;
+    document.getElementById("mid_hours").append(mid_text);
+    document.getElementById("total_hours").style = `background: linear-gradient(90deg, ${done_color} 0%, ${done_color} ${max_percent * 100}%, ${pending_color} ${max_percent * 100}%, ${pending_color} ${(max_pending + max_percent) * 100}%, ${not_done_color} ${(max_percent + max_pending) * 100}%, ${not_done_color} 100%); border: solid 1px black;`;
+    document.getElementById("total_hours").append(max_text);
 }
