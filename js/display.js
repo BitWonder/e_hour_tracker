@@ -5,6 +5,7 @@ function next(user_json) {
     let pending_hours = 0;
     let place = document.getElementById("pending_hours");
     user_json.requested.forEach(hour => {
+        console.log(pending_hours);
         pending_hours += hour.amount;
         let p = document.createElement("div");
         if ( hour.hours == 1 ) {
