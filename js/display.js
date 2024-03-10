@@ -16,12 +16,12 @@ function next(user_json) {
             s1.append(title);
             s1.append(hour_text);
             s2 = document.createElement("section");
-            title = document.createElement("h3");
-            title.innerText = "Description:";
-            hour_text = document.createElement("p");
-            hour_text.innerText = `${hour.description}`;
-            s2.append(title);
-            s2.append(hour_text);
+            description_title = document.createElement("h3");
+            description_title.innerText = "Description:";
+            description = document.createElement("p");
+            description.innerText = `${hour.description}`;
+            s2.append(description_title);
+            s2.append(description);
             p.append(s1);
             p.append(s2);
 
@@ -33,7 +33,15 @@ function next(user_json) {
             hour_text.innerText = `${hour.amount} hours`;
             s1.append(title);
             s1.append(hour_text);
+            s2 = document.createElement("section");
+            description_title = document.createElement("h3");
+            description_title.innerText = "Description:";
+            description = document.createElement("p");
+            description.innerText = `${hour.description}`;
+            s2.append(description_title);
+            s2.append(description);
             p.append(s1);
+            p.append(s2);
         }
         p.classList.add("hours");
         place.append(p);
@@ -47,6 +55,7 @@ function next(user_json) {
         place.append(none);
     }
 
+    // total hours arn't done yet
     let total_hours = 0;
     place = document.getElementById("accepted_hours");
     user_json.hours.forEach(hour => {
@@ -99,6 +108,7 @@ function next(user_json) {
         place.append(none);
     }
 
+    // denied isn't done yet
     place = document.getElementById("denied_hours");
     user_json.denied.forEach(hour => {
         let p = document.createElement("div");
@@ -128,12 +138,12 @@ function next(user_json) {
             s1.append(title);
             s1.append(hour_text);
             s2 = document.createElement("section");
-            title = document.createElement("h3");
-            title.innerText = "Description:";
-            hour_text = document.createElement("p");
-            hour_text.innerText = `${hour.description}`;
-            s2.append(title);
-            s2.append(hour_text);
+            description_title = document.createElement("h3");
+            description_title.innerText = "Description:";
+            description = document.createElement("p");
+            description.innerText = `${hour.description}`;
+            s2.append(description_title);
+            s2.append(description);
             p.append(s1);
             p.append(s2);
         }
