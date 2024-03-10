@@ -160,6 +160,7 @@ router.post("/delete", async (context) => {
     console.log("Parsed Data: {" + body.username + "}");
 
     let data = (await database.get(["users", body.username])).value;
+    console.log("User data: " + data);
     let group = data.academy;
 
     // Log data retrieval and group determination
