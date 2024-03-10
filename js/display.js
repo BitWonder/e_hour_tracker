@@ -124,15 +124,15 @@ function next(user_json) {
     let pending_color = "lightblue"
     let not_done_color = "white"
     less_text = document.createElement("h3");
-    minNeed = int(needed) - 200;
+    minNeed = needed - 200;
     less_text.innerText = `${total_hours} / ${minNeed}`;
 
     mid_text = document.createElement("h3");
-    midNeed = int(needed) - 100;
+    midNeed = needed - 100;
     mid_text.innerText = `${total_hours} / ${midNeed}`;
 
     max_text = document.createElement("h3");
-    maxNeed = int(needed);
+    maxNeed = needed;
     max_text.innerText = `${total_hours} / ${maxNeed}`;
     document.getElementById("less_hours").style = `background: linear-gradient(90deg, ${done_color} 0%, ${done_color} ${min_percent * 100}%, ${pending_color} ${min_percent * 100}%, ${pending_color} ${(min_pending + min_percent) * 100}%, ${not_done_color} ${(min_pending + min_percent) * 100}%, ${not_done_color} 100%); border: solid 1px black;`;
     document.getElementById("less_hours").append(less_text);
