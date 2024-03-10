@@ -110,7 +110,7 @@ document.getElementById("hour").onsubmit = async function(event) {
         body: JSON.stringify({
             id: localStorage.getItem("user_id"),
             title:  document.getElementById("title").value,
-            date:   document.getElementById("date").value,
+            date:   document.getElementById("datePicker").value,
             amount: document.getElementById("hours").value,
             description: document.getElementById("description_text").value,
             images: images
@@ -119,7 +119,7 @@ document.getElementById("hour").onsubmit = async function(event) {
 
     if (response.status == 200) {
         document.getElementById("title").value = "";
-        document.getElementById("date").value = "";
+        document.getElementById("datePicker").valueAsDate = new Date();
         document.getElementById("hours").value = "";
         document.getElementById("description_text").value = "";
         document.getElementById("place_images_here").innerHTML = "";
