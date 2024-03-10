@@ -26,13 +26,13 @@ async function new_user(username, group, data) {
     // Check if user exists
     const userRecord = await database.get(primaryKey);
     if (!userRecord || typeof userRecord.value === "undefined") {
-        return { ok: true };
+        return { ok: false };
     }
     
     // User exists, set data
     await database.set(primaryKey, data);
     await database.set(secondaryKey, data);
-    return { ok: false };
+    return { ok: true };
 }
 
 async function new_admin(full_name, password, academy, username) {
