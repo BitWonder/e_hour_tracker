@@ -183,6 +183,29 @@ router.post("/delete", async (context) => {
     return;
 });
 
+router.post("/submitHours", async (context) => {
+    const input = await context.request.body.text();
+    let body = JSON.parse(input);
+    let person = (await database.get([body.id])).value
+    // not checking for group because that should sync in every write function
+    if (person !== (await database.get(["users", person.username])).value) { // because their isn't one identifier if someone logs in twice. data can get out of sync so check to make sure data pre isn't already messed up
+        context.request.status = 409;
+        return;
+    }
+    // continue
+    person.requested.push({
+        title:  body.title,
+        date:   body.date,
+        amount: body.amount,
+        description: body.description,
+        images: body.images
+    });
+    await database.set(["users", person.username], JSON.stringify(person));
+    await database.set(["academy", person.academy, person.username], JSON.stringify(person));
+    context.response.status = 200;
+    return;
+});
+
 router.get("/user/:id", async (context) => {
     const userId = context.params.id;
     console.log("Fetching user with ID:", userId);
