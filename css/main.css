@@ -192,3 +192,11 @@ main section table div:last-child {
     border-bottom-left-radius: 15px;
     border-bottom-right-radius: 15px;
 }
+
+main section table div.none {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr;
+    place-content: center;
+    place-items: center;
+}

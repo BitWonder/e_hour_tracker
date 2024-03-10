@@ -64,6 +64,14 @@ function next(user_json) {
         p.classList.add("hours");
         place.append(p);
     })
+    if (!place.hasChildNodes()) {
+        none = document.createElement("div");
+        none.classList.add("none")
+        text = document.createElement("p");
+        text.innerText = "No Accepted Hours";
+        none.append(text);
+        place.append(none);
+    }
 
     place = document.getElementById("denied_hours");
     user_json.denied.forEach(hour => {
@@ -90,6 +98,14 @@ function next(user_json) {
         p.classList.add("hours");
         place.append(p);
     })
+    if (!place.hasChildNodes()) {
+        none = document.createElement("div");
+        none.classList.add("none")
+        text = document.createElement("p");
+        text.innerText = "No Denied Hours";
+        none.append(text);
+        place.append(none);
+    }
 
     // the show amount of hours
     let needed = 400;
