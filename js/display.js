@@ -114,12 +114,12 @@ function next(user_json) {
     } else {
         needed = user_json.needed_hours;
     }
-    let min_percent = total_hours / needed - 200;
-    let min_pending = pending     / needed - 200;
-    let mid_percent = total_hours / needed - 100;
-    let mid_pending = pending     / needed - 100;
-    let max_percent = total_hours / needed;
-    let max_pending = pending     / needed;
+    let min_percent = total_hours   / needed - 200;
+    let min_pending = pending_hours / needed - 200;
+    let mid_percent = total_hours   / needed - 100;
+    let mid_pending = pending_hours / needed - 100;
+    let max_percent = total_hours   / needed;
+    let max_pending = pending_hours / needed;
     let done_color = "var(--accent-color)"
     let pending_color = "lightblue"
     let not_done_color = "white"

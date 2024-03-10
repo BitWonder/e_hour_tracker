@@ -193,10 +193,12 @@ main section table div:last-child {
     border-bottom-right-radius: 15px;
 }
 
+
+/* using important so confident that the content will be centered */
 main section table div.none {
-    display: grid;
-    grid-template-columns: 1fr;
-    grid-template-rows: 1fr;
-    place-content: center;
-    place-items: center;
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    grid-template-rows: 1fr !important;
+    place-content: center !important;
+    place-items: center !important;
 }
