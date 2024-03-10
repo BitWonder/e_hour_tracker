@@ -116,14 +116,21 @@ function next(user_json) {
         needed = user_json.needed_hours;
     }
     let min_percent = total_hours   / (needed - 200);
+    console.log(min_percent);
     let min_pending = pending_hours / (needed - 200);
+    console.log(min_pending);
     let mid_percent = total_hours   / (needed - 100);
+    console.log(mid_percent);
     let mid_pending = pending_hours / (needed - 100);
+    console.log(mid_pending);
     let max_percent = total_hours   / needed;
+    console.log(max_percent);
     let max_pending = pending_hours / needed;
+    console.log(max_pending);
     let done_color = "var(--accent-color)"
     let pending_color = "lightblue"
     let not_done_color = "white"
+
     less_text = document.createElement("h3");
     minNeed = needed - 200;
     less_text.innerText = `${total_hours} / ${minNeed}`;
@@ -135,6 +142,7 @@ function next(user_json) {
     max_text = document.createElement("h3");
     maxNeed = needed;
     max_text.innerText = `${total_hours} / ${maxNeed}`;
+
     document.getElementById("less_hours").style = `background: linear-gradient(90deg, ${done_color} 0%, ${done_color} ${min_percent * 100}%, ${pending_color} ${min_percent * 100}%, ${pending_color} ${(min_pending + min_percent) * 100}%, ${not_done_color} ${(min_pending + min_percent) * 100}%, ${not_done_color} 100%); border: solid 1px black;`;
     document.getElementById("less_hours").append(less_text);
     document.getElementById("mid_hours").style = `background: linear-gradient(90deg, ${done_color} 0%, ${done_color} ${mid_percent * 100}%, ${pending_color} ${mid_percent * 100}%, ${pending_color} ${(mid_pending + mid_percent) * 100}%, ${not_done_color} ${(mid_pending + mid_percent) * 100}%, ${not_done_color} 100%); border: solid 1px black;`;
