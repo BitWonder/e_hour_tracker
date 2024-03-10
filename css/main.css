@@ -123,6 +123,8 @@ main .hour_teller {
     display: grid;
 
     /*border-radius: 5px;*/
+
+    transition: all .2s;
 }
 
 main .hour_teller h3 {
@@ -133,6 +135,8 @@ main .hour_teller h3 {
     margin-left: 1%;
 
     text-shadow: 0 0 8px rgb(0,0,0);
+
+    transition: all .2s;
 }
 
 /* border of teller by position */
@@ -144,6 +148,10 @@ main .hour_teller:first-child {
 main .hour_teller:last-child {
     border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;
+}
+
+main .hour_teller:hover * {
+    transform: scale(1.1);
 }
 
 main #button-container {
