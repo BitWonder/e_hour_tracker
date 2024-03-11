@@ -72,6 +72,13 @@ function previewFile() {
         const imageDataUrl = reader.result;
 
         const imagePreview = document.getElementById("place_images_here");
+
+        // Revoke previous object URL if exists
+        if (imagePreview.src) {
+            URL.revokeObjectURL(imagePreview.src);
+        }
+
+        // Set the src attribute with the new object URL
         imagePreview.src = URL.createObjectURL(new Blob([imageDataUrl]));
         imagePreview.style.display = "block";
     }, false);
