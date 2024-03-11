@@ -224,7 +224,7 @@ router.post("/submitHours", async (context) => {
         await database.set(["academy", person.academy, person.username], JSON.stringify(person));
         console.log("Updated academy data in the database:", person);
 
-        await database.set([formData.get('id')], person);
+        await database.set([formData.get('id')], person, { expireIn: 360000 });
 
         context.response.status = 200;
         console.log("Submission successful. Responding with status 200.");
