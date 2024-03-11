@@ -246,6 +246,19 @@ router.get("/user/:id", async (context) => {
     context.response.status = 401;
 })
 
+router.get("/stus/:academy", async (context) => {
+    const academy = context.params.academy;
+    const entries = await database.list({ prefix: ["academy", academy] });
+    let list = [];
+    entries.forEach(entry => {
+        list.push(entry.value);
+    });
+    context.response.status = 200;
+    context.response.body = {students: list};
+    context.response.type = "json";
+    return;
+});
+
 // setup initialize app
 app.use(router.routes());
 app.use(router.allowedMethods());
