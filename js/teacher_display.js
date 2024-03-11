@@ -39,7 +39,7 @@ async function next(user_json) {
                 let t = document.createElement("h3");
                 t.innerText = student.full_name;
                 let h = document.createElement("p");
-                h.innerText = total_hours;
+                h.innerText = total_hours + " pending hours";
                 s.append(t);
                 s.append(h);
                 a.append(s);

@@ -153,6 +153,7 @@ main section table {
 
 main section table a {
     width: 100%;
+    color: var(--main-text-color);
 }
 
 main section table a div {
