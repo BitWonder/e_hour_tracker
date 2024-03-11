@@ -44,50 +44,27 @@ function hours() {
 document.getElementById("hours").onchange = () => {hours()}
 
 function previewFile() {
-    const fileInput = document.getElementById("image_getter");
-    const file = fileInput.files[0];
-
-    if (!file) {
-        console.error("No file selected.");
-        return;
-    }
-
-    // Maximum file size in bytes (e.g., 5 MB)
-    const maxFileSizeInBytes = 5 * 1024 * 1024;
-
-    if (file.size > maxFileSizeInBytes) {
-        console.error("Selected file exceeds the maximum size limit.");
-        return;
-    }
-
-    if (!file.type.startsWith("image/")) {
-        console.error("Selected file is not an image.");
-        return;
-    }
-
+    const file = document.getElementById("image_getter").files[0];
     const reader = new FileReader();
-
-    reader.addEventListener("load", () => {
-        // Convert image file to base64 string
-        const imageDataUrl = reader.result;
-
-        const imagePreview = document.getElementById("place_images_here");
-
-        // Revoke previous object URL if exists
-        if (imagePreview.src) {
-            URL.revokeObjectURL(imagePreview.src);
-        }
-
-        // Set the src attribute with the new object URL
-        imagePreview.src = URL.createObjectURL(new Blob([imageDataUrl]));
-        imagePreview.style.display = "block";
-    }, false);
-
-    reader.addEventListener("error", (error) => {
-        console.error("Error reading file:", error);
-    });
-
-    reader.readAsArrayBuffer(file);
+          
+    reader.addEventListener(
+        "load",
+        () => {
+            // convert image file to base64 string
+            let e = document.createElement("img");
+            e.src = reader.result;
+            e.classList.add("epic")
+            e.setAttribute("id",`img_${num_o_imag}`)
+            e.addEventListener("click", function () {document.getElementById(`img_${num_o_imag}`).remove()});
+            document.getElementById("place_images_here").append(e);
+            num_o_imag += 1
+        },
+        false
+    );
+      
+    if (file) {
+        reader.readAsDataURL(file);
+    }
 }
 
 hours()
@@ -112,37 +89,34 @@ checkFirstVisit();
 document.getElementById("hour").onsubmit = async function(event) {
     event.preventDefault();
 
-    const response = await fetch(`https://${window.location.host}/submitHours`,
-    {
-        method: "POST", // *GET, POST, PUT, DELETE, etc.
-        mode: "cors", // no-cors, *cors, same-origin
-        cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
-        credentials: "same-origin", // include, *same-origin, omit
-        headers: {
-            "Content-Type": "application/json",
-            // 'Content-Type': 'application/x-www-form-urlencoded',
-        },
-        redirect: "follow", // manual, *follow, error
-        referrerPolicy: "no-referrer", // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
-        body: JSON.stringify({
-            id: localStorage.getItem("user_id"),
-            title:  document.getElementById("title").value,
-            date:   document.getElementById("datePicker").value,
-            amount: document.getElementById("hours").value,
-            description: document.getElementById("description_text").value,
-            images: document.getElementById("place_images_here").src
-        }), // body data type must match "Content-Type" header)
-    });
+    const formData = new FormData();
+    formData.append('id', localStorage.getItem('user_id'));
+    formData.append('title', document.getElementById('title').value);
+    formData.append('date', document.getElementById('datePicker').value);
+    formData.append('amount', document.getElementById('hours').value);
+    formData.append('description', document.getElementById('description_text').value);
 
-    if (response.status == 200) {
-        document.getElementById("title").value = "";
-        document.getElementById("datePicker").valueAsDate = new Date();
-        document.getElementById("hours").value = "";
-        document.getElementById("description_text").value = "";
-        document.getElementById("place_images_here").src = "";
-        alert("Submitted!")
-        return;
+    const fileInput = document.getElementById('image_getter');
+    for (const file of fileInput.files) {
+        formData.append('images', file);
     }
-    alert("Out of Sync!");
-    return;
+
+    try {
+        const response = await fetch(`https://${window.location.host}/submitHours`, {
+            method: 'POST',
+            body: formData
+        });
+
+        if (response.status === 200) {
+            // Handle success
+            console.log('Submission successful');
+            return;
+        } else {
+            // Handle error
+            console.error('Submission failed');
+            return;
+        }
+    } catch (error) {
+        console.error('Error occurred during submission:', error);
+    }
 }

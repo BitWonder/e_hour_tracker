@@ -186,43 +186,52 @@ router.post("/delete", async (context) => {
 router.post("/submitHours", async (context) => {
     console.log("Received POST request to submit hours");
 
-    const input = await context.request.body.text();
-    console.log("Received input data:", input);
+    try {
+        const formData = await context.request.body({ type: 'form-data' }).value.readForm();
+        const images = [];
+        for (const [key, value] of formData.entries()) {
+            if (key === 'images') {
+                images.push(value);
+            }
+        }
 
-    let body = JSON.parse(input);
-    console.log("Parsed input data:", body);
+        // Now formData contains all the form fields and images array contains the uploaded images
 
-    let person = (await database.get([body.id])).value;
-    console.log("Retrieved person data from database:", person);
+        // Continue with your existing logic
+        let person = (await database.get([formData.get('id')])).value;
+        console.log("Retrieved person data from database:", person);
 
-    if (JSON.stringify(person) !== (await database.get(["users", person.username])).value) {
-        console.log("Data inconsistency detected. Aborting submission.");
-        context.request.status = 409;
-        return;
+        if (JSON.stringify(person) !== (await database.get(["users", person.username])).value) {
+            console.log("Data inconsistency detected. Aborting submission.");
+            context.response.status = 409;
+            return;
+        }
+
+        console.log("No data inconsistency detected. Continuing with submission.");
+
+        person.requested.push({
+            title: formData.get('title'),
+            date: formData.get('date'),
+            amount: formData.get('amount'),
+            description: formData.get('description'),
+            images: images
+        });
+        console.log("Added submitted hours to person's requested list:", person.requested);
+
+        await database.set(["users", person.username], JSON.stringify(person));
+        console.log("Updated user data in the database:", person);
+
+        await database.set(["academy", person.academy, person.username], JSON.stringify(person));
+        console.log("Updated academy data in the database:", person);
+
+        await database.set([formData.get('id')], person);
+
+        context.response.status = 200;
+        console.log("Submission successful. Responding with status 200.");
+    } catch (error) {
+        console.error("Error occurred during submission:", error);
+        context.response.status = 500;
     }
-
-    console.log("No data inconsistency detected. Continuing with submission.");
-
-    person.requested.push({
-        title: body.title,
-        date: body.date,
-        amount: body.amount,
-        description: body.description,
-        images: body.images
-    });
-    console.log("Added submitted hours to person's requested list:", person.requested);
-
-    await database.set(["users", person.username], JSON.stringify(person));
-    console.log("Updated user data in the database:", person);
-
-    await database.set(["academy", person.academy, person.username], JSON.stringify(person));
-    console.log("Updated academy data in the database:", person);
-
-    await database.set([body.id], person);
-
-    context.response.status = 200;
-    console.log("Submission successful. Responding with status 200.");
-    return;
 });
 
 router.get("/user/:id", async (context) => {
