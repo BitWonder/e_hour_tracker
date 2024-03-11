@@ -250,6 +250,7 @@ router.get("/stus/:academy", async (context) => {
     const academy = context.params.academy;
     const entries = await database.list({ prefix: ["academy", academy] });
     let list = [];
+    console.log(typeof entries); // Check the type of entries
     entries.forEach(entry => {
         list.push(entry.value);
     });
