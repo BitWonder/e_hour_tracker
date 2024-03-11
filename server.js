@@ -187,7 +187,7 @@ router.post("/submitHours", async (context) => {
     console.log("Received POST request to submit hours");
 
     try {
-        const formData = await context.request.body({ type: 'form' }).value;
+        const formData = await context.request.body.formData();
         const images = [];
         for (const [key, value] of formData.entries()) {
             if (key === 'images') {
