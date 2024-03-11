@@ -27,12 +27,12 @@ async function next(user_json) {
         if (student.user !== "teacher" || student.user !== "admin") {
             console.log(student);
             let total_hours = 0;
-            for (request in student.requested) {
+            for (let request in student.requested) {
                 total_hours += parseFloat(request.amount);
             }
             let a = document.createElement("a");
             a.href = "./student.html";
-            a.addEventListener("onmouseover", function () {localStorage.setItem("student", student.username)}) // when clicked we can go to that var and get student that way
+            a.addEventListener("mouseover", function () {localStorage.setItem("student", student.username)}) // when clicked we can go to that var and get student that way
             let s = document.createElement("div");
             s.classList.add("student");
             let t = document.createElement("h3");
