@@ -229,6 +229,11 @@ router.get("/user/:id", async (context) => {
     const userId = context.params.id;
     console.log("Fetching user with ID:", userId);
     const userRecord = (await database.get([userId])).value;
+    // this is a mess... I know that... It will be less of a mess once we get a better id'ing system
+    if ( JSON.stringify(userRecord) !== (await database.get(["users", userRecord.username])).value ) {
+        await database.set([userId], JSON.parse((await database.get(["users", userRecord.username])).value));
+        userRecord = (await database.get([userId])).value;
+    } 
     console.log("User record from database:", userRecord);
     if (userRecord !== undefined) {
         context.response.status = 200;
