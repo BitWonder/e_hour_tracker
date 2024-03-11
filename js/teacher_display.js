@@ -26,9 +26,9 @@ async function next(user_json) {
     students.students.forEach(student => {
         console.log(student);
         let total_hours = 0;
-        student.requested.forEach(requested => {
-            total_hours += parseFloat(requested.amount);
-        })
+        for (request in student.requested) {
+            total_hours += parseFloat(request.amount);
+        }
         let a = document.createElement("a");
         a.href = "./student.html";
         a.addEventListener("onmouseover", function () {localStorage.setItem("student", student.username)}) // when clicked we can go to that var and get student that way
