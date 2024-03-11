@@ -44,27 +44,43 @@ function hours() {
 document.getElementById("hours").onchange = () => {hours()}
 
 function previewFile() {
-    const file = document.getElementById("image_getter").files[0];
-    const reader = new FileReader();
-          
-    reader.addEventListener(
-        "load",
-        () => {
-            // convert image file to base64 string
-            let e = document.createElement("img");
-            e.src = reader.result;
-            e.classList.add("epic")
-            e.setAttribute("id",`img_${num_o_imag}`)
-            e.setAttribute("onclick",`document.getElementById(img_${num_o_imag}).remove()`)
-            document.getElementById("place_images_here").append(e);
-            num_o_imag += 1
-        },
-        false
-    );
-      
-    if (file) {
-        reader.readAsDataURL(file);
+    const fileInput = document.getElementById("image_getter");
+    const file = fileInput.files[0];
+
+    if (!file) {
+        console.error("No file selected.");
+        return;
     }
+
+    // Maximum file size in bytes (e.g., 5 MB)
+    const maxFileSizeInBytes = 5 * 1024 * 1024;
+
+    if (file.size > maxFileSizeInBytes) {
+        console.error("Selected file exceeds the maximum size limit.");
+        return;
+    }
+
+    if (!file.type.startsWith("image/")) {
+        console.error("Selected file is not an image.");
+        return;
+    }
+
+    const reader = new FileReader();
+
+    reader.addEventListener("load", () => {
+        // Convert image file to base64 string
+        const imageDataUrl = reader.result;
+
+        const imagePreview = document.getElementById("place_images_here");
+        imagePreview.src = imageDataUrl;
+        imagePreview.style.display = "block";
+    }, false);
+
+    reader.addEventListener("error", (error) => {
+        console.error("Error reading file:", error);
+    });
+
+    reader.readAsDataURL(file);
 }
 
 hours()
@@ -89,12 +105,6 @@ checkFirstVisit();
 document.getElementById("hour").onsubmit = async function(event) {
     event.preventDefault();
 
-    let images = [];
-
-    document.getElementById("place_images_here").childNodes.forEach(element => {
-        images.push(element.src);
-    })
-
     const response = await fetch(`https://${window.location.host}/submitHours`,
     {
         method: "POST", // *GET, POST, PUT, DELETE, etc.
@@ -113,7 +123,7 @@ document.getElementById("hour").onsubmit = async function(event) {
             date:   document.getElementById("datePicker").value,
             amount: document.getElementById("hours").value,
             description: document.getElementById("description_text").value,
-            images: images
+            images: compressString(document.getElementById("place_images_here").src)
         }), // body data type must match "Content-Type" header)
     });
 
@@ -122,10 +132,44 @@ document.getElementById("hour").onsubmit = async function(event) {
         document.getElementById("datePicker").valueAsDate = new Date();
         document.getElementById("hours").value = "";
         document.getElementById("description_text").value = "";
-        document.getElementById("place_images_here").innerHTML = "";
+        document.getElementById("place_images_here").src = "";
         alert("Submitted!")
         return;
     }
     alert("Out of Sync!");
     return;
 }
+
+function compressString(str) {
+    let compressed = '';
+    let count = 1;
+
+    for (let i = 0; i < str.length; i++) {
+        if (str[i] === str[i + 1]) {
+            count++;
+        } else {
+            compressed += str[i] + count;
+            count = 1;
+        }
+    }
+
+    return compressed.length < str.length ? compressed : str;
+}
+
+// decompression function here
+/* function decompressString(str) {
+    let decompressed = '';
+    let count = '';
+
+    for (let char of str) {
+        if (!isNaN(parseInt(char))) {
+            count += char;
+        } else {
+            let repeat = parseInt(count) || 1;
+            decompressed += char.repeat(repeat);
+            count = '';
+        }
+    }
+
+    return decompressed;
+} */
