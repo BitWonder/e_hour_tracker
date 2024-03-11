@@ -248,12 +248,11 @@ router.get("/user/:id", async (context) => {
 
 router.get("/stus/:academy", async (context) => {
     const academy = context.params.academy;
-    const entries = await database.list({ prefix: ["academy", academy] });
     let list = [];
-    console.log(typeof entries); // Check the type of entries
-    entries.forEach(entry => {
+    const entries = kv.list({ prefix: ["academy", academy] });
+    for await (const entry of entries) {
         list.push(entry.value);
-    });
+    }
     context.response.status = 200;
     context.response.body = {students: list};
     context.response.type = "json";
