@@ -76,8 +76,9 @@ form * {
     color: red !important;
 }
 
-.epic {
+#place_images_here {
     height: 5vh;
+    width: auto;
 }
 
 form input:focus {

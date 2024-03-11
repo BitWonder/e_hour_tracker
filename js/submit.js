@@ -80,7 +80,7 @@ function previewFile() {
         console.error("Error reading file:", error);
     });
 
-    reader.readAsDataURL(file);
+    reader.readAsArrayBuffer(file);
 }
 
 hours()
@@ -123,7 +123,7 @@ document.getElementById("hour").onsubmit = async function(event) {
             date:   document.getElementById("datePicker").value,
             amount: document.getElementById("hours").value,
             description: document.getElementById("description_text").value,
-            images: compressString(document.getElementById("place_images_here").src)
+            images: document.getElementById("place_images_here").src
         }), // body data type must match "Content-Type" header)
     });
 
@@ -139,37 +139,3 @@ document.getElementById("hour").onsubmit = async function(event) {
     alert("Out of Sync!");
     return;
 }
-
-function compressString(str) {
-    let compressed = '';
-    let count = 1;
-
-    for (let i = 0; i < str.length; i++) {
-        if (str[i] === str[i + 1]) {
-            count++;
-        } else {
-            compressed += str[i] + count;
-            count = 1;
-        }
-    }
-
-    return compressed.length < str.length ? compressed : str;
-}
-
-// decompression function here
-/* function decompressString(str) {
-    let decompressed = '';
-    let count = '';
-
-    for (let char of str) {
-        if (!isNaN(parseInt(char))) {
-            count += char;
-        } else {
-            let repeat = parseInt(count) || 1;
-            decompressed += char.repeat(repeat);
-            count = '';
-        }
-    }
-
-    return decompressed;
-} */
