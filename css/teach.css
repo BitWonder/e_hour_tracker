@@ -151,6 +151,10 @@ main section table {
     width: calc(100% - 2px);
 }
 
+main section table a {
+    width: 100%;
+}
+
 main section table a div {
     border: 1px solid var(--secondary-color);
     width: 100%;
