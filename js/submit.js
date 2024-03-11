@@ -72,7 +72,7 @@ function previewFile() {
         const imageDataUrl = reader.result;
 
         const imagePreview = document.getElementById("place_images_here");
-        imagePreview.src = imageDataUrl;
+        imagePreview.src = URL.createObjectURL(new Blob([imageDataUrl]));
         imagePreview.style.display = "block";
     }, false);
 
