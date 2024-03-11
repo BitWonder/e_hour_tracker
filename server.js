@@ -251,7 +251,7 @@ router.get("/stus/:academy", async (context) => {
     let list = [];
     const entries = database.list({ prefix: ["academy", academy] });
     for await (const entry of entries) {
-        list.push(entry.value);
+        list.push(JSON.parse(entry.value));
     }
     context.response.status = 200;
     context.response.body = {students: list};
