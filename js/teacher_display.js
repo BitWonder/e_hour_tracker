@@ -24,6 +24,7 @@ async function next(user_json) {
     let students = await response.json();
     const place = document.getElementById("students")
     students.students.forEach(student => {
+        console.log(student);
         let total_hours = 0;
         student.requested.forEach(requested => {
             total_hours += parseFloat(requested.amount);
