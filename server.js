@@ -249,7 +249,7 @@ router.get("/user/:id", async (context) => {
 router.get("/stus/:academy", async (context) => {
     const academy = context.params.academy;
     let list = [];
-    const entries = kv.list({ prefix: ["academy", academy] });
+    const entries = database.list({ prefix: ["academy", academy] });
     for await (const entry of entries) {
         list.push(entry.value);
     }
