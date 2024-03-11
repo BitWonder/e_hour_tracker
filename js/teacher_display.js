@@ -24,23 +24,25 @@ async function next(user_json) {
     let students = await response.json();
     const place = document.getElementById("students")
     students.students.forEach(student => {
-        console.log(student);
-        let total_hours = 0;
-        for (request in student.requested) {
-            total_hours += parseFloat(request.amount);
+        if (student.user !== "teacher" || student.user !== "admin") {
+            console.log(student);
+            let total_hours = 0;
+            for (request in student.requested) {
+                total_hours += parseFloat(request.amount);
+            }
+            let a = document.createElement("a");
+            a.href = "./student.html";
+            a.addEventListener("onmouseover", function () {localStorage.setItem("student", student.username)}) // when clicked we can go to that var and get student that way
+            let s = document.createElement("div");
+            s.classList.add("student");
+            let t = document.createElement("h3");
+            t.innerText = student.full_name;
+            let h = document.createElement("p");
+            h.innerText = total_hours;
+            s.append(t);
+            s.append(h);
+            a.append(s);
+            place.append(a);
         }
-        let a = document.createElement("a");
-        a.href = "./student.html";
-        a.addEventListener("onmouseover", function () {localStorage.setItem("student", student.username)}) // when clicked we can go to that var and get student that way
-        let s = document.createElement("div");
-        s.classList.add("student");
-        let t = document.createElement("h3");
-        t.innerText = student.full_name;
-        let h = document.createElement("p");
-        h.innerText = total_hours;
-        s.append(t);
-        s.append(h);
-        a.append(s);
-        place.append(a);
     });
 }
