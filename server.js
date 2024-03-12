@@ -29,9 +29,9 @@ async function hashPassword(password) {
 }
 
 function delete_all() {
-    const entries = kv.list({ prefix: [] });
+    const entries = database.list({ prefix: [] });
     for await (const entry of entries) {
-        kv.delete(entry.key);
+        database.delete(entry.key);
     }
 }
 
