@@ -73,7 +73,7 @@ form * {
     font-size: 1.5em;
     font-weight: bold;
     transition: all .5s;
-    color: red !important;
+    color: var(--bold-color) !important;
 }
 
 .epic {
@@ -124,4 +124,12 @@ form input[type="submit"]:hover {
 #image_getter:hover {
     transform: scale(1.1);
     outline: var(--accent-color) solid 1px;
+}
+
+.good {
+    color: var(--good-color);
+}
+
+.bad {
+    color: var(--bad-color);
 }

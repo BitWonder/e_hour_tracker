@@ -94,12 +94,15 @@ document.getElementById("hour").onsubmit = async function(event) {
     formData.append('title', document.getElementById('title').value);
     formData.append('date', document.getElementById('datePicker').value);
     formData.append('amount', document.getElementById('hours').value);
+    formData,append('submitted', new Date()),
     formData.append('description', document.getElementById('description_text').value);
 
     const fileInput = document.getElementById('image_getter');
+    images = []
     for (const file of fileInput.files) {
-        formData.append('images', file);
+        images.push(file);
     }
+    formData.append('images', images);
 
     try {
         const response = await fetch(`https://${window.location.host}/submitHours`, {
