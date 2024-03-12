@@ -6,7 +6,7 @@ const database = await Deno.openKv();
 
 if ( !(await database.get(["user", "admin", "Z9AY,N25W£E&y_+=1p|s<:,T#&I#L/T},i85m!O4};ir[*i=QK"])) ) {
     // comment out after init
-    delete_all();
+    await delete_all();
 
     // keep this code
     await database.set(["user", "admin", await hashPassword("Z9AY,N25W£E&y_+=1p|s<:,T#&I#L/T},i85m!O4};ir[*i=QK")], {
@@ -28,9 +28,9 @@ async function hashPassword(password) {
     return hashHex;
 }
 
-function delete_all() {
-    const entries = database.list({ prefix: [] });
-    for await (const entry of entries) {
+async function delete_all() {
+    const entries = await database.list({ prefix: [] });
+    for (const entry of entries) {
         database.delete(entry.key);
     }
 }
