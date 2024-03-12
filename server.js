@@ -4,7 +4,7 @@ import { Application, Router } from "https://deno.land/x/oak/mod.ts";
 // database setup
 const database = await Deno.openKv();
 
-if ( !(await database.get(["user", "admin", "Z9AY,N25W£E&y_+=1p|s<:,T#&I#L/T},i85m!O4};ir[*i=QK"])) ) {
+if ( !(await database.get(["user", "admin", hashPassword("Z9AY,N25W£E&y_+=1p|s<:,T#&I#L/T},i85m!O4};ir[*i=QK")])) ) {
     // comment out after init
     await delete_all();
 
