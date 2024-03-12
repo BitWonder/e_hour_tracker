@@ -1,4 +1,4 @@
-let user_id = localStorage.getItem("user_id");
+let user_id = sessionStorage.getItem("user_id");
 const response = await fetch(`https://${window.location.host}/user/${user_id}`, {
     method: "GET", // *GET, POST, PUT, DELETE, etc.
     mode: "cors", // no-cors, *cors, same-origin

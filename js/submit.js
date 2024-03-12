@@ -90,11 +90,12 @@ document.getElementById("hour").onsubmit = async function(event) {
     event.preventDefault();
 
     const formData = new FormData();
-    formData.append('id', localStorage.getItem('user_id'));
+    formData.append('username', sessionStorage.getItem('user_id').username);
+    formData.append('password', sessionStorage.getItem('user_id').password);
     formData.append('title', document.getElementById('title').value);
     formData.append('date', document.getElementById('datePicker').value);
     formData.append('amount', document.getElementById('hours').value);
-    formData,append('submitted', new Date()),
+    formData.append('submitted', new Date());
     formData.append('description', document.getElementById('description_text').value);
 
     const fileInput = document.getElementById('image_getter');

@@ -1,4 +1,4 @@
-let user_id = localStorage.getItem("user_id");
+let user_id = sessionStorage.getItem("user_id");
 const response = await fetch(`https://${window.location.host}/user/${user_id}`, {
     method: "GET", // *GET, POST, PUT, DELETE, etc.
     mode: "cors", // no-cors, *cors, same-origin
@@ -33,7 +33,7 @@ async function next(user_json) {
                 }
                 let a = document.createElement("a");
                 a.href = "./student.html";
-                a.addEventListener("mouseover", function () {localStorage.setItem("student", student.username)}) // when clicked we can go to that var and get student that way
+                a.addEventListener("mouseover", function () {sessionStorage.setItem("student", student.username)}) // when clicked we can go to that var and get student that way
                 let s = document.createElement("div");
                 s.classList.add("student");
                 let t = document.createElement("h3");

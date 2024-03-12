@@ -109,7 +109,7 @@ router.post("/submitHours",      async (context) => {
 });
 
 router.get("/user/:id",          async (context) => {
-    const input = context.request.url.searchParams.get("id");
+    const input = JSON.parse(await context.request.url.searchParams.get("id"));
     context.response.status = 200;
     context.response.body = await database.get(["user", input.username, await hashPassword(input.password)]);
     context.response.type = "json";
