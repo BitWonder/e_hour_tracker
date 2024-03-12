@@ -29,8 +29,8 @@ async function hashPassword(password) {
 }
 
 async function delete_all() {
-    const entries = await database.list({ prefix: [] });
-    for (const entry of entries) {
+    const entries = database.list({ prefix: [] });
+    for await (let entry of entries) {
         database.delete(entry.key);
     }
 }
