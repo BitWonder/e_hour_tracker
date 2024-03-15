@@ -183,13 +183,13 @@ function next(user_json) {
     midNeed = needed - 100;
     mid_text.innerText = `${total_hours} / ${midNeed}`;
     document.getElementById("mid_hours").append(mid_text);
-    document.getElementById("less_hours").classList.add("loaded");
+    document.getElementById("mid_hours").classList.add("loaded");
 
     max_text = document.createElement("h3");
     maxNeed = needed;
     max_text.innerText = `${total_hours} / ${maxNeed}`;
     document.getElementById("total_hours").append(max_text);
-    document.getElementById("less_hours").classList.add("loaded");
+    document.getElementById("total_hours").classList.add("loaded");
 
     var root = document.querySelector(':root');
 

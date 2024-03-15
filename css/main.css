@@ -254,5 +254,5 @@ main section table div.none {
 
 /* transition the gradient onto screen */
 .hour_teller.loaded {
-    background-size: 100%;
+    background-size: 100% !important;
 }
