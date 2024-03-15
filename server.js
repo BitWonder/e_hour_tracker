@@ -135,7 +135,7 @@ router.get("/user/:id",          async (context) => {
 router.get("/students/:academy", async (context) => {
     const input = context.request.url.searchParams.get("academy");
     const entries = database.list({ prefix: ["academy", input] });
-    users = [];
+    let users = [];
     for await (const entry of entries) {
         users.push(entry.value); // { ... }
     }

@@ -133,6 +133,7 @@ main .hour_teller h3 {
     margin-top: auto;
     margin-bottom: auto;
     margin-left: 1%;
+    mix-blend-mode: difference; /* so you can see the text when colors don't work out */
 
     text-shadow: 0 0 8px rgb(0,0,0);
 
