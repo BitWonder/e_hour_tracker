@@ -115,11 +115,13 @@ router.post("/submitHours",      async (context) => {
         description: input.get("description"),
         images: input.get("images")
     });
-    
+
+    let user_new = user; 
+
     // see what images is (currently I don't know what it would be)
     console.log("images: " + input.get("images"));
     await database.set(["user", info.username, info.password], user);
-    await database.set(["academy", user.academy, info.username], user);
+    await database.set(["academy", user.academy, info.username], user_new);
     context.response.status = 200;
 });
 
