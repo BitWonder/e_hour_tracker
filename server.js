@@ -149,7 +149,7 @@ router.delete("/deleteUser/:username",     async (context) => {
     const username = context.params.username;
 
     // Look up the user in the database
-    const user = await database.get(["user", username]);
+    const user = (await database.get(["user", username])).value;
 
     if (user) {
         // Delete the user from the database
