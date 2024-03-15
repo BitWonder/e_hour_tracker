@@ -9,7 +9,7 @@ document.getElementById("new").onsubmit = async function(event) {
         credentials: "same-origin", // include, *same-origin, omit
         redirect: "follow", // manual, *follow, error
         referrerPolicy: "no-referrer", // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
-        body: {
+        body: JSON.stringify({
             username: document.getElementById("user").value,
             password: document.getElementById("password").value,
             academy: document.getElementById("academy").value,
@@ -17,14 +17,14 @@ document.getElementById("new").onsubmit = async function(event) {
             data: {
                 full_name: document.getElementById("name").value,
                 username: document.getElementById("user").value,
-                password: document.getElementById("password"),
-                academy: document.getElementById("academy"),
+                password: document.getElementById("password").value,
+                academy: document.getElementById("academy").value,
                 user: "student",
                 accepted_hours: [],
                 pending_hours: [],
                 denied_hours: []
             }
-        }, // body data type must match "Content-Type" header)
+        }), // body data type must match "Content-Type" header)
     });
 
     if (response.status == 200) {
