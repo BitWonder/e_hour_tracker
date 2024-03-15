@@ -150,6 +150,8 @@ router.delete("/deleteUser/:username",     async (context) => {
 
     // Look up the user in the database
     const user = (await database.get(["user", username])).value;
+    console.log("User deleting: " + username);
+    console.log("user data: " + user);
 
     if (user) {
         // Delete the user from the database
@@ -163,6 +165,7 @@ router.delete("/deleteUser/:username",     async (context) => {
     } else {
         context.response.status = 404;
         context.response.body = { message: 'User not found' };
+        console.log("user not found: " + username)
     }
     context.response.type = "json";
     return;
