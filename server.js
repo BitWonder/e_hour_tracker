@@ -135,7 +135,7 @@ router.get("/user/:id",          async (context) => {
 router.get("/students/:academy", async (context) => {
     const input = context.params.academy;
     console.log("Received request for academy:", input); // Log the received academy parameter
-    const iter = kv.list({ prefix: ["academy", input] });
+    const iter = database.list({ prefix: ["academy", input] });
     const users = [];
     for await (const res of iter) users.push(res.value);
     console.log("Processed users:", users); // Log the processed users
