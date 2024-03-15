@@ -90,8 +90,7 @@ document.getElementById("hour").onsubmit = async function(event) {
     event.preventDefault();
 
     const formData = new FormData();
-    formData.append('username', sessionStorage.getItem('user_id').username);
-    formData.append('password', sessionStorage.getItem('user_id').password);
+    formData.append('id', sessionStorage.getItem('user_id'));
     formData.append('title', document.getElementById('title').value);
     formData.append('date', document.getElementById('datePicker').value);
     formData.append('amount', document.getElementById('hours').value);
@@ -113,14 +112,15 @@ document.getElementById("hour").onsubmit = async function(event) {
 
         if (response.status === 200) {
             // Handle success
-            console.log('Submission successful');
+            alert('Submission successful');
             return;
         } else {
             // Handle error
-            console.error('Submission failed');
+            alert('Submission failed');
             return;
         }
     } catch (error) {
         console.error('Error occurred during submission:', error);
+        alert('Submission failed');
     }
 }

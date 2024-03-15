@@ -99,7 +99,8 @@ router.post("/newUser",          async (context) => {
 router.post("/submitHours",      async (context) => {
     const input = await context.request.body.formData();
     // json containing user stuff
-    let user = await database.get(["user", input.get("username"), await hashPassword(input.get("password"))]);
+    let info = ( await database.get(["uuid", input.get("id")]) ).value;
+    let user = await database.get(["user", info.username, info.password]);
     let requested = user.requested;
     requested.push({
         title: input.get("title"),
@@ -112,7 +113,8 @@ router.post("/submitHours",      async (context) => {
     user.requested = requested;
     // see what images is (currently I don't know what it would be)
     console.log("images: " + input.get("images"));
-    await database.set(["user", user.username, await hashPassword(user.password)], user);
+    await database.set(["user", info.username, info.password], user);
+    await database.set(["academy", user.academy, info.username], user);
     context.response.status = 200;
 });
 
