@@ -114,7 +114,8 @@ router.post("/submitHours",      async (context) => {
 });
 
 router.get("/user/:id",          async (context) => {
-    const input = await context.request.url.searchParams.get("id");
+    const searchParams = new URLSearchParams(context.request.url.search);
+    const input = searchParams.get("id");
     console.log(`input type: ${typeof input}, input data: ${input}`);
     let data    = ( await database.get(["uuid", input]) ).value
     context.response.status = 200;
