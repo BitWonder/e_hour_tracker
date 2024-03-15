@@ -100,7 +100,7 @@ router.post("/submitHours",      async (context) => {
     const input = await context.request.body.formData();
     // json containing user stuff
     let info = ( await database.get(["uuid", input.get("id")]) ).value;
-    let user = await database.get(["user", info.username, info.password]);
+    let user = (await database.get(["user", info.username, info.password])).value;
     // Check if user.pending_hours is undefined, if so, initialize it as an empty array
     if (!user.pending_hours) {
         user.pending_hours = [];
@@ -116,12 +116,10 @@ router.post("/submitHours",      async (context) => {
         images: input.get("images")
     });
 
-    let user_new = user; 
-
     // see what images is (currently I don't know what it would be)
     console.log("images: " + input.get("images"));
     await database.set(["user", info.username, info.password], user);
-    await database.set(["academy", user.academy, info.username], user_new);
+    await database.set(["academy", user.academy, info.username], user);
     context.response.status = 200;
 });
 
