@@ -172,9 +172,6 @@ function next(user_json) {
     let mid_pending = pending_hours / (needed - 100);
     let max_percent = total_hours   / needed;
     let max_pending = pending_hours / needed;
-    let done_color = "var(--accent-color)"
-    let pending_color = "lightblue"
-    let not_done_color = "white"
 
     less_text = document.createElement("h3");
     minNeed = needed - 200;
