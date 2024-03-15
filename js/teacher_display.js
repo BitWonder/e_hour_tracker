@@ -13,7 +13,7 @@ next((await response.json()));
 async function next(user_json) {
     document.getElementById("academy").src = `../images/academy/${user_json.academy}.png`;
     document.getElementById("welcome").innerText = `Welcome ${user_json.full_name}!`;
-    let response = await fetch(`https://${window.location.host}/stus/${user_json.academy}`, {
+    let response = await fetch(`https://${window.location.host}/students/${user_json.academy}`, {
         method: "GET", // *GET, POST, PUT, DELETE, etc.
         mode: "cors", // no-cors, *cors, same-origin
         cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
