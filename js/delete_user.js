@@ -1,7 +1,7 @@
 document.getElementById("new").onsubmit = async function(event) {
     event.preventDefault();
 
-    const response = await fetch(`https://${window.location.host}/delete/${document.getElementById("user").value}`,
+    const response = await fetch(`https://${window.location.host}/deleteUser/${document.getElementById("user").value}`,
     {
         method: "delete", // *GET, POST, PUT, DELETE, etc.
     });
