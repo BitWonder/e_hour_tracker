@@ -28,8 +28,8 @@ document.getElementById("login").onsubmit = async function(event) {
 
 
     if (response.status == 200) {
-        let user = await response.text()
-        sessionStorage.setItem("user_id", user) // the id
+        let user = await response.json()
+        sessionStorage.setItem("user_id", user.uuid) // the id
         if (user.user == "admin") {
             window.location.href = "./admin/";
             return;
