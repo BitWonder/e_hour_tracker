@@ -233,49 +233,10 @@ main section table div.none {
     background: linear-gradient(90deg, var(--done-color) 0%, var(--done-color) var(--done-min-amount), var(--pending-color) var(--done-min-amount), var(--pending-color) calc(var(--done-min-amount) + var(--pending-min-amount)), var(--unfinished-color) calc(var(--done-min-amount) + var(--pending-min-amount)), var(--unfinished-color) 100%);
 }
 
-main .hour_teller#less_hours h3:after {
-    position: absolute;
-    bottom: 0;  
-    height: 100%;
-    width: 100%;
-    content: "";
-    background: linear-gradient(90deg,
-       rgba(255,255,255, 1) 20%, 
-       rgba(255,255,255, 1) 80%
-    );
-    pointer-events: none; /* so the text is still selectable */
-}
-
 #mid_hours {
     background: linear-gradient(90deg, var(--done-color) 0%, var(--done-color) var(--done-mid-amount), var(--pending-color) var(--done-mid-amount), var(--pending-color) calc(var(--done-mid-amount) + var(--pending-mid-amount)), var(--unfinished-color) calc(var(--done-mid-amount) + var(--pending-mid-amount)), var(--unfinished-color) 100%);
 }
 
-main .hour_teller#mid_hours h3:after {
-    position: absolute;
-    bottom: 0;  
-    height: 100%;
-    width: 100%;
-    content: "";
-    background: linear-gradient(90deg,
-       rgba(255,255,255, 1) 20%, 
-       rgba(255,255,255, 1) 80%
-    );
-    pointer-events: none; /* so the text is still selectable */
-}
-
 #total_hours {
     background: linear-gradient(90deg, var(--done-color) 0%, var(--done-color) var(--done-max-amount), var(--pending-color) var(--done-max-amount), var(--pending-color) calc(var(--done-max-amount) + var(--pending-max-amount)), var(--unfinished-color) calc(var(--done-max-amount) + var(--pending-max-amount)), var(--unfinished-color) 100%);
-}
-
-main .hour_teller#total_hours h3:after {
-    position: absolute;
-    bottom: 0;  
-    height: 100%;
-    width: 100%;
-    content: "";
-    background: linear-gradient(90deg,
-       rgba(255,255,255, 1) 20%, 
-       rgba(255,255,255, 1) 80%
-    );
-    pointer-events: none; /* so the text is still selectable */
 }
