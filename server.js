@@ -48,8 +48,13 @@ router.post("/login",            async (context) => {
         return;
     }
     // if didn't fail to retrieve user data then send ok (user exists)
+    let uuid = crypto.randomUUID();
+    await database.set(["uuid", uuid], {
+        username: user.username,
+        password: user.password
+    }, { expireIn: 3600000 }); // a database linker that expires in one hour
     context.response.status = 200;
-    context.response.body = {user: user.user};
+    context.response.body = {user: uuid};
     context.response.type = "json";
     return;
 });
@@ -109,9 +114,10 @@ router.post("/submitHours",      async (context) => {
 });
 
 router.get("/user/:id",          async (context) => {
-    const input = JSON.parse(await context.request.url.searchParams.get("id"));
+    const input = await context.request.url.searchParams.get("id");
+    let data    = ( await database.get(["uuid", input]) ).value
     context.response.status = 200;
-    context.response.body = await database.get(["user", input.username, await hashPassword(input.password)]);
+    context.response.body = JSON.stringify(( await database.get(["user", data.username, data.password]) ).value);
     context.response.type = "json";
 })
 
