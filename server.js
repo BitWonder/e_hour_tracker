@@ -148,31 +148,24 @@ router.get("/students/:academy", async (context) => {
 router.delete("/deleteUser/:username",     async (context) => {
     const username = context.params.username;
 
-    try {
-        // Look up the user in the database
-        const user = await openKV.get(["user", username]);
+    // Look up the user in the database
+    const user = await openKV.get(["user", username]);
 
-        if (user) {
-            // Delete the user from the database
-            await openKV.delete(["user", username]);
+    if (user) {
+        // Delete the user from the database
+        await openKV.delete(["user", username]);
 
-            // Delete associated entries from the secondary account
-            const academy = user.academy; // Assuming user data contains 'academy' field
-            await openKV.delete(["academy", academy, username]);
-            context.response.status = 200;
-            context.response.body = { message: 'User deleted successfully' };
-        } else {
-            context.response.status = 404;
-            context.response.body = { message: 'User not found' };
-        }
-        context.response.type = "json";
-        return;
-    } catch (error) {
-        context.response.status = 500;
-        context.response.body = { message: 'Internal Server Error' };
-        context.response.type = "json";
-        return;
+        // Delete associated entries from the secondary account
+        const academy = user.academy; // Assuming user data contains 'academy' field
+        await openKV.delete(["academy", academy, username]);
+        context.response.status = 200;
+        context.response.body = { message: 'User deleted successfully' };
+    } else {
+        context.response.status = 404;
+        context.response.body = { message: 'User not found' };
     }
+    context.response.type = "json";
+    return;
 });
 
 // setup initialize app
