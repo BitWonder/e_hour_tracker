@@ -101,7 +101,7 @@ router.post("/submitHours",      async (context) => {
     // json containing user stuff
     let info = ( await database.get(["uuid", input.get("id")]) ).value;
     let user = await database.get(["user", info.username, info.password]);
-    let requested = user.requested;
+    let requested = user.pending_hours;
     requested.push({
         title: input.get("title"),
         amount: input.get("amount"),
@@ -110,7 +110,7 @@ router.post("/submitHours",      async (context) => {
         description: input.get("description"),
         images: input.get("images")
     });
-    user.requested = requested;
+    user.pending_hours = requested;
     // see what images is (currently I don't know what it would be)
     console.log("images: " + input.get("images"));
     await database.set(["user", info.username, info.password], user);
