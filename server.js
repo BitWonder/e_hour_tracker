@@ -134,11 +134,15 @@ router.get("/user/:id",          async (context) => {
 
 router.get("/students/:academy", async (context) => {
     const input = context.params.academy;
+    console.log("Received request for academy:", input); // Log the received academy parameter
     const entries = await database.list({ prefix: ["academy", input] }); // Await for the async operation
+    console.log("Retrieved entries:", entries); // Log the retrieved entries
     let users = [];
     for (const entry of entries) {
+        console.log("Processing entry:", entry); // Log each entry being processed
         users.push(entry.value); // { ... }
     }
+    console.log("Processed users:", users); // Log the processed users
     context.response.status = 200;
     context.response.body = { users: users }; // No need to stringify, Oak handles JSON serialization
     context.response.type = "json";
