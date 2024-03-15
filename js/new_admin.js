@@ -14,13 +14,13 @@ document.getElementById("new").onsubmit = async function(event) {
             password: document.getElementById("password").value,
             academy: document.getElementById("academy").value,
             user: "student",
-            data: {
+            data: JSON.stringify({
                 full_name: document.getElementById("name").value,
                 username: document.getElementById("user").value,
                 password: document.getElementById("password"),
                 academy: document.getElementById("academy"),
                 user: document.getElementById("user_group"),
-            }
+            })
         }, // body data type must match "Content-Type" header)
     });
 
@@ -32,14 +32,14 @@ document.getElementById("new").onsubmit = async function(event) {
         document.getElementById("academy").value = "";
         s = document.createElement("p")
         s.innerText = `Created ${name} successfully`
-        s.classlist.add("good");
+        s.classList.add("good");
         document.getElementById("done").insertBefore(s, document.getElementById("done").firstChild);
         return;
     }
     let name = document.getElementById("user").value;
     s = document.createElement("p")
     s.innerText = `Failed to create ${name}`
-    s.classlist.add("bad");
+    s.classList.add("bad");
     document.getElementById("done").insertBefore(s, document.getElementById("done").firstChild);
     return;
 }
