@@ -123,6 +123,7 @@ router.get("/user/:id",          async (context) => {
 
 router.get("/students/:academy", async (context) => {
     const input = context.request.url.searchParams.get("academy");
+    console.log(`input type: ${typeof input}, input data: ${input}`);
     const entries = database.list({ prefix: ["academy", input] });
     users = [];
     for await (const entry of entries) {
