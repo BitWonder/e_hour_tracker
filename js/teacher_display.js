@@ -26,7 +26,7 @@ async function next(user_json) {
     students.users.forEach(student => {
         console.log(student);
         let total_hours = 0;
-        for (let request in student.requested) {
+        for (let request in student.pending_hours) {
             total_hours += parseFloat(student.pending_hours[parseInt(request)].amount);
         }
         let a = document.createElement("a");
