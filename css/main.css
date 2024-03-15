@@ -231,32 +231,14 @@ main section table div.none {
 #less_hours {
     background-color: var(--unfinished-color);
     background: linear-gradient(90deg, var(--done-color) 0%, var(--done-color) var(--done-min-amount), var(--pending-color) var(--done-min-amount), var(--pending-color) calc(var(--done-min-amount) + var(--pending-min-amount)), var(--unfinished-color) calc(var(--done-min-amount) + var(--pending-min-amount)), var(--unfinished-color) 110%);
-    background-repeat: no-repeat;
-    background-size: 1000%;
-    background-position: 100%;
 }
 
 #mid_hours {
     background-color: var(--unfinished-color);
     background: linear-gradient(90deg, var(--done-color) 0%, var(--done-color) var(--done-mid-amount), var(--pending-color) var(--done-mid-amount), var(--pending-color) calc(var(--done-mid-amount) + var(--pending-mid-amount)), var(--unfinished-color) calc(var(--done-mid-amount) + var(--pending-mid-amount)), var(--unfinished-color) 110%);
-    background-repeat: no-repeat;
-    background-size: 1000%;
-    background-position: 100%;
 }
 
 #total_hours {
     background-color: var(--unfinished-color);
     background: linear-gradient(90deg, var(--done-color) 0%, var(--done-color) var(--done-max-amount), var(--pending-color) var(--done-max-amount), var(--pending-color) calc(var(--done-max-amount) + var(--pending-max-amount)), var(--unfinished-color) calc(var(--done-max-amount) + var(--pending-max-amount)), var(--unfinished-color) 110%);
-    background-repeat: no-repeat;
-    background-size: 1000%;
-    background-position: 100%;
-}
-
-/* transition the gradient onto screen */
-.hour_teller.loaded {
-    background-size: 100% !important;
-    -moz-transition: background-size 1500ms ease-in;
-    -o-transition: background-size 1500ms ease-in;
-    -ms-transition: background-size 1500ms ease-in;
-    transition: background-size 1500ms ease-in;
 }

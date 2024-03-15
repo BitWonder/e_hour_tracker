@@ -190,6 +190,7 @@ function next(user_json) {
     max_text.innerText = `${total_hours} / ${maxNeed}`;
     document.getElementById("total_hours").append(max_text);
     document.getElementById("total_hours").classList.add("loaded");
+    // loaded is for if someone can figure out how to smooth transition
 
     var root = document.querySelector(':root');
 
