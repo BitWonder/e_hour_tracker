@@ -149,15 +149,15 @@ router.delete("/deleteUser/:username",     async (context) => {
     const username = context.params.username;
 
     // Look up the user in the database
-    const user = await openKV.get(["user", username]);
+    const user = await database.get(["user", username]);
 
     if (user) {
         // Delete the user from the database
-        await openKV.delete(["user", username]);
+        await database.delete(["user", username]);
 
         // Delete associated entries from the secondary account
         const academy = user.academy; // Assuming user data contains 'academy' field
-        await openKV.delete(["academy", academy, username]);
+        await database.delete(["academy", academy, username]);
         context.response.status = 200;
         context.response.body = { message: 'User deleted successfully' };
     } else {
