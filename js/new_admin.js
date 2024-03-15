@@ -9,19 +9,19 @@ document.getElementById("new").onsubmit = async function(event) {
         credentials: "same-origin", // include, *same-origin, omit
         redirect: "follow", // manual, *follow, error
         referrerPolicy: "no-referrer", // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
-        body: {
+        body: JSON.stringify({
             username: document.getElementById("user").value,
             password: document.getElementById("password").value,
             academy: document.getElementById("academy").value,
-            user: "student",
-            data: JSON.stringify({
+            user: document.getElementById("user_group").value,
+            data: {
                 full_name: document.getElementById("name").value,
                 username: document.getElementById("user").value,
-                password: document.getElementById("password"),
-                academy: document.getElementById("academy"),
-                user: document.getElementById("user_group"),
-            })
-        }, // body data type must match "Content-Type" header)
+                password: document.getElementById("password").value,
+                academy: document.getElementById("academy").value,
+                user: document.getElementById("user_group").value,
+            }
+        }), // body data type must match "Content-Type" header)
     });
 
     if (response.status == 200) {
