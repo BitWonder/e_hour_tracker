@@ -27,7 +27,7 @@ async function next(user_json) {
         console.log(student);
         let total_hours = 0;
         for (let request in student.requested) {
-            total_hours += parseFloat(student.requested[parseInt(request)].amount);
+            total_hours += parseFloat(student.pending_hours[parseInt(request)].amount);
         }
         let a = document.createElement("a");
         a.href = "./student.html";
