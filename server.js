@@ -153,11 +153,11 @@ router.delete("/deleteUser/:username",     async (context) => {
     for await ( const entry of users ) {
         let user = entry.value;
         console.log("User deleting: " + username);
-        console.log("user data: " + user);
+        console.log("user data: " + JSON.stringify(user));
 
         if (user) {
             // Delete the user from the database
-            await database.delete(["user", username]);
+            await database.delete(["user", username, user.password]);
 
             // Delete associated entries from the secondary account
             const academy = user.academy; // Assuming user data contains 'academy' field
