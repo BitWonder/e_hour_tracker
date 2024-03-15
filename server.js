@@ -54,8 +54,8 @@ router.post("/login",            async (context) => {
         password: user.password
     }, { expireIn: 3600000 }); // a database linker that expires in one hour
     context.response.status = 200;
-    context.response.body = JSON.stringify({user: uuid});
-    context.response.type = "json";
+    context.response.body = uuid;
+    context.response.type = "text";
     return;
 });
 
