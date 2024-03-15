@@ -255,5 +255,8 @@ main section table div.none {
 /* transition the gradient onto screen */
 .hour_teller.loaded {
     background-size: 100% !important;
-    transition: all .2s ease-in !important;
+    -moz-transition: background-size 1500ms ease-in;
+    -o-transition: background-size 1500ms ease-in;
+    -ms-transition: background-size 1500ms ease-in;
+    transition: background-size 1500ms ease-in;
 }
