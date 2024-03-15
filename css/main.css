@@ -1,3 +1,21 @@
+:root {
+    --done-color: var(--accent-color);
+    --pending-color: lightblue;
+    --unfinished-color: rgb(200, 200, 200);
+    /* gradient min hours */
+    --done-min-amount: 0%;
+    --pending-min-amount: 0%;
+
+    /* gradient mid hours */
+    --done-mid-amount: 0%;
+    --pending-mid-amount: 0%;
+
+    /* gradient max hours */
+    --done-max-amount: 0%;
+    --pending-max-amount: 0%;
+
+}
+
 html {
     font-family: "Barlow";
 }
@@ -133,7 +151,6 @@ main .hour_teller h3 {
     margin-top: auto;
     margin-bottom: auto;
     margin-left: 1%;
-    mix-blend-mode: difference; /* so you can see the text when colors don't work out */
 
     text-shadow: 0 0 8px rgb(0,0,0);
 
@@ -210,4 +227,16 @@ main section table div.none {
     grid-template-rows: 1fr !important;
     place-content: center !important;
     place-items: center !important;
+}
+
+#less_hours {
+    background: linear-gradient(90deg, var(--done-color) 0%, var(--done-color) var(--done-min-amount), var(--pending-color) var(--done-min-amount), var(--pending-color) calc(var(--done-min-amount) + var(--pending-min-amount)), var(--unfinished-color) calc(var(--done-min-amount) + var(--pending-min-amount)), var(--unfinished-color) 100%);
+}
+
+#mid_hours {
+    background: linear-gradient(90deg, var(--done-color) 0%, var(--done-color) var(--done-mid-amount), var(--pending-color) var(--done-mid-amount), var(--pending-color) calc(var(--done-mid-amount) + var(--pending-mid-amount)), var(--unfinished-color) calc(var(--done-mid-amount) + var(--pending-mid-amount)), var(--unfinished-color) 100%);
+}
+
+#total_hours {
+    background: linear-gradient(90deg, var(--done-color) 0%, var(--done-color) var(--done-max-amount), var(--pending-color) var(--done-max-amount), var(--pending-color) calc(var(--done-max-amount) + var(--pending-max-amount)), var(--unfinished-color) calc(var(--done-max-amount) + var(--pending-max-amount)), var(--unfinished-color) 100%);
 }

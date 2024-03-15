@@ -179,20 +179,27 @@ function next(user_json) {
     less_text = document.createElement("h3");
     minNeed = needed - 200;
     less_text.innerText = `${total_hours} / ${minNeed}`;
+    document.getElementById("less_hours").append(less_text);
 
     mid_text = document.createElement("h3");
     midNeed = needed - 100;
     mid_text.innerText = `${total_hours} / ${midNeed}`;
+    document.getElementById("mid_hours").append(mid_text);
 
     max_text = document.createElement("h3");
     maxNeed = needed;
     max_text.innerText = `${total_hours} / ${maxNeed}`;
-
-    document.getElementById("less_hours").style = `background: linear-gradient(90deg, ${done_color} 0%, ${done_color} ${min_percent * 100}%, ${pending_color} ${min_percent * 100}%, ${pending_color} ${(min_pending + min_percent) * 100}%, ${not_done_color} ${(min_pending + min_percent) * 100}%, ${not_done_color} 100%); border: solid 1px black;`;
-    document.getElementById("less_hours").append(less_text);
-    document.getElementById("mid_hours").style = `background: linear-gradient(90deg, ${done_color} 0%, ${done_color} ${mid_percent * 100}%, ${pending_color} ${mid_percent * 100}%, ${pending_color} ${(mid_pending + mid_percent) * 100}%, ${not_done_color} ${(mid_pending + mid_percent) * 100}%, ${not_done_color} 100%); border: solid 1px black;`;
-    document.getElementById("mid_hours").append(mid_text);
-    document.getElementById("total_hours").style = `background: linear-gradient(90deg, ${done_color} 0%, ${done_color} ${max_percent * 100}%, ${pending_color} ${max_percent * 100}%, ${pending_color} ${(max_pending + max_percent) * 100}%, ${not_done_color} ${(max_percent + max_pending) * 100}%, ${not_done_color} 100%); border: solid 1px black;`;
     document.getElementById("total_hours").append(max_text);
+
+    var root = document.querySelector(':root');
+
+    root.style.setProperty('--done-min-amount', `${min_percent * 100}%`);
+    root.style.setProperty('--pending-min-amount', `${min_pending * 100}%`);
+
+    root.style.setProperty('--done-mid-amount', `${mid_percent * 100}%`);
+    root.style.setProperty('--pending-mid-amount', `${mid_pending * 100}%`);
+
+    root.style.setProperty('--done-max-amount', `${max_percent * 100}%`);
+    root.style.setProperty('--pending-max-amount', `${max_pending * 100}%`);
 
 }
