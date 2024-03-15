@@ -149,26 +149,29 @@ router.delete("/deleteUser/:username",     async (context) => {
     const username = context.params.username;
 
     // Look up the user in the database
-    const user = (await database.get(["user", username])).value;
-    console.log("User deleting: " + username);
-    console.log("user data: " + user);
+    const users = await database.list( { prefix: ["user", username] } );
+    for ( let entry of users ) {
+        let user = entry.value;
+        console.log("User deleting: " + username);
+        console.log("user data: " + user);
 
-    if (user) {
-        // Delete the user from the database
-        await database.delete(["user", username]);
+        if (user) {
+            // Delete the user from the database
+            await database.delete(["user", username]);
 
-        // Delete associated entries from the secondary account
-        const academy = user.academy; // Assuming user data contains 'academy' field
-        await database.delete(["academy", academy, username]);
-        context.response.status = 200;
-        context.response.body = { message: 'User deleted successfully' };
-    } else {
-        context.response.status = 404;
-        context.response.body = { message: 'User not found' };
-        console.log("user not found: " + username)
+            // Delete associated entries from the secondary account
+            const academy = user.academy; // Assuming user data contains 'academy' field
+            await database.delete(["academy", academy, username]);
+            context.response.status = 200;
+            context.response.body = { message: 'User deleted successfully' };
+        } else {
+            context.response.status = 404;
+            context.response.body = { message: 'User not found' };
+            console.log("user not found: " + username)
+        }
+        context.response.type = "json";
+        return;
     }
-    context.response.type = "json";
-    return;
 });
 
 // setup initialize app
