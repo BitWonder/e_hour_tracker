@@ -28,6 +28,8 @@ async function hashPassword(password) {
     return hashHex;
 }
 
+await delete_all()
+
 async function delete_all() {
     const entries = database.list({ prefix: [] });
     for await (let entry of entries) {
