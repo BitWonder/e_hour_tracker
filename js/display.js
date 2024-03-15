@@ -4,7 +4,7 @@ function next(user_json) {
     document.getElementById("welcome").innerText = `Welcome ${user_json.full_name}!`;
     let pending_hours = 0;
     let place = document.getElementById("pending_hours");
-    user_json.requested.forEach(hour => {
+    user_json.pending_hours.forEach(hour => {
         pending_hours += parseFloat(hour.amount);
         let p = document.createElement("div");
         if ( hour.hours == 1 ) {
@@ -55,10 +55,10 @@ function next(user_json) {
         place.append(none);
     }
 
-    // total hours arn't done yet
+    // total hours aren't done yet
     let total_hours = 0;
     place = document.getElementById("accepted_hours");
-    user_json.hours.forEach(hour => {
+    user_json.accepted_hours.forEach(hour => {
         total_hours += hour.amount;
         let p = document.createElement("div");
         if ( hour.hours == 1 ) {
@@ -110,7 +110,7 @@ function next(user_json) {
 
     // denied isn't done yet
     place = document.getElementById("denied_hours");
-    user_json.denied.forEach(hour => {
+    user_json.denied_hours.forEach(hour => {
         let p = document.createElement("div");
         if ( hour.hours == 1 ) {
             s1 = document.createElement("section");
