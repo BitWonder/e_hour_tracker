@@ -182,6 +182,7 @@ router.post("/password", async (context) => {
     let user = (await database.get(["user", input.username, hashed_password])).value;
     await database.delete(["user", input.username, user.password]);
     await database.delete(["user", user.academy, input.username]);
+    user.password = new_password;
     let primary_key = ["user", user.username, new_password]
     let response = await database.atomic()
         .check({key: primary_key})
