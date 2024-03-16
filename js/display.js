@@ -133,7 +133,7 @@ function next(user_json) {
             let title_s1 = document.createElement("h3");
             title_s1.innerText = hour.title;
             let hour_text_s1 = document.createElement("p");
-            hour_text.innerText = `${hour.amount} hour`;
+            hour_text_s1.innerText = `${hour.amount} hour`;
             s1.append(title_s1);
             s1.append(hour_text_s1);
             s2 = document.createElement("section");
@@ -158,7 +158,7 @@ function next(user_json) {
             let title_s1 = document.createElement("h3");
             title_s1.innerText = hour.title;
             let hour_text_s1 = document.createElement("p");
-            hour_text.innerText = `${hour.amount} hours`;
+            hour_text_s1.innerText = `${hour.amount} hours`;
             s1.append(title_s1);
             s1.append(hour_text_s1);
             s2 = document.createElement("section");
