@@ -62,7 +62,7 @@ function next(user_json) {
                     comments: document.getElementsByClassName(`comments_${x}`)[0].value,
                     username: sessionStorage.getItem("student"),
                     type: "reject",
-                    position: x
+                    position: (x - 1)
                 })
             }
         );
