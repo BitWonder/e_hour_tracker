@@ -153,6 +153,8 @@ main .hour_teller h3 {
 
     text-shadow: 0 0 8px rgb(0,0,0);
 
+    filter: invert(1) grayscale(1) contrast(9);
+
     transition: all .2s;
 }
 
