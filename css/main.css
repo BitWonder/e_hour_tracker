@@ -1,6 +1,6 @@
 :root {
     --done-color: var(--accent-color);
-    --pending-color: black;
+    --pending-color: lightblue;
     --unfinished-color: white;
     /* gradient min hours */
     --done-min-amount: 0%;
