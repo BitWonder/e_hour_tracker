@@ -207,19 +207,19 @@ function next(user_json) {
 
     less_text = document.createElement("h3");
     minNeed = needed - 200;
-    less_text.innerText = `${total_hours} / ${minNeed}`;
+    less_text.innerText = `${total_hours} (${pending_hours}) / ${minNeed}`;
     document.getElementById("less_hours").append(less_text);
     document.getElementById("less_hours").classList.add("loaded");
 
     mid_text = document.createElement("h3");
     midNeed = needed - 100;
-    mid_text.innerText = `${total_hours} / ${midNeed}`;
+    mid_text.innerText = `${total_hours} (${pending_hours}) / ${midNeed}`;
     document.getElementById("mid_hours").append(mid_text);
     document.getElementById("mid_hours").classList.add("loaded");
 
     max_text = document.createElement("h3");
     maxNeed = needed;
-    max_text.innerText = `${total_hours} / ${maxNeed}`;
+    max_text.innerText = `${total_hours} (${pending_hours}) / ${maxNeed}`;
     document.getElementById("total_hours").append(max_text);
     document.getElementById("total_hours").classList.add("loaded");
     // loaded is for if someone can figure out how to smooth transition
