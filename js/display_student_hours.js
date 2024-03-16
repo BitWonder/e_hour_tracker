@@ -1,4 +1,5 @@
 function next(user_json) {
+    document.getElementById("title_of_student_requests").innerText = `${user_json.full_name} Requested Hours`;
     let x = 0 
     user_json.pending_hours.forEach(element => {
         x += 1;
