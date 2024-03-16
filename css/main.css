@@ -201,7 +201,8 @@ main .hour_teller:last-child {
 }
 
 main .hour_teller:hover * {
-    transform: scale(1.1);
+    font-size: xx-large;
+    font-weight: bold;
 }
 
 main #button-container {
