@@ -136,7 +136,7 @@ router.post("/handle_hours", async (context) => {
         let user = user_db.value;
         console.log(user);
         console.log("Doing something with hour: " + user)
-        let index = user.pending_hours.indexOf(input.element);
+        let index = parseInt(input.position);
         console.log(index);
         if (index > -1) { // only splice array when item is found
             user.pending_hours.splice(index, 1); // 2nd parameter means remove one item only

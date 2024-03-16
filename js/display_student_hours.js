@@ -40,7 +40,8 @@ function next(user_json) {
                     element: element,
                     comments: document.getElementsByClassName(`comments_${x}`)[0].value,
                     username: sessionStorage.getItem("student"),
-                    type: "accept"
+                    type: "accept",
+                    position: (x - 1)
                 })
             }
         );
@@ -60,7 +61,8 @@ function next(user_json) {
                     element: element,
                     comments: document.getElementsByClassName(`comments_${x}`)[0].value,
                     username: sessionStorage.getItem("student"),
-                    type: "reject"
+                    type: "reject",
+                    position: x
                 })
             }
         );
