@@ -146,10 +146,9 @@ main .hour_teller {
 
 main .hour_teller h3 {
     height: fit-content;
-    width: fit-content;
+    width: 100%;
     margin-top: auto;
     margin-bottom: auto;
-    margin-left: 1%;
 
     -webkit-background-clip: text;
     background-clip: text;
@@ -237,12 +236,24 @@ main section table div.none {
     background: linear-gradient(90deg, var(--done-color) 0%, var(--done-color) var(--done-min-amount), var(--pending-color) var(--done-min-amount), var(--pending-color) calc(var(--done-min-amount) + var(--pending-min-amount)), var(--unfinished-color) calc(var(--done-min-amount) + var(--pending-min-amount)), var(--unfinished-color) 110%);
 }
 
+#less_hours h3 {
+    background: linear-gradient(90deg, var(--done-color) 0%, var(--done-color) var(--done-min-amount), var(--pending-color) var(--done-min-amount), var(--pending-color) calc(var(--done-min-amount) + var(--pending-min-amount)), var(--unfinished-color) calc(var(--done-min-amount) + var(--pending-min-amount)), var(--unfinished-color) 110%);
+}
+
 #mid_hours {
     background-color: var(--unfinished-color);
     background: linear-gradient(90deg, var(--done-color) 0%, var(--done-color) var(--done-mid-amount), var(--pending-color) var(--done-mid-amount), var(--pending-color) calc(var(--done-mid-amount) + var(--pending-mid-amount)), var(--unfinished-color) calc(var(--done-mid-amount) + var(--pending-mid-amount)), var(--unfinished-color) 110%);
 }
 
+#mid_hours h3 {
+    background: linear-gradient(90deg, var(--done-color) 0%, var(--done-color) var(--done-mid-amount), var(--pending-color) var(--done-mid-amount), var(--pending-color) calc(var(--done-mid-amount) + var(--pending-mid-amount)), var(--unfinished-color) calc(var(--done-mid-amount) + var(--pending-mid-amount)), var(--unfinished-color) 110%);
+}
+
 #total_hours {
     background-color: var(--unfinished-color);
+    background: linear-gradient(90deg, var(--done-color) 0%, var(--done-color) var(--done-max-amount), var(--pending-color) var(--done-max-amount), var(--pending-color) calc(var(--done-max-amount) + var(--pending-max-amount)), var(--unfinished-color) calc(var(--done-max-amount) + var(--pending-max-amount)), var(--unfinished-color) 110%);
+}
+
+#total_hours h3 {
     background: linear-gradient(90deg, var(--done-color) 0%, var(--done-color) var(--done-max-amount), var(--pending-color) var(--done-max-amount), var(--pending-color) calc(var(--done-max-amount) + var(--pending-max-amount)), var(--unfinished-color) calc(var(--done-max-amount) + var(--pending-max-amount)), var(--unfinished-color) 110%);
 }
