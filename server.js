@@ -176,12 +176,19 @@ router.post("/handle_hours", async (context) => {
 })
 
 router.post("/password", async (context) => {
+    console.log("POST request received on route \"/password\"");
     const input = await context.request.body.json();
+    console.log("Parsing JSON body of the request");
     let hashed_password = await hashPassword(input.password);
+    console.log("Hashing current password");
     let new_password = await hashPassword(input.new);
+    console.log("Hashing new password");
     let user = (await database.get(["user", input.username, hashed_password])).value;
+    console.log("Retrieving user data from the database");
     await database.delete(["user", input.username, user.password]);
+    console.log("Deleting old password entry from the database");
     await database.delete(["user", user.academy, input.username]);
+    console.log("Deleting user entry from previous academy in the database");
     user.password = new_password;
     let primary_key = ["user", user.username, new_password]
     let response = await database.atomic()
@@ -189,11 +196,13 @@ router.post("/password", async (context) => {
         .set(primary_key, user)
         .set(["academy", user.academy, user.username], user)
         .commit();
-    if ( response.ok == true ) {
+    if (response.ok == true) {
+        console.log("Password change successful for user:", user.username);
         context.response.status = 200;
         return;
     } else {
-        context.response = 400;
+        console.log("Database operation failed: Unable to set user password");
+        context.response.status = 400;
         return;
     }
 })
