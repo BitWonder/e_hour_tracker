@@ -126,12 +126,17 @@ router.post("/submitHours",      async (context) => {
 router.post("/handle_hours", async (context) => {
     const input = await context.request.body.json();
     console.log(input);
+    console.log("handling hours");
     // getting user
     let possible_users = (await database.list({prefix: ["user", input.username]}))
+    console.log(possible_users);
     for ( let user_db in possible_users ) {
+        console.log(user_db);
         let user = user_db.value;
+        console.log(user);
         console.log("Doing something with hour: " + user)
         let index = user.pending_hours.indexOf(input.element);
+        console.log(index);
         if (index > -1) { // only splice array when item is found
             user.pending_hours.splice(index, 1); // 2nd parameter means remove one item only
         }
