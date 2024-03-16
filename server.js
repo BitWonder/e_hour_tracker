@@ -181,16 +181,16 @@ router.get("/user/:id",          async (context) => {
 router.get("/student/:username", async (context) => {
     const input = context.params.username;
     console.log(`input type: ${typeof input}, input data: ${input}`);
-    let user = await database.list({prefix: ["user", input]});
+    const iter = database.list({ prefix: ["academy", input] });
+    let user;
+    for await (const res of iter) user = res.value;
     console.log(user);
-    for ( let thing of user ) {
-        data = thing.value;
-        console.log(data);
-        context.response.status = 200;
-        context.response.body = JSON.stringify(( await database.get(["user", data.username, data.password]) ).value);
-        context.response.type = "json";
-        return;
-    }
+    data = user;
+    console.log(data);
+    context.response.status = 200;
+    context.response.body = JSON.stringify(( await database.get(["user", data.username, data.password]) ).value);
+    context.response.type = "json";
+    return;
 })
 
 router.get("/students/:academy", async (context) => {
