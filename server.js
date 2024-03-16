@@ -185,21 +185,21 @@ router.post("/password", async (context) => {
     console.log("Hashing new password");
     let user = (await database.get(["user", input.username, hashed_password])).value;
     console.log("Retrieving user data from the database");
-    await database.delete(["user", input.username, user.password]);
-    console.log("Deleting old password entry from the database");
-    await database.delete(["user", user.academy, input.username]);
-    console.log("Deleting user entry from previous academy in the database");
     user.password = new_password;
-    await database.set(["uuid", input.uuid], {
-        username: user.username,
-        password: new_password
-    });
     let primary_key = ["user", user.username, new_password]
     let response = await database.atomic()
         .check({key: primary_key})
         .set(primary_key, user)
         .set(["academy", user.academy, user.username], user)
         .commit();
+        await database.set(["uuid", input.uuid], {
+            username: user.username,
+            password: new_password
+        });
+        await database.delete(["user", user.academy, input.username]);
+        console.log("Deleting user entry from previous academy in the database");
+        await database.delete(["user", input.username, user.password]);
+        console.log("Deleting old password entry from the database");
     if (response.ok == true) {
         console.log("Password change successful for user:", user.username);
         context.response.status = 200;
