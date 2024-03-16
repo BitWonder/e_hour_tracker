@@ -181,7 +181,8 @@ router.get("/user/:id",          async (context) => {
 router.get("/student/:username", async (context) => {
     const input = context.params.username;
     console.log(`input type: ${typeof input}, input data: ${input}`);
-    const iter = database.list({ prefix: ["academy", input] });
+    const iter = database.list({ prefix: ["user", input] });
+    console.log(iter);
     let user;
     for await (const res of iter) user = res.value;
     console.log(user);
