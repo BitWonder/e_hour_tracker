@@ -101,21 +101,6 @@ main img {
     border-radius: 15px;
 }
 
-@media screen and (max-width: 100vh) {
-    body h1 {
-        font-size: larger;
-    }
-
-    main {
-        padding-top: 5%;
-    }
-
-    main img {
-        width: 70vw;
-        height: auto;
-    }
-}
-
 main #button-container {
     margin-top: 10vh;
     margin-bottom: 10vh;
@@ -245,4 +230,24 @@ main section table div :nth-child(11) {
 main section table div :nth-child(11):hover {
     background-color: var(--bad-color);
     font-size: xx-large;
+}
+
+@media screen and (max-width: 100vh) {
+    body h1 {
+        font-size: larger;
+    }
+
+    main {
+        padding-top: 5%;
+    }
+
+    main img {
+        width: 70vw;
+        height: auto;
+    }
+
+    main section table div {
+        display: flex;
+        flex-direction: row;
+    }
 }
