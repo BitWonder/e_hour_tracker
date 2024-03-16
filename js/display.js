@@ -59,7 +59,7 @@ function next(user_json) {
     let total_hours = 0;
     place = document.getElementById("accepted_hours");
     user_json.accepted_hours.forEach(hour => {
-        total_hours += hour.amount;
+        total_hours += parseFloat(hour.amount);
         let p = document.createElement("div");
         if ( hour.hours == 1 ) {
             s1 = document.createElement("section");
@@ -113,39 +113,55 @@ function next(user_json) {
     user_json.denied_hours.forEach(hour => {
         let p = document.createElement("div");
         if ( hour.hours == 1 ) {
-            s1 = document.createElement("section");
-            title = document.createElement("h3");
-            title.innerText = hour.title;
-            hour_text = document.createElement("p");
+            let s1 = document.createElement("section");
+            let title_s1 = document.createElement("h3");
+            title_s1.innerText = hour.title;
+            let hour_text_s1 = document.createElement("p");
             hour_text.innerText = `${hour.amount} hour`;
-            s1.append(title);
-            s1.append(hour_text);
+            s1.append(title_s1);
+            s1.append(hour_text_s1);
             s2 = document.createElement("section");
-            title = document.createElement("h3");
+            let title = document.createElement("h3");
             title.innerText = "Description:";
-            hour_text = document.createElement("p");
+            let hour_text = document.createElement("p");
             hour_text.innerText = `${hour.description}`;
             s2.append(title);
             s2.append(hour_text);
+            let s3 = document.createElement("section");
+            let comment_title = document.createElement("h3");
+            comment_title = "Comments";
+            let comment = document.createElement("p");
+            comment.innerText = hour.comment;
+            s3.append(comment_title);
+            s3.append(comment);
             p.append(s1);
             p.append(s2);
+            p.append(s3);
         } else {
-            s1 = document.createElement("section");
-            title = document.createElement("h3");
-            title.innerText = hour.title;
-            hour_text = document.createElement("p");
+            let s1 = document.createElement("section");
+            let title_s1 = document.createElement("h3");
+            title_s1.innerText = hour.title;
+            let hour_text_s1 = document.createElement("p");
             hour_text.innerText = `${hour.amount} hours`;
-            s1.append(title);
-            s1.append(hour_text);
+            s1.append(title_s1);
+            s1.append(hour_text_s1);
             s2 = document.createElement("section");
-            description_title = document.createElement("h3");
-            description_title.innerText = "Description:";
-            description = document.createElement("p");
-            description.innerText = `${hour.description}`;
-            s2.append(description_title);
-            s2.append(description);
+            let title = document.createElement("h3");
+            title.innerText = "Description:";
+            let hour_text = document.createElement("p");
+            hour_text.innerText = `${hour.description}`;
+            s2.append(title);
+            s2.append(hour_text);
+            let s3 = document.createElement("section");
+            let comment_title = document.createElement("h3");
+            comment_title = "Comments";
+            let comment = document.createElement("p");
+            comment.innerText = hour.comment;
+            s3.append(comment_title);
+            s3.append(comment);
             p.append(s1);
             p.append(s2);
+            p.append(s3);
         }
         p.classList.add("hours");
         place.append(p);
