@@ -206,7 +206,7 @@ router.get("/user/:id",          async (context) => {
     context.response.type = "json";
 })
 
-router.get("/student/:username", async (context) => {
+router.get("/student_get/:username", async (context) => {
     const input = context.params.username;
     console.log(`input type: ${typeof input}, input data: ${input}`);
     const iter = database.list({ prefix: ["user", input] });
