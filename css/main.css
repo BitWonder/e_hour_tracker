@@ -166,6 +166,8 @@ main .hour_teller {
     height: 5vh;
     margin-bottom: 1vh;
 
+    overflow: hidden;
+
     display: grid;
 
     -webkit-transition: background-image 0.2s ease-in;
