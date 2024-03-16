@@ -1,5 +1,5 @@
 let user_id = sessionStorage.getItem("student");
-const response = await fetch(`https://${window.location.host}/user/${user_id}`, {
+const response = await fetch(`https://${window.location.host}/student/${user_id}`, {
     method: "GET", // *GET, POST, PUT, DELETE, etc.
     mode: "cors", // no-cors, *cors, same-origin
     cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
