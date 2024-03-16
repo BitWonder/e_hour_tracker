@@ -73,5 +73,6 @@ function next(user_json) {
         div.append(comments);
         div.append(accept_button);
         div.append(reject_button);
+        document.getElementById("students").append(div);
     });
 }
