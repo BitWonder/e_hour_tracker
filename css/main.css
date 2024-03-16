@@ -16,6 +16,34 @@
 
 }
 
+
+#less_hours {
+    background-color: var(--unfinished-color);
+    background: linear-gradient(90deg, var(--done-color) 0%, var(--done-color) var(--done-min-amount), var(--pending-color) var(--done-min-amount), var(--pending-color) calc(var(--done-min-amount) + var(--pending-min-amount)), var(--unfinished-color) calc(var(--done-min-amount) + var(--pending-min-amount)), var(--unfinished-color) 110%);
+}
+
+#less_hours h3 {
+    background: linear-gradient(90deg, var(--done-color) 0%, var(--done-color) var(--done-min-amount), var(--pending-color) var(--done-min-amount), var(--pending-color) calc(var(--done-min-amount) + var(--pending-min-amount)), var(--unfinished-color) calc(var(--done-min-amount) + var(--pending-min-amount)), var(--unfinished-color) 110%);
+}
+
+#mid_hours {
+    background-color: var(--unfinished-color);
+    background: linear-gradient(90deg, var(--done-color) 0%, var(--done-color) var(--done-mid-amount), var(--pending-color) var(--done-mid-amount), var(--pending-color) calc(var(--done-mid-amount) + var(--pending-mid-amount)), var(--unfinished-color) calc(var(--done-mid-amount) + var(--pending-mid-amount)), var(--unfinished-color) 110%);
+}
+
+#mid_hours h3 {
+    background: linear-gradient(90deg, var(--done-color) 0%, var(--done-color) var(--done-mid-amount), var(--pending-color) var(--done-mid-amount), var(--pending-color) calc(var(--done-mid-amount) + var(--pending-mid-amount)), var(--unfinished-color) calc(var(--done-mid-amount) + var(--pending-mid-amount)), var(--unfinished-color) 110%);
+}
+
+#total_hours {
+    background-color: var(--unfinished-color);
+    background: linear-gradient(90deg, var(--done-color) 0%, var(--done-color) var(--done-max-amount), var(--pending-color) var(--done-max-amount), var(--pending-color) calc(var(--done-max-amount) + var(--pending-max-amount)), var(--unfinished-color) calc(var(--done-max-amount) + var(--pending-max-amount)), var(--unfinished-color) 110%);
+}
+
+#total_hours h3 {
+    background: linear-gradient(90deg, var(--done-color) 0%, var(--done-color) var(--done-max-amount), var(--pending-color) var(--done-max-amount), var(--pending-color) calc(var(--done-max-amount) + var(--pending-max-amount)), var(--unfinished-color) calc(var(--done-max-amount) + var(--pending-max-amount)), var(--unfinished-color) 110%);
+}
+
 html {
     font-family: "Barlow";
 }
@@ -154,7 +182,7 @@ main .hour_teller h3 {
     background-clip: text;
     color: transparent;
 
-    filter: grayscale(1) contrast(9);
+    filter: grayscale(1) contrast(9) invert(1);
 
     transition: all .2s;
 }
@@ -229,31 +257,4 @@ main section table div.none {
     grid-template-rows: 1fr !important;
     place-content: center !important;
     place-items: center !important;
-}
-
-#less_hours {
-    background-color: var(--unfinished-color);
-    background: linear-gradient(90deg, var(--done-color) 0%, var(--done-color) var(--done-min-amount), var(--pending-color) var(--done-min-amount), var(--pending-color) calc(var(--done-min-amount) + var(--pending-min-amount)), var(--unfinished-color) calc(var(--done-min-amount) + var(--pending-min-amount)), var(--unfinished-color) 110%);
-}
-
-#less_hours h3 {
-    background: linear-gradient(90deg, var(--done-color) 0%, var(--done-color) var(--done-min-amount), var(--pending-color) var(--done-min-amount), var(--pending-color) calc(var(--done-min-amount) + var(--pending-min-amount)), var(--unfinished-color) calc(var(--done-min-amount) + var(--pending-min-amount)), var(--unfinished-color) 110%);
-}
-
-#mid_hours {
-    background-color: var(--unfinished-color);
-    background: linear-gradient(90deg, var(--done-color) 0%, var(--done-color) var(--done-mid-amount), var(--pending-color) var(--done-mid-amount), var(--pending-color) calc(var(--done-mid-amount) + var(--pending-mid-amount)), var(--unfinished-color) calc(var(--done-mid-amount) + var(--pending-mid-amount)), var(--unfinished-color) 110%);
-}
-
-#mid_hours h3 {
-    background: linear-gradient(90deg, var(--done-color) 0%, var(--done-color) var(--done-mid-amount), var(--pending-color) var(--done-mid-amount), var(--pending-color) calc(var(--done-mid-amount) + var(--pending-mid-amount)), var(--unfinished-color) calc(var(--done-mid-amount) + var(--pending-mid-amount)), var(--unfinished-color) 110%);
-}
-
-#total_hours {
-    background-color: var(--unfinished-color);
-    background: linear-gradient(90deg, var(--done-color) 0%, var(--done-color) var(--done-max-amount), var(--pending-color) var(--done-max-amount), var(--pending-color) calc(var(--done-max-amount) + var(--pending-max-amount)), var(--unfinished-color) calc(var(--done-max-amount) + var(--pending-max-amount)), var(--unfinished-color) 110%);
-}
-
-#total_hours h3 {
-    background: linear-gradient(90deg, var(--done-color) 0%, var(--done-color) var(--done-max-amount), var(--pending-color) var(--done-max-amount), var(--pending-color) calc(var(--done-max-amount) + var(--pending-max-amount)), var(--unfinished-color) calc(var(--done-max-amount) + var(--pending-max-amount)), var(--unfinished-color) 110%);
 }
