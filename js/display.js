@@ -80,7 +80,7 @@ function next(user_json) {
             let comment_title = document.createElement("h3");
             comment_title.innerText = "Comments";
             let comment = document.createElement("p");
-            comment.innerText = hour.comment;
+            comment.innerText = hour.comments;
             s3.append(comment_title);
             s3.append(comment);
             p.append(s1);
@@ -105,7 +105,7 @@ function next(user_json) {
             let comment_title = document.createElement("h3");
             comment_title.innerText = "Comments";
             let comment = document.createElement("p");
-            comment.innerText = hour.comment;
+            comment.innerText = hour.comments;
             s3.append(comment_title);
             s3.append(comment);
             p.append(s1);
@@ -147,7 +147,7 @@ function next(user_json) {
             let comment_title = document.createElement("h3");
             comment_title.innerText = "Comments";
             let comment = document.createElement("p");
-            comment.innerText = hour.comment;
+            comment.innerText = hour.comments;
             s3.append(comment_title);
             s3.append(comment);
             p.append(s1);
@@ -172,7 +172,7 @@ function next(user_json) {
             let comment_title = document.createElement("h3");
             comment_title.innerText = "Comments";
             let comment = document.createElement("p");
-            comment.innerText = hour.comment;
+            comment.innerText = hour.comments;
             s3.append(comment_title);
             s3.append(comment);
             p.append(s1);
