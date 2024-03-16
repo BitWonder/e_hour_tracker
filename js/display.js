@@ -78,7 +78,7 @@ function next(user_json) {
             s2.append(hour_text);
             let s3 = document.createElement("section");
             let comment_title = document.createElement("h3");
-            comment_title = "Comments";
+            comment_title.innerText = "Comments";
             let comment = document.createElement("p");
             comment.innerText = hour.comment;
             s3.append(comment_title);
@@ -103,7 +103,7 @@ function next(user_json) {
             s2.append(hour_text);
             let s3 = document.createElement("section");
             let comment_title = document.createElement("h3");
-            comment_title = "Comments";
+            comment_title.innerText = "Comments";
             let comment = document.createElement("p");
             comment.innerText = hour.comment;
             s3.append(comment_title);
@@ -145,7 +145,7 @@ function next(user_json) {
             s2.append(hour_text);
             let s3 = document.createElement("section");
             let comment_title = document.createElement("h3");
-            comment_title = "Comments";
+            comment_title.innerText = "Comments";
             let comment = document.createElement("p");
             comment.innerText = hour.comment;
             s3.append(comment_title);
@@ -170,7 +170,7 @@ function next(user_json) {
             s2.append(hour_text);
             let s3 = document.createElement("section");
             let comment_title = document.createElement("h3");
-            comment_title = "Comments";
+            comment_title.innerText = "Comments";
             let comment = document.createElement("p");
             comment.innerText = hour.comment;
             s3.append(comment_title);
