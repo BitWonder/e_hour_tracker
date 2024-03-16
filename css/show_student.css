@@ -222,11 +222,11 @@ main section table div :nth-child(9) {
 main section table div :nth-child(10) {
     grid-column: 3;
     grid-row: 1 / 4;
-    background-color: var(--bad-color);
+    background-color: var(--good-color);
 }
 
 main section table div :nth-child(11) {
     grid-column: 3;
     grid-row: 4 / 8;
-    background-color: var(--good-color);
+    background-color: var(--bad-color);
 }
