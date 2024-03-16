@@ -123,6 +123,52 @@ router.post("/submitHours",      async (context) => {
     context.response.status = 200;
 });
 
+router.post("/handle_hours", async (context) => {
+    const input = await context.request.body.json();
+    console.log(input);
+    // getting user
+    let possible_users = (await database.list({prefix: ["user", input.username]}))
+    for ( let user_db in possible_users ) {
+        let user = user_db.value;
+        console.log("Doing something with hour: " + user)
+        let index = user.pending_hours.indexOf(input.element);
+        if (index > -1) { // only splice array when item is found
+            user.pending_hours.splice(index, 1); // 2nd parameter means remove one item only
+        }
+        if (input.type == "accept") {
+            let accepted_hours = user.accepted_hours;
+            accepted_hours.push({
+                title: input.element.title,
+                amount: input.element.amount,
+                description: input.element.description,
+                date: input.element.date,
+                submitted: input.element.submitted,
+                accepted: new Date(),
+                comments: input.comments
+            })
+            user.accepted_hours = accepted_hours;
+            await database.set(["user", user.username, user.password], user);
+            await database.set(["academy". user.academy, user.username], user);
+        } else {
+            let denied_hours = user.denied_hours;
+            denied_hours.push({
+                title: input.element.title,
+                amount: input.element.amount,
+                description: input.element.description,
+                date: input.element.date,
+                submitted: input.element.submitted,
+                rejected: new Date(),
+                comments: input.comments
+            })
+            user.denied_hours = denied_hours;
+            await database.set(["user", user.username, user.password], user);
+            await database.set(["academy". user.academy, user.username], user);
+        }
+        // so the for loop doesn't continue
+        return;
+    }
+})
+
 router.get("/user/:id",          async (context) => {
     const input = context.params.id;
     console.log(`input type: ${typeof input}, input data: ${input}`);

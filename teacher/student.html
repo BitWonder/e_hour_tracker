@@ -3,9 +3,35 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>E-Hour Tracker Admin</title>
+    <link rel="icon" type="image/x-icon" href="./images/favicon/favicon.ico">
+    <link rel="stylesheet" href="../css/vars.css">
+    <link rel="stylesheet" href="../css/show_student.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/x-icon" href="../images/favicon/favicon.ico">
 </head>
 <body>
-    <h1>Student</h1>
+    <header>
+        <h1 id="welcome"></h1>
+        <a href="../index.html">
+            <a href="./"><h1>Accept Hours</h1></a>
+        </a>
+    </header>
+
+    <main>
+        <img src="#" id="academy">
+
+        <section id="accepted">
+            <header style="margin-top: 3vh;">
+                <h1>Student Requested Hours</h1>
+            </header>
+            <table id="students"></table>
+        </section>
+    </main>
+
+    <script src="../js/get_student.js" type="module"></script>
+    <script src="../js/display_student_hours.js"></script>
 </body>
 </html>
