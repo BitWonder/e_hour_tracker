@@ -67,7 +67,7 @@ main section table div section :first-child {
 @media screen and (max-width: 100vh) {
     main section table#accepted_hours div {
         display: grid;
-        grid-template-rows: repeat(3, 1fr);
+        grid-template-rows: repeat(3, auto);
         grid-template-columns: 1fr;
     }
     
@@ -88,7 +88,7 @@ main section table div section :first-child {
 
     main section table#denied_hours div {
         display: grid;
-        grid-template-rows: repeat(3, 1fr);
+        grid-template-rows: repeat(3, auto);
         grid-template-columns: 1fr;
     }
 
@@ -111,7 +111,7 @@ main section table div section :first-child {
     
     main section table#pending_hours div {
         display: grid;
-        grid-template-rows: repeat(2, 1fr);
+        grid-template-rows: repeat(2, auto);
         grid-template-columns: 1fr;
     }
     
