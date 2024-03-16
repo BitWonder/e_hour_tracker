@@ -26,7 +26,7 @@ function next(user_json) {
         let accept_button = document.createElement("button"); // e 10
         accept_button.innerText = "Accept";
         accept_button.classList.add(`accept_${x}`);
-        accept_button.addEventListener("onclick", async function () {await fetch(
+        accept_button.addEventListener("click", async function () {await fetch(
             `https://${window.location.host}/handle_hours`, {
                 method: "POST", // *GET, POST, PUT, DELETE, etc.
                 mode: "cors", // no-cors, *cors, same-origin
@@ -46,7 +46,7 @@ function next(user_json) {
         let reject_button = document.createElement("button"); // e 11
         reject_button.innerText = "Reject";
         reject_button.classList.add(`reject_${x}`);
-        reject_button.addEventListener("onclick", async function () {await fetch(
+        reject_button.addEventListener("click", async function () {await fetch(
             `https://${window.location.host}/handle_hours`, {
                 method: "POST", // *GET, POST, PUT, DELETE, etc.
                 mode: "cors", // no-cors, *cors, same-origin
