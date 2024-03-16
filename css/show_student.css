@@ -248,6 +248,6 @@ main section table div :nth-child(11):hover {
 
     main section table div {
         display: flex;
-        flex-direction: row;
+        flex-direction: column;
     }
 }
