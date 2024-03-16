@@ -86,6 +86,12 @@ main section table div section :first-child {
         grid-row: 3;
     }
 
+    main section table#denied_hours div {
+        display: grid;
+        grid-template-rows: repeat(3, 1fr);
+        grid-template-columns: 1fr;
+    }
+
     main section table#denied_hours div :nth-child(1) {
         grid-column: 1;
         grid-row: 1;
