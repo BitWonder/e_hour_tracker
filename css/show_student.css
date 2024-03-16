@@ -228,8 +228,6 @@ main section table div :nth-child(10) {
 }
 
 main section table div :nth-child(10):hover {
-    grid-column: 3;
-    grid-row: 1 / 4;
     background-color: var(--good-color);
     font-size: xx-large;
 }
@@ -243,8 +241,6 @@ main section table div :nth-child(11) {
 }
 
 main section table div :nth-child(11):hover {
-    grid-column: 3;
-    grid-row: 1 / 4;
-    background-color: var(--good-color);
+    background-color: var(--bad-color);
     font-size: xx-large;
 }
