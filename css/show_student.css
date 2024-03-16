@@ -223,10 +223,28 @@ main section table div :nth-child(10) {
     grid-column: 3;
     grid-row: 1 / 4;
     background-color: var(--good-color);
+    font-size: larger;
+    transition: all .2s ease-in;
+}
+
+main section table div :nth-child(10):hover {
+    grid-column: 3;
+    grid-row: 1 / 4;
+    background-color: var(--good-color);
+    font-size: xx-large;
 }
 
 main section table div :nth-child(11) {
     grid-column: 3;
     grid-row: 4 / 8;
     background-color: var(--bad-color);
+    font-size: larger;
+    transition: all .2s ease-in;
+}
+
+main section table div :nth-child(11):hover {
+    grid-column: 3;
+    grid-row: 1 / 4;
+    background-color: var(--good-color);
+    font-size: xx-large;
 }
