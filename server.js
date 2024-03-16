@@ -187,7 +187,6 @@ router.get("/student/:username", async (context) => {
     for await (const res of iter) user = res.value;
     console.log(user);
     let data = user;
-    console.log(data);
     context.response.status = 200;
     context.response.body = JSON.stringify(( await database.get(["user", data.username, data.password]) ).value);
     context.response.type = "json";
