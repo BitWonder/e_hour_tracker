@@ -182,8 +182,10 @@ router.get("/student/:username", async (context) => {
     const input = context.params.username;
     console.log(`input type: ${typeof input}, input data: ${input}`);
     let user = await database.list({prefix: ["user", input]});
+    console.log(user);
     for ( let thing of user ) {
         data = thing.value;
+        console.log(data);
         context.response.status = 200;
         context.response.body = JSON.stringify(( await database.get(["user", data.username, data.password]) ).value);
         context.response.type = "json";
