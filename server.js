@@ -190,6 +190,10 @@ router.post("/password", async (context) => {
     await database.delete(["user", user.academy, input.username]);
     console.log("Deleting user entry from previous academy in the database");
     user.password = new_password;
+    await database.set(["uuid", input.uuid], {
+        username: user.username,
+        password: new_password
+    });
     let primary_key = ["user", user.username, new_password]
     let response = await database.atomic()
         .check({key: primary_key})
