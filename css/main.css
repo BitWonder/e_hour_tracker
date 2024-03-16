@@ -178,8 +178,8 @@ main .hour_teller h3 {
     margin-top: auto;
     margin-bottom: auto;
 
-    -webkit-background-clip: text;
-    background-clip: text;
+    -webkit-background-clip: text !important;
+    background-clip: text !important;
     color: transparent;
 
     filter: grayscale(1) contrast(9) invert(1);
