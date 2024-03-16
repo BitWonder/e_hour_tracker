@@ -1,6 +1,6 @@
 :root {
     --done-color: var(--accent-color);
-    --pending-color: lightblue;
+    --pending-color: black;
     --unfinished-color: white;
     /* gradient min hours */
     --done-min-amount: 0%;
@@ -150,8 +150,6 @@ main .hour_teller h3 {
     margin-top: auto;
     margin-bottom: auto;
     margin-left: 1%;
-
-    text-shadow: 0 0 8px rgb(0,0,0);
 
     filter: invert(1) grayscale(1) contrast(9);
 
