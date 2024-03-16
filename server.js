@@ -131,6 +131,7 @@ router.post("/handle_hours", async (context) => {
     let possible_users = (await database.list({prefix: ["user", input.username]}))
     console.log(possible_users);
     for ( let user_db in possible_users ) {
+        console.log("Inside for loop");
         console.log(user_db);
         let user = user_db.value;
         console.log(user);
