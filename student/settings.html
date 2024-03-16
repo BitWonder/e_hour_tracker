@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-Hour Tracker</title>
+    <link rel="icon" type="image/x-icon" href="../images/favicon/favicon.ico">
+    <link rel="stylesheet" href="../css/vars.css">
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/hours.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/x-icon" href="../images/favicon/favicon.ico">
+</head>
+<body>
+    <header>
+        <h1 id="welcome"></h1>
+        <a href="../index.html">
+            <!--onmouseover="document.getElementById('logout').src = './images/icon/logout.png'" onmouseleave="document.getElementById('logout').src = './images/icon/logout_invert.png'"-->
+            <button value="Log Out" onclick="localStorage.setItem('username', null)"><img src="../images/icon/logout_invert.png"  id="logout"/></button>
+        </a>
+    </header>
+
+    <main>
+        <form id="password">
+            <input type="password" id="cur" placeholder="current password" required>
+            <input type="password" id="new" placeholder="new password" required>
+            <input type="password" id="con" placeholder="confirm password" required>
+            <input type="submit">
+        </form>
+    </main>
+
+    <script >
+        let user;
+        function next(user_json) {
+            user = user_json;
+        }
+
+        document.getElementById("password").addEventListener("submit", async function (e) {
+            e.preventDefault();
+
+            if (document.getElementById("new").value !== document.getElementById("con").value) {
+                alert("passwords do not match!");
+                return;
+            }
+
+            let response = await fetch(
+                `https://${window.location.host}/password`,
+                {
+                    method: "POST", // *GET, POST, PUT, DELETE, etc.
+                    mode: "cors", // no-cors, *cors, same-origin
+                    cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
+                    credentials: "same-origin", // include, *same-origin, omit
+                    headers: {
+                        "Content-Type": "application/json",
+                        // 'Content-Type': 'application/x-www-form-urlencoded',
+                    },
+                    redirect: "follow", // manual, *follow, error
+                    referrerPolicy: "no-referrer", // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
+                    body: JSON.stringify({
+                        username: user.username,
+                        password: document.getElementById("cur").value,
+                        new: document.getElementById("new").value,
+                        uuid: sessionStorage.getItem("user_id")
+                    }), // body data type must match "Content-Type" header
+                }
+            )
+
+            if (response.ok == true) {
+                alert("Password Changed!");
+            }
+            else {
+                alert("Failed to change");
+            }
+        })
+    </script>
+    <script src="../js/get_user.js" type="module"></script>
+    
+    <p id="copyright">&copy; Copyright Drake Morgan and Collin Rawson 2024</p>
+</body>
+</html>

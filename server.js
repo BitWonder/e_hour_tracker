@@ -175,6 +175,28 @@ router.post("/handle_hours", async (context) => {
     }
 })
 
+router.post("/password", async (context) => {
+    const input = await context.request.body.json();
+    let hashed_password = await hashPassword(input.password);
+    let new_password = await hashPassword(input.new);
+    let user = (await database.get(["user", input.username, hashed_password])).value;
+    await database.delete(["user", input.username, user.password]);
+    await database.delete(["user", user.academy, input.username]);
+    primary_key = ["user", user.username, new_password]
+    let response = await database.atomic()
+        .check({key: primary_key})
+        .set(primary_key, user)
+        .set(["academy", user.academy, user.username], user)
+        .commit();
+    if ( response.ok == true ) {
+        context.response.status = 200;
+        return;
+    } else {
+        context.response = 400;
+        return;
+    }
+})
+
 router.get("/user/:id",          async (context) => {
     const input = context.params.id;
     console.log(`input type: ${typeof input}, input data: ${input}`);
