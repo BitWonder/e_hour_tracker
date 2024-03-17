@@ -49,9 +49,8 @@ header a:first-child {
 
 header a {
     right: 0;
-    padding-right: 5%;
 
-    place-self: center end;
+    place-self: center;
 }
 
 header a img {
