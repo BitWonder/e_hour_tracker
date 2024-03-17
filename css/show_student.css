@@ -30,6 +30,7 @@ header h1 {
     grid-column: 2;
     margin: 0;
     place-self: center;
+    color: var(--main-text-color);
 }
 
 @media screen and (max-height: 30em) {
