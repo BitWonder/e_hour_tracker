@@ -153,7 +153,7 @@ router.post("/handle_hours", async (context) => {
                 comments: input.comments
             })
             user.accepted_hours = accepted_hours;
-            console.log("user at push: " + user);
+            console.log("user at push: " + JSON.stringify(user));
             await database.set(["user", user.username, user.password], user);
             await database.set(["academy". user.academy, user.username], user);
         } else {
