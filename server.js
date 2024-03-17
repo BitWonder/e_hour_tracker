@@ -155,7 +155,7 @@ router.post("/handle_hours", async (context) => {
             user.accepted_hours = accepted_hours;
             console.log("user at push: " + JSON.stringify(user));
             await database.set(["user", user.username, user.password], user);
-            await database.set(["academy". user.academy, user.username], user);
+            await database.set(["academy", user.academy, user.username], user);
         } else {
             let denied_hours = user.denied_hours;
             denied_hours.push({
@@ -170,7 +170,7 @@ router.post("/handle_hours", async (context) => {
             user.denied_hours = denied_hours;
             console.log("user at push: " + user);
             await database.set(["user", user.username, user.password], user);
-            await database.set(["academy". user.academy, user.username], user);
+            await database.set(["academy", user.academy, user.username], user);
         }
         // so the for loop doesn't continue
         return;
