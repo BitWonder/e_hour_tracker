@@ -44,7 +44,6 @@ header h1 {
 }
 
 header a:first-child {
-    opacity: 0;
     user-select: none;
 }
 
