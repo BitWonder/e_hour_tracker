@@ -235,7 +235,7 @@ main section table div.none p {
 
 main section table div :nth-child(10) {
     grid-column: 3;
-    grid-row: 1 / -1;
+    grid-row: 1 / 8;
     background-color: var(--bad-color);
     font-size: larger;
     font-weight: bold;
