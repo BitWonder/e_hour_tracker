@@ -229,6 +229,10 @@ main section table div :nth-child(11):hover {
     font-size: xx-large;
 }
 
+main section table div.none {
+    grid-column: 1 / 3;
+}
+
 @media screen and (max-width: 100vh) {
     body h1 {
         font-size: larger;
@@ -246,5 +250,9 @@ main section table div :nth-child(11):hover {
     main section table div {
         display: flex;
         flex-direction: column;
+    }
+
+    main section table div.none {
+        grid-column: 1;
     }
 }
