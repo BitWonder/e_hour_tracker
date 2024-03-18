@@ -80,7 +80,7 @@ function next(user_json) {
         div.append(reject_button);
         document.getElementById("students").append(div);
     });
-    if (!document.getElementById("student").hasChildNodes()) {
+    if (!document.getElementById("students").hasChildNodes()) {
         none = document.createElement("div");
         none.classList.add("none")
         text = document.createElement("p");
