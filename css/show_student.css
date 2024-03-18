@@ -233,6 +233,20 @@ main section table div.none p {
     grid-column: 1 / -1;
 }
 
+main section table div :nth-child(10) {
+    grid-column: 3;
+    grid-row: 1 / -1;
+    background-color: var(--bad-color);
+    font-size: larger;
+    font-weight: bold;
+    transition: all .2s ease-in;
+}
+
+main section table div :nth-child(10):hover {
+    background-color: var(--bad-color);
+    font-size: xx-large;
+}
+
 @media screen and (max-width: 100vh) {
     body h1 {
         font-size: larger;
@@ -250,9 +264,5 @@ main section table div.none p {
     main section table div {
         display: flex;
         flex-direction: column;
-    }
-
-    main section table div.none p {
-        grid-column: 1;
     }
 }
