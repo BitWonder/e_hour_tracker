@@ -141,7 +141,6 @@ function next(user_json) {
         div.append(date_submitted);
         div.append(comment_title);
         div.append(comments);
-        div.append(accept_button);
         div.append(reject_button);
         document.getElementById("hours").append(div);
     });
