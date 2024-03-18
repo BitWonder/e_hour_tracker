@@ -86,7 +86,7 @@ function next(user_json) {
         text = document.createElement("p");
         text.innerText = "No Denied Hours";
         none.append(text);
-        place.append(none);
+        document.getElementById("students").append(none);
     }
 
     user_json.accepted_hours.forEach(element => {
@@ -151,6 +151,6 @@ function next(user_json) {
         text = document.createElement("p");
         text.innerText = "No Denied Hours";
         none.append(text);
-        place.append(none);
+        document.getElementById("hours").append(none);
     }
 }
