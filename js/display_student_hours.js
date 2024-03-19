@@ -90,7 +90,7 @@ function next(user_json) {
     }
 
     user_json.accepted_hours.forEach(element => {
-        x += 1;
+        y += 1;
         let div = document.createElement("div");
         let h2 = document.createElement("h2"); // e 1
         h2.innerText = element.title;
@@ -109,11 +109,11 @@ function next(user_json) {
         let comment_title = document.createElement("h3"); // e 8
         comment_title.innerText = "Comments:";
         let comments = document.createElement("textarea"); // e 9
-        comments.classList.add(`comments_${x}`);
+        comments.classList.add(`comments_${y}`);
         // the button
         let reject_button = document.createElement("button"); // e 11
         reject_button.innerText = "Reject";
-        reject_button.classList.add(`reject_${x}`);
+        reject_button.classList.add(`reject_${y}`);
         reject_button.addEventListener("click", async function () {await fetch(
             `https://${window.location.host}/handle_hours`, {
                 method: "POST", // *GET, POST, PUT, DELETE, etc.
@@ -124,10 +124,10 @@ function next(user_json) {
                 referrerPolicy: "no-referrer", // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
                 body: JSON.stringify({
                     element: element,
-                    comments: document.getElementsByClassName(`comments_${x}`)[0].value,
+                    comments: document.getElementsByClassName(`comments_${y}`)[0].value,
                     username: sessionStorage.getItem("student"),
                     type: "reject",
-                    position: (x - 1)
+                    position: (y - 1)
                 })
             }
         );
