@@ -123,6 +123,7 @@ router.post("/submitHours",      async (context) => {
     context.response.status = 200;
 });
 
+// Broken
 router.post("/handle_hours", async (context) => {
     const input = await context.request.body.json();
     console.log(input);
@@ -177,6 +178,7 @@ router.post("/handle_hours", async (context) => {
     }
 })
 
+// Broken!
 router.post("/password", async (context) => {
     console.log("POST request received on route \"/password\"");
     const input = await context.request.body.json();

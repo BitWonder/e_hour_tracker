@@ -233,7 +233,7 @@ main section table div.none p {
     grid-column: 1 / -1;
 }
 
-main section table div :nth-child(10) {
+main section table#hours div :nth-child(10) {
     grid-column: 3;
     grid-row: 1 / 8;
     background-color: var(--bad-color);
@@ -242,7 +242,7 @@ main section table div :nth-child(10) {
     transition: all .2s ease-in;
 }
 
-main section table div :nth-child(10):hover {
+main section table#hours div :nth-child(10):hover {
     background-color: var(--bad-color);
     font-size: xx-large;
 }
