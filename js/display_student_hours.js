@@ -152,7 +152,6 @@ function next(user_json) {
                     console.error('Error occurred:', error);
                     // Handle error appropriately
                 });});
-        window.location.reload();
         div.append(h2);
         div.append(hours);
         div.append(h3);
