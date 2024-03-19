@@ -43,7 +43,7 @@ function next(user_json) {
                     position: (x - 1)
                 })
             });
-            window.location.reload();
+            //window.location.reload();
         });
         let reject_button = document.createElement("button"); // e 11
         reject_button.innerText = "Reject";
@@ -64,9 +64,8 @@ function next(user_json) {
                     type: "reject",
                     position: (x - 1)
                 })
-            }
-            );
-            window.location.reload();
+            });
+            //window.location.reload();
         });
         div.append(h2);
         div.append(hours);
