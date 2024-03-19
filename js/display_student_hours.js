@@ -1,6 +1,24 @@
 async function handle(element, type, acc) {
     let class_name = element.className;
     let position = parseInt(class_name.substring(7)); // from 7th character to end
+    var valueToSet = acc === "_" ? document.getElementsByClassName(`comments_${position}`)[0].value : document.getElementsByClassName(`comment2_${position}`)[0].value;
+    // as told
+    let parent_child;
+    if (acc === "_") {
+        // https://stackoverflow.com/questions/48129301/get-the-nth-child-of-a-div-by-pure-javascript
+        parent_child = document.getElementById('students').children.item(position - 1);
+    }
+    else {
+        parent_child = document.getElementById('hours').children.item(position - 1);
+    }
+    // reforming element from inputted data... this is a pain
+    var data = {
+        title: parent_child.children.item(1).innerText,
+        amount: parseFloat(parent_child.children.item(2).innerText.split(" hours")),
+        description: parent_child.children.item(4).innerText,
+        date: parent_child.children.item(6).innerText.substring(15),
+        submitted: parent_child.children.item(6).innerText.substring(14)
+    }
     fetch(
         `https://${window.location.host}/handle${acc}hours`, {
             method: "POST",
@@ -10,8 +28,8 @@ async function handle(element, type, acc) {
             redirect: "follow",
             referrerPolicy: "no-referrer",
             body: JSON.stringify({
-                element: element,
-                comments: document.getElementsByClassName(`comments_${position}`)[0].value,
+                element: data,
+                comments: valueToSet,
                 username: sessionStorage.getItem("student"),
                 type: type,
                 position: ( position - 1 )
@@ -102,7 +120,7 @@ function next(user_json) {
         let comment_title = document.createElement("h3"); // e 8
         comment_title.innerText = "Comments:";
         let comments = document.createElement("textarea"); // e 9
-        comments.classList.add(`comments_${y}`);
+        comments.classList.add(`comment2_${y}`);
         // the button
         let reject_button = document.createElement("button"); // e 11
         reject_button.innerText = "Reject";
