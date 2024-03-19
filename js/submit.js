@@ -112,7 +112,6 @@ document.getElementById("hour").onsubmit = async function(event) {
 
         if (response.status === 200) {
             // Handle success
-            alert('Submission successful');
             window.location.reload();
             return;
         } else {

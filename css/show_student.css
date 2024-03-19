@@ -145,7 +145,7 @@ main section table div {
     border-top: 5px solid var(--secondary-color);
     columns: var(--main-text-color);
     display: grid;
-    grid-template-columns: 2fr 2fr 1fr;
+    grid-template-columns: 3fr 2fr 1fr;
 }
 
 main section table div:last-child {
@@ -213,8 +213,8 @@ main section table div :nth-child(10) {
 main section table button {
     margin: auto;
     text-align: center;
-    height: 2vh;
-    width: 3vw;
+    height: 80%;
+    width: 80%;
     border-radius: 15px;
 }
 

@@ -96,7 +96,7 @@ function next(user_json) {
         none = document.createElement("div");
         none.classList.add("none")
         text = document.createElement("p");
-        text.innerText = "No Denied Hours";
+        text.innerText = "No Pending Hours Hours";
         none.append(text);
         document.getElementById("students").append(none);
     }
@@ -168,7 +168,7 @@ function next(user_json) {
         none = document.createElement("div");
         none.classList.add("none")
         text = document.createElement("p");
-        text.innerText = "No Denied Hours";
+        text.innerText = "No Accepted Hours";
         none.append(text);
         document.getElementById("hours").append(none);
     }
