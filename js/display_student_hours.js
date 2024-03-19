@@ -1,3 +1,31 @@
+async function handle(element, type, acc) {
+    let class_name = element.className;
+    let position = parseInt(class_name.substring(7)); // from 7th character to end
+    fetch(
+        `https://${window.location.host}/handle${acc}hours`, {
+            method: "POST",
+            mode: "cors",
+            cache: "no-cache",
+            credentials: "same-origin",
+            redirect: "follow",
+            referrerPolicy: "no-referrer",
+            body: JSON.stringify({
+                element: element,
+                comments: document.getElementsByClassName(`comments_${position}`)[0].value,
+                username: sessionStorage.getItem("student"),
+                type: type,
+                position: ( position - 1 )
+            })
+        })
+        .then(() => {
+            window.location.reload();
+        })
+        .catch(error => {
+            console.error('Error occurred:', error);
+            // Handle error appropriately
+        });
+}
+
 function next(user_json) {
     document.getElementById("title_of_student_accepted").innerText = `${user_json.full_name} Accepted Hours`;
     let x = 0 
@@ -26,59 +54,11 @@ function next(user_json) {
         let accept_button = document.createElement("button"); // e 10
         accept_button.innerText = "Accept";
         accept_button.classList.add(`accept_${x}`);
-        accept_button.addEventListener("click", async function () {
-            const currentX = x; // Capture the current value of x
-            fetch(
-                `https://${window.location.host}/handle_hours`, {
-                    method: "POST",
-                    mode: "cors",
-                    cache: "no-cache",
-                    credentials: "same-origin",
-                    redirect: "follow",
-                    referrerPolicy: "no-referrer",
-                    body: JSON.stringify({
-                        element: element,
-                        comments: document.getElementsByClassName(`comments_${currentX}`)[0].value,
-                        username: sessionStorage.getItem("student"),
-                        type: "accept",
-                        position: (currentX - 1)
-                    })
-                })
-                .then(() => {
-                    window.location.reload();
-                })
-                .catch(error => {
-                    console.error('Error occurred:', error);
-                    // Handle error appropriately
-                });});
+        accept_button.addEventListener("click", async function () {await handle(this, "accept", "_")});
         let reject_button = document.createElement("button"); // e 11
         reject_button.innerText = "Reject";
         reject_button.classList.add(`reject_${x}`);
-        reject_button.addEventListener("click", async function () {
-            const currentX = x; // Capture the current value of x
-            fetch(
-                `https://${window.location.host}/handle_hours`, {
-                    method: "POST",
-                    mode: "cors",
-                    cache: "no-cache",
-                    credentials: "same-origin",
-                    redirect: "follow",
-                    referrerPolicy: "no-referrer",
-                    body: JSON.stringify({
-                        element: element,
-                        comments: document.getElementsByClassName(`comments_${currentX}`)[0].value,
-                        username: sessionStorage.getItem("student"),
-                        type: "reject",
-                        position: (currentX - 1)
-                    })
-                })
-                .then(() => {
-                    window.location.reload();
-                })
-                .catch(error => {
-                    console.error('Error occurred:', error);
-                    // Handle error appropriately
-                });});
+        reject_button.addEventListener("click", async function () {await handle(this, "reject", "_")});
         div.append(h2);
         div.append(hours);
         div.append(h3);
@@ -127,31 +107,7 @@ function next(user_json) {
         let reject_button = document.createElement("button"); // e 11
         reject_button.innerText = "Reject";
         reject_button.classList.add(`reject_${y}`);
-        reject_button.addEventListener("click", async function () {
-            const currentY = y; // Capture the current value of x
-            fetch(
-                `https://${window.location.host}/handle_acc_hours`, {
-                    method: "POST",
-                    mode: "cors",
-                    cache: "no-cache",
-                    credentials: "same-origin",
-                    redirect: "follow",
-                    referrerPolicy: "no-referrer",
-                    body: JSON.stringify({
-                        element: element,
-                        comments: document.getElementsByClassName(`comments_${currentY}`)[0].value,
-                        username: sessionStorage.getItem("student"),
-                        type: "reject",
-                        position: (currentY - 1)
-                    })
-                })
-                .then(() => {
-                    window.location.reload();
-                })
-                .catch(error => {
-                    console.error('Error occurred:', error);
-                    // Handle error appropriately
-                });});
+        reject_button.addEventListener("click", async function () {await handle(this, "accept", "_acc_")});
         div.append(h2);
         div.append(hours);
         div.append(h3);
