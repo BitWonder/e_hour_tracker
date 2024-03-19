@@ -130,7 +130,7 @@ function next(user_json) {
         reject_button.addEventListener("click", async function () {
             const currentY = y; // Capture the current value of x
             fetch(
-                `https://${window.location.host}/handle_hours`, {
+                `https://${window.location.host}/handle_acc_hours`, {
                     method: "POST",
                     mode: "cors",
                     cache: "no-cache",

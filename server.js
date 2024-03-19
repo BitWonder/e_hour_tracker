@@ -176,7 +176,45 @@ router.post("/handle_hours", async (context) => {
         // so the for loop doesn't continue
         return;
     }
-})
+});
+
+// Broken
+router.post("/handle_acc_hours", async (context) => {
+    const input = await context.request.body.json();
+    console.log(input);
+    console.log("handling hours");
+    // getting user
+    let possible_users =  database.list({prefix: ["user", input.username]});
+    console.log(possible_users);
+    for await ( let user_db of possible_users ) {
+        console.log("Inside for loop");
+        console.log(user_db);
+        let user = user_db.value;
+        console.log(user);
+        console.log("Doing something with hour: " + user)
+        let index = parseInt(input.position);
+        console.log(index);
+        if (index > -1) { // only splice array when item is found
+            user.accepted_hours.splice(index, 1); // 2nd parameter means remove one item only
+        }
+        let denied_hours = user.denied_hours;
+        denied_hours.push({
+            title: input.element.title,
+            amount: input.element.amount,
+            description: input.element.description,
+            date: input.element.date,
+            submitted: input.element.submitted,
+            accepted: new Date(),
+            comments: input.comments
+        })
+        user.denied_hours = denied_hours;
+        console.log("user at push: " + JSON.stringify(user));
+        await database.set(["user", user.username, user.password], user);
+        await database.set(["academy", user.academy, user.username], user);
+        // so the for loop doesn't continue
+        return;
+    }
+});
 
 // Broken!
 router.post("/password", async (context) => {
