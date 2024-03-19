@@ -27,7 +27,6 @@ function next(user_json) {
         accept_button.innerText = "Accept";
         accept_button.classList.add(`accept_${x}`);
         accept_button.addEventListener("click", async function () {
-            alert("Sending message!");
             await fetch(
             `https://${window.location.host}/handle_hours`, {
                 method: "POST", // *GET, POST, PUT, DELETE, etc.
@@ -43,13 +42,14 @@ function next(user_json) {
                     type: "accept",
                     position: (x - 1)
                 })
-            }
-        );
-        window.location.reload();});
+            });
+            window.location.reload();
+        });
         let reject_button = document.createElement("button"); // e 11
         reject_button.innerText = "Reject";
         reject_button.classList.add(`reject_${x}`);
-        reject_button.addEventListener("click", async function () {await fetch(
+        reject_button.addEventListener("click", async function () {
+            await fetch(
             `https://${window.location.host}/handle_hours`, {
                 method: "POST", // *GET, POST, PUT, DELETE, etc.
                 mode: "cors", // no-cors, *cors, same-origin
@@ -65,8 +65,9 @@ function next(user_json) {
                     position: (x - 1)
                 })
             }
-        );
-        window.location.reload();});
+            );
+            window.location.reload();
+        });
         div.append(h2);
         div.append(hours);
         div.append(h3);
