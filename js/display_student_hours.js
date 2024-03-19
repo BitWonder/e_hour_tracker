@@ -1,24 +1,21 @@
+let person;
+
 async function handle(element, type, acc) {
     let class_name = element.className;
     let position = parseInt(class_name.substring(7)); // from 7th character to end
     var valueToSet = acc === "_" ? document.getElementsByClassName(`comments_${position}`)[0].value : document.getElementsByClassName(`comment2_${position}`)[0].value;
     // as told
-    let parent_child;
+    let data;
     if (acc === "_") {
         // https://stackoverflow.com/questions/48129301/get-the-nth-child-of-a-div-by-pure-javascript
-        parent_child = document.getElementById('students').children.item(position - 1);
+        //parent_child = document.getElementById('students').children.item(position - 1);
+        data = person.pending_hours[position - 1];
     }
     else {
-        parent_child = document.getElementById('hours').children.item(position - 1);
+        //parent_child = document.getElementById('hours').children.item(position - 1);
+        data = person.accepted_hours[position - 1];
     }
     // reforming element from inputted data... this is a pain
-    var data = {
-        title: parent_child.children.item(1).innerText,
-        amount: parseFloat(parent_child.children.item(2).innerText.split(" hours")),
-        description: parent_child.children.item(4).innerText,
-        date: parent_child.children.item(6).innerText.substring(15),
-        submitted: parent_child.children.item(6).innerText.substring(14)
-    }
     fetch(
         `https://${window.location.host}/handle${acc}hours`, {
             method: "POST",
@@ -45,6 +42,7 @@ async function handle(element, type, acc) {
 }
 
 function next(user_json) {
+    person = user_json;
     document.getElementById("title_of_student_accepted").innerText = `${user_json.full_name} Accepted Hours`;
     let x = 0 
     user_json.pending_hours.forEach(element => {
