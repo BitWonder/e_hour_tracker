@@ -28,47 +28,57 @@ function next(user_json) {
         accept_button.classList.add(`accept_${x}`);
         accept_button.addEventListener("click", async function () {
             const currentX = x; // Capture the current value of x
-            await fetch(
-            `https://${window.location.host}/handle_hours`, {
-                method: "POST", // *GET, POST, PUT, DELETE, etc.
-                mode: "cors", // no-cors, *cors, same-origin
-                cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
-                credentials: "same-origin", // include, *same-origin, omit
-                redirect: "follow", // manual, *follow, error
-                referrerPolicy: "no-referrer", // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
-                body: JSON.stringify({
-                    element: element,
-                    comments: document.getElementsByClassName(`comments_${currentX}`)[0].value,
-                    username: sessionStorage.getItem("student"),
-                    type: "accept",
-                    position: (currentX - 1)
+            fetch(
+                `https://${window.location.host}/handle_hours`, {
+                    method: "POST",
+                    mode: "cors",
+                    cache: "no-cache",
+                    credentials: "same-origin",
+                    redirect: "follow",
+                    referrerPolicy: "no-referrer",
+                    body: JSON.stringify({
+                        element: element,
+                        comments: document.getElementsByClassName(`comments_${currentX}`)[0].value,
+                        username: sessionStorage.getItem("student"),
+                        type: "accept",
+                        position: (currentX - 1)
+                    })
                 })
-            });
-            window.location.reload();
-        });
+                .then(() => {
+                    window.location.reload();
+                })
+                .catch(error => {
+                    console.error('Error occurred:', error);
+                    // Handle error appropriately
+                });});
         let reject_button = document.createElement("button"); // e 11
         reject_button.innerText = "Reject";
         reject_button.classList.add(`reject_${x}`);
         reject_button.addEventListener("click", async function () {
             const currentX = x; // Capture the current value of x
-            await fetch(
-            `https://${window.location.host}/handle_hours`, {
-                method: "POST", // *GET, POST, PUT, DELETE, etc.
-                mode: "cors", // no-cors, *cors, same-origin
-                cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
-                credentials: "same-origin", // include, *same-origin, omit
-                redirect: "follow", // manual, *follow, error
-                referrerPolicy: "no-referrer", // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
-                body: JSON.stringify({
-                    element: element,
-                    comments: document.getElementsByClassName(`comments_${currentX}`)[0].value,
-                    username: sessionStorage.getItem("student"),
-                    type: "reject",
-                    position: (currentX - 1)
+            fetch(
+                `https://${window.location.host}/handle_hours`, {
+                    method: "POST",
+                    mode: "cors",
+                    cache: "no-cache",
+                    credentials: "same-origin",
+                    redirect: "follow",
+                    referrerPolicy: "no-referrer",
+                    body: JSON.stringify({
+                        element: element,
+                        comments: document.getElementsByClassName(`comments_${currentX}`)[0].value,
+                        username: sessionStorage.getItem("student"),
+                        type: "reject",
+                        position: (currentX - 1)
+                    })
                 })
-            });
-            window.location.reload();
-        });
+                .then(() => {
+                    window.location.reload();
+                })
+                .catch(error => {
+                    console.error('Error occurred:', error);
+                    // Handle error appropriately
+                });});
         div.append(h2);
         div.append(hours);
         div.append(h3);
@@ -91,6 +101,7 @@ function next(user_json) {
         document.getElementById("students").append(none);
     }
 
+    let y = 0;
     user_json.accepted_hours.forEach(element => {
         y += 1;
         let div = document.createElement("div");
@@ -117,25 +128,31 @@ function next(user_json) {
         reject_button.innerText = "Reject";
         reject_button.classList.add(`reject_${y}`);
         reject_button.addEventListener("click", async function () {
-            const currentY = y;
-            await fetch(
-            `https://${window.location.host}/handle_hours`, {
-                method: "POST", // *GET, POST, PUT, DELETE, etc.
-                mode: "cors", // no-cors, *cors, same-origin
-                cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
-                credentials: "same-origin", // include, *same-origin, omit
-                redirect: "follow", // manual, *follow, error
-                referrerPolicy: "no-referrer", // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
-                body: JSON.stringify({
-                    element: element,
-                    comments: document.getElementsByClassName(`comments_${currentY}`)[0].value,
-                    username: sessionStorage.getItem("student"),
-                    type: "reject",
-                    position: (currentY - 1)
+            const currentY = y; // Capture the current value of x
+            fetch(
+                `https://${window.location.host}/handle_hours`, {
+                    method: "POST",
+                    mode: "cors",
+                    cache: "no-cache",
+                    credentials: "same-origin",
+                    redirect: "follow",
+                    referrerPolicy: "no-referrer",
+                    body: JSON.stringify({
+                        element: element,
+                        comments: document.getElementsByClassName(`comments_${currentY}`)[0].value,
+                        username: sessionStorage.getItem("student"),
+                        type: "reject",
+                        position: (currentY - 1)
+                    })
                 })
-            }
-        );
-        window.location.reload();});
+                .then(() => {
+                    window.location.reload();
+                })
+                .catch(error => {
+                    console.error('Error occurred:', error);
+                    // Handle error appropriately
+                });});
+        window.location.reload();
         div.append(h2);
         div.append(hours);
         div.append(h3);
