@@ -234,14 +234,14 @@ router.post("/password", async (context) => {
         .set(primary_key, user)
         .set(["academy", user.academy, user.username], user)
         .commit();
-        await database.set(["uuid", input.uuid], {
-            username: user.username,
-            password: new_password
-        });
-        await database.delete(["user", user.academy, input.username]);
-        console.log("Deleting user entry from previous academy in the database");
-        await database.delete(["user", input.username, user.password]);
-        console.log("Deleting old password entry from the database");
+    await database.set(["uuid", input.uuid], {
+        username: user.username,
+        password: new_password
+    });
+    await database.delete(["user", user.academy, input.username]);
+    console.log("Deleting user entry from previous academy in the database");
+    await database.delete(["user", input.username, user.password]);
+    console.log("Deleting old password entry from the database");
     if (response.ok == true) {
         console.log("Password change successful for user:", user.username);
         context.response.status = 200;
