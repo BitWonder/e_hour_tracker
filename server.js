@@ -237,6 +237,11 @@ router.post("/password", async (context) => {
     await database.delete(["user", input.username, old_password]);
     console.log("Deleting old password entry from the database");
     console.log("Password change successful for user:", user.username);
+    console.log("Change uuid");
+    await database.set(["uuid", input.uuid], {
+        username: user.username,
+        password: new_password
+    });
     context.response.status = 200;
     return;
 });
