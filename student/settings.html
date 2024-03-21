@@ -24,8 +24,8 @@
 
     <main>
         <form id="password">
-            <input type="password" id="cur" placeholder="current password" required>
-            <input type="password" id="new" placeholder="new password" required>
+            <input type="password" id="cur" placeholder="current password" autocomplete="current-password" required>
+            <input type="password" id="new" placeholder="new password" autocomplete="new-password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[$&+,:;=?@#|'<>.^*()%!-]).{8.}" title="Password must contain at least 1 number, 1 uppercase and lowercase letter, 1 special character, and be 8 or more characters long" required>
             <input type="password" id="con" placeholder="confirm password" required>
             <input type="submit">
         </form>
