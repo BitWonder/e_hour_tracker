@@ -236,16 +236,10 @@ router.post("/password", async (context) => {
     console.log("Deleting user entry from previous academy in the database");
     await database.delete(["user", input.username, old_password]);
     console.log("Deleting old password entry from the database");
-    if (response.ok == true) {
-        console.log("Password change successful for user:", user.username);
-        context.response.status = 200;
-        return;
-    } else {
-        console.log("Database operation failed: Unable to set user password");
-        context.response.status = 400;
-        return;
-    }
-})
+    console.log("Password change successful for user:", user.username);
+    context.response.status = 200;
+    return;
+});
 
 router.get("/user/:id",          async (context) => {
     const input = context.params.id;
